@@ -7,8 +7,8 @@ Ordinance (Cap. 112) and Stamp Duty Ordinance (Cap. 117).
 
 **Live site:** <https://anthonymankaho.github.io/hktax-studyhub/>
 
-Static HTML, no server and no build step to read it: open `index.html` in a
-browser, or use the single-file [`combined.html`](combined.html).
+Static HTML, no server and nothing to install: open `index.html` in a browser.
+It is a single self-contained file — the whole Hub, every page, one download.
 
 ## ⚠️ Disclaimer — read this first
 
@@ -53,7 +53,7 @@ Two different things, two different answers:
 
 ## Start here
 
-Open `index.html`. From the hub you can reach:
+Open `index.html` (or the live site). From the card index you can reach:
 
 | Page | Purpose |
 |---|---|
@@ -151,9 +151,11 @@ extract illustrations from it the same way.
 ## Folder structure
 
 ```
-index.html                       Hub — links to everything below
-HK Tax Study Hub - Combined.html GENERATED single-file edition — do not hand-edit
-pages/
+index.html                       GENERATED — the site's landing page; same app as below
+combined.html                    GENERATED — identical, clean URL for sharing
+HK Tax Study Hub - Combined.html GENERATED — identical, the name people recognise
+                                 as an email attachment
+pages/                           THE SOURCES. Edit these, then rebuild.
   ird-updates.html               IRD What's New, marked enacted / bill / proposed
   module9-extra-practice.html    Extra paraphrased Module 9 practice Q&A
   transaction-checker.html       Search tool: transaction → tax treatment
@@ -185,15 +187,19 @@ Data/
 
 There are two ways to read the Hub, from **one** set of sources:
 
-- **Multi-file** — open `index.html` and navigate between `pages/*.html`.
-  This is the editable version.
-- **Single-file** — `HK Tax Study Hub - Combined.html`, everything inlined
-  (CSS, JS, data), so it can be emailed as one attachment. It uses a tabbed
-  frame: a sticky topbar, a card index, and one panel per page, with
-  jump-search and a dark-mode toggle.
+- **Single-file app** — a tabbed frame: sticky topbar, a bilingual card index,
+  one panel per page, jump-search and a dark-mode toggle. The build writes it
+  to three paths, byte-identical:
+  - `index.html` — the landing page of the published site
+  - `combined.html` — same thing, clean URL for pasting into Slack or email
+  - `HK Tax Study Hub - Combined.html` — same thing again; this is the name
+    that makes it recognisable in someone's Downloads folder
+- **Multi-file** — `pages/*.html` opened individually. These are the sources
+  you edit, and they stay browsable on their own.
 
-**The combined file is generated. Never hand-edit it** — edit the page under
-`pages/` and rebuild:
+**All three outputs are generated. Never hand-edit them** — including
+`index.html`, which used to be a hand-written hub page and no longer is. Edit
+the page under `pages/` and rebuild:
 
 ```
 python scripts\build-combined.py

@@ -21,67 +21,106 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "HK Tax Study Hub - Combined.html")
 OUT_WEB = os.path.join(ROOT, "combined.html")
+# The published site's landing page IS this app. The old hand-written
+# multi-file hub used to live here; its card blurbs now live in PAGES[*]["en"],
+# so there is one landing page instead of two that drift apart.
+OUT_INDEX = os.path.join(ROOT, "index.html")
 
 BUILD_DATE = "24 September 2026"
 IRD_READ_DATE = "24 September 2026"
 
-# id, source file, English label, Chinese label, group, Chinese summary, search keywords
+# One entry per tab panel. `en` is the card blurb on the MAIN index; `zh` is the
+# Chinese summary shown both on the card and at the head of the panel.
 PAGES = [
-    ("ird-updates", "ird-updates.html", "IRD What's New", "稅務局最新消息", "Start here",
-     "整理稅務局「最新消息」所載事項，標明哪些已成為法例、哪些仍屬草案或政策建議，以及本平台已據此更新的頁面。",
-     "ird what's new news policy address updates bills"),
-    ("transaction-checker", "transaction-checker.html", "Transaction Checker", "交易稅務檢查器", "Start here",
-     "按交易或會計項目快速查看可能屬於應課稅、非應課稅、可扣稅、不可扣稅或須繳印花稅，並連回相關章節。",
-     "transaction checker taxable deductible dutiable search"),
-    ("dipn-index", "dipn-index.html", "DIPN Index", "DIPN 索引", "Start here",
-     "列出 IRD DIPN、SOIPN 及 EDOIPN 文件，方便按編號、主題或關鍵字搜尋，並區分核心學習頁與參考資料。",
-     "dipn soipn edoipn index practice notes"),
+    dict(id="ird-updates", src="ird-updates.html", group="Start here",
+         label="IRD What's New", label_zh="稅務局最新消息",
+         en="Everything on IRD's What's New page, read against this Hub and marked enacted, bill or proposed — with the exact page each item changed. Last read 24 September 2026 (38 items, 1 Jun – 16 Sep 2026).",
+         zh="整理稅務局「最新消息」所載事項，標明哪些已成為法例、哪些仍屬草案或政策建議，以及本平台已據此更新的頁面。",
+         kw="ird what's new news policy address updates bills"),
+    dict(id="transaction-checker", src="transaction-checker.html", group="Start here",
+         label="Transaction Checker", label_zh="交易稅務檢查器",
+         en="Search any transaction by keyword to confirm Taxable / Non-taxable / Deductible / Non-deductible / Dutiable, with the exact section and a link to the full explanation — the working tool for tax computation analysis.",
+         zh="按交易或會計項目快速查看可能屬於應課稅、非應課稅、可扣稅、不可扣稅或須繳印花稅，並連回相關章節。",
+         kw="transaction checker taxable deductible dutiable search"),
+    dict(id="dipn-index", src="dipn-index.html", group="Start here",
+         label="DIPN Index", label_zh="DIPN 索引",
+         en="All 73 currently-in-force DIPN/SOIPN/EDOIPN documents, searchable by number, topic or keyword, with a summary and worked-example flag — each row linking to IRD's own PDF.",
+         zh="列出 IRD DIPN、SOIPN 及 EDOIPN 文件，方便按編號、主題或關鍵字搜尋，每行並連結至稅務局官方 PDF。",
+         kw="dipn soipn edoipn index practice notes"),
 
-    ("profits-tax", "profits-tax.html", "Profits Tax", "利得稅", "Tax types",
-     "涵蓋香港來源原則、兩級制稅率、應課稅收入、扣稅開支、虧損、FSIE、Patent Box 及基本計算格式。",
-     "profits tax source two-tiered fsie patent box"),
-    ("salaries-tax", "salaries-tax.html", "Salaries Tax", "薪俸稅", "Tax types",
-     "涵蓋香港受僱工作、入息、福利、可扣除支出、個人免稅額、標準稅率上限及個人入息課稅銜接。",
-     "salaries tax employment allowances personal assessment"),
-    ("property-tax", "property-tax.html", "Property Tax", "物業稅", "Tax types",
-     "說明物業稅的納稅人、租金收入、差餉、20% 法定修葺免稅額、不可收回租金及公司業主與利得稅的互動。",
-     "property tax net assessable value rates repairs"),
-    ("stamp-duty", "stamp-duty.html", "Stamp Duty", "印花稅", "Tax types",
-     "說明印花稅以文書為課稅對象，涵蓋物業、股票、租約、BSD/SSD、關聯公司寬免及上訴程序。",
-     "stamp duty avd bsd ssd shares lease"),
-    ("depreciation-allowances", "depreciation-allowances.html", "Depreciation & Allowances", "折舊及免稅額", "Tax types",
-     "整理工業/商業建築物免稅額、機械及設備、初期/每年免稅額、結餘課稅/免稅額及特定資產即時扣除。",
-     "depreciation allowances buildings plant machinery pooling"),
-    ("ird-administration", "ird-administration.html", "IRD Administration", "稅務局行政", "Tax types",
-     "涵蓋報稅、評稅、估計評稅、反對、上訴、暫繳稅緩繳、罰則、稅務調查，以及自動交換財務帳戶資料與加密資產申報。",
-     "ird administration returns assessment objection penalties aeoi carf"),
+    dict(id="profits-tax", src="profits-tax.html", group="Tax types",
+         label="Profits Tax", label_zh="利得稅",
+         en="Territorial source principle, two-tiered rates, taxable/non-taxable receipts, deductible/non-deductible expenses, FSIE, Patent Box, computation template.",
+         zh="涵蓋香港來源原則、兩級制稅率、應課稅收入、扣稅開支、虧損、FSIE、Patent Box 及基本計算格式。",
+         kw="profits tax source two-tiered fsie patent box"),
+    dict(id="salaries-tax", src="salaries-tax.html", group="Tax types",
+         label="Salaries Tax", label_zh="薪俸稅",
+         en="Progressive rates vs. standard rate cap, personal allowances, deduction ceilings, territorial source and the 60-day rule, personal assessment election.",
+         zh="涵蓋香港受僱工作、入息、福利、可扣除支出、個人免稅額、標準稅率上限及個人入息課稅銜接。",
+         kw="salaries tax employment allowances personal assessment"),
+    dict(id="property-tax", src="property-tax.html", group="Tax types",
+         label="Property Tax", label_zh="物業稅",
+         en="Chargeable persons, net assessable value, the 20% statutory repair allowance, and the interaction with profits tax (corporate set-off / exemption).",
+         zh="說明物業稅的納稅人、租金收入、差餉、20% 法定修葺免稅額、不可收回租金及公司業主與利得稅的互動。",
+         kw="property tax net assessable value rates repairs"),
+    dict(id="stamp-duty", src="stamp-duty.html", group="Tax types",
+         label="Stamp Duty", label_zh="印花稅",
+         en="Share transfers, property (AVD/BSD/SSD), leases and partnership admission — including the 2026 amendment ordinances.",
+         zh="說明印花稅以文書為課稅對象，涵蓋物業、股票、租約、BSD/SSD、關聯公司寬免及上訴程序。",
+         kw="stamp duty avd bsd ssd shares lease"),
+    dict(id="depreciation-allowances", src="depreciation-allowances.html", group="Tax types",
+         label="Depreciation & Allowances", label_zh="折舊及免稅額",
+         en="Industrial and commercial buildings allowances, plant and machinery pools, initial/annual/balancing allowances and charges.",
+         zh="整理工業/商業建築物免稅額、機械及設備、初期/每年免稅額、結餘課稅/免稅額及特定資產即時扣除。",
+         kw="depreciation allowances buildings plant machinery pooling"),
+    dict(id="ird-administration", src="ird-administration.html", group="Tax types",
+         label="IRD Administration", label_zh="稅務局行政",
+         en="Returns and filing, assessment and estimated assessment, objections and appeals, penalties, holdover of provisional tax, plus AEOI and crypto-asset reporting.",
+         zh="涵蓋報稅、評稅、估計評稅、反對、上訴、暫繳稅緩繳、罰則、稅務調查，以及自動交換財務帳戶資料與加密資產申報。",
+         kw="ird administration returns assessment objection penalties aeoi carf"),
 
-    ("profits-tax-return-guide", "profits-tax-return-guide.html", "Profits Tax Return Guide", "利得稅報稅表指南", "Returns",
-     "把 BIR51/52/54 的欄位與稅務計算邏輯連接，說明哪些資料要填在報稅表，哪些屬於另附稅務計算。",
-     "profits tax return guide bir51 bir52 bir54"),
-    ("profits-tax-return-finder", "profits-tax-return-finder.html", "Profits Tax Return Box Finder", "利得稅報稅表欄位搜尋", "Returns",
-     "用關鍵字尋找 BIR51、BIR52、BIR54 欄位，適合在準備報稅表或溫習 supplementary forms 時使用。",
-     "bir box finder supplementary forms"),
+    dict(id="profits-tax-return-guide", src="profits-tax-return-guide.html", group="Returns",
+         label="Profits Tax Return Guide", label_zh="利得稅報稅表指南",
+         en="Box-by-box walkthrough of BIR51 (corporations), plus how BIR52 (persons other than corporations) and BIR54 (non-residents) differ — tied back to the Profits Tax and Depreciation pages.",
+         zh="把 BIR51/52/54 的欄位與稅務計算邏輯連接，說明哪些資料要填在報稅表，哪些屬於另附稅務計算。",
+         kw="profits tax return guide bir51 bir52 bir54"),
+    dict(id="profits-tax-return-finder", src="profits-tax-return-finder.html", group="Returns",
+         label="Profits Tax Return Box Finder", label_zh="利得稅報稅表欄位搜尋",
+         en="Keyword search over every box on BIR51, BIR52 and BIR54, including the supplementary forms — for when you know the figure but not which box it belongs in.",
+         zh="用關鍵字尋找 BIR51、BIR52、BIR54 欄位，適合在準備報稅表或溫習 supplementary forms 時使用。",
+         kw="bir box finder supplementary forms"),
 
-    ("profits-tax-illustrations", "profits-tax-illustrations.html", "Profits Tax — Illustrations", "利得稅例題", "Worked illustrations",
-     "以改寫例題展示來源地、資本/收益性質、壞帳、知識產權、虧損及兩級制計算等常見考點。",
-     "profits tax worked illustrations examples"),
-    ("salaries-tax-illustrations", "salaries-tax-illustrations.html", "Salaries Tax — Illustrations", "薪俸稅例題", "Worked illustrations",
-     "以服務地點、僱傭關係、福利、股份獎勵及個人入息課稅情境強化考試判斷。",
-     "salaries tax worked illustrations examples"),
-    ("property-tax-illustrations", "property-tax-illustrations.html", "Property Tax — Illustrations", "物業稅例題", "Worked illustrations",
-     "用租金、差餉、租客代付開支、不可收回租金及公司持有物業情境練習 NAV 計算。",
-     "property tax worked illustrations examples"),
-    ("stamp-duty-illustrations", "stamp-duty-illustrations.html", "Stamp Duty — Illustrations", "印花稅例題", "Worked illustrations",
-     "以物業買賣、公司買樓、香港股票轉讓及關聯公司重組練習印花稅分析。",
-     "stamp duty worked illustrations examples"),
-    ("depreciation-allowances-illustrations", "depreciation-allowances-illustrations.html",
-     "Depreciation & Allowances — Illustrations", "折舊及免稅額例題", "Worked illustrations",
-     "透過池制、出售資產、商業建築物、翻新及指定固定資產練習折舊免稅額。",
-     "depreciation allowances worked illustrations examples"),
-    ("module9-extra-practice", "module9-extra-practice.html", "Module 9 Extra Practice Q&A", "Module 9 額外練習問答", "Worked illustrations",
-     "改寫練習庫，按利得稅、薪俸稅、物業稅、個人入息課稅、印花稅及跨境預扣稅分類。",
-     "module 9 extra practice questions answers"),
+    dict(id="profits-tax-illustrations", src="profits-tax-illustrations.html", group="Worked illustrations",
+         label="Profits Tax — Illustrations", label_zh="利得稅例題",
+         en="Source, capital vs revenue, bad debts, IP, losses and two-tiered computations — DIPN examples paraphrased and textbook figures recomputed against current law.",
+         zh="以改寫例題展示來源地、資本/收益性質、壞帳、知識產權、虧損及兩級制計算等常見考點。",
+         kw="profits tax worked illustrations examples"),
+    dict(id="salaries-tax-illustrations", src="salaries-tax-illustrations.html", group="Worked illustrations",
+         label="Salaries Tax — Illustrations", label_zh="薪俸稅例題",
+         en="The 60-day rule, housing benefit valuation, share options, termination gratuities, a full computation, and three personal assessment election scenarios.",
+         zh="以服務地點、僱傭關係、福利、股份獎勵及個人入息課稅情境強化考試判斷。",
+         kw="salaries tax worked illustrations examples"),
+    dict(id="property-tax-illustrations", src="property-tax-illustrations.html", group="Worked illustrations",
+         label="Property Tax — Illustrations", label_zh="物業稅例題",
+         en="NAV computations built from rent, rates, tenant-paid outgoings, irrecoverable rent, and corporate-owned property scenarios.",
+         zh="用租金、差餉、租客代付開支、不可收回租金及公司持有物業情境練習 NAV 計算。",
+         kw="property tax worked illustrations examples"),
+    dict(id="stamp-duty-illustrations", src="stamp-duty-illustrations.html", group="Worked illustrations",
+         label="Stamp Duty — Illustrations", label_zh="印花稅例題",
+         en="Property purchases, corporate buyers, Hong Kong share transfers and intra-group reorganisations — every figure recomputed against post-2026 law.",
+         zh="以物業買賣、公司買樓、香港股票轉讓及關聯公司重組練習印花稅分析。",
+         kw="stamp duty worked illustrations examples"),
+    dict(id="depreciation-allowances-illustrations", src="depreciation-allowances-illustrations.html",
+         group="Worked illustrations",
+         label="Depreciation & Allowances — Illustrations", label_zh="折舊及免稅額例題",
+         en="Pooling, asset disposals, commercial buildings, refurbishment and prescribed fixed assets worked end to end.",
+         zh="透過池制、出售資產、商業建築物、翻新及指定固定資產練習折舊免稅額。",
+         kw="depreciation allowances worked illustrations examples"),
+    dict(id="module9-extra-practice", src="module9-extra-practice.html", group="Worked illustrations",
+         label="Module 9 Extra Practice Q&A", label_zh="Module 9 額外練習問答",
+         en="An extra question bank, grouped by profits tax, salaries tax, property tax, personal assessment, stamp duty and cross-border withholding.",
+         zh="改寫練習庫，按利得稅、薪俸稅、物業稅、個人入息課稅、印花稅及跨境預扣稅分類。",
+         kw="module 9 extra practice questions answers"),
 ]
 
 GROUP_ORDER = ["Start here", "Tax types", "Returns", "Worked illustrations"]
@@ -100,7 +139,7 @@ GROUP_BLURB = {
     "Worked illustrations": "Paraphrased DIPN and Module 9 examples, recomputed against current rates.",
 }
 
-PAGE_IDS = {p[0] for p in PAGES}
+PAGE_IDS = {p["id"] for p in PAGES}
 
 
 def read(path):
@@ -199,16 +238,20 @@ def build_cards():
         out.append('<h2 class="family-heading">%s · %s</h2>' % (group, GROUP_ZH[group]))
         out.append('<p class="group-blurb">%s</p>' % GROUP_BLURB[group])
         out.append('<div class="card-grid">')
-        for pid, src, label, label_zh, grp, summary_zh, keywords in PAGES:
-            if grp != group:
+        for pg in PAGES:
+            if pg["group"] != group:
                 continue
-            haystack = " ".join((keywords, label, label_zh, summary_zh)).lower().replace('"', "")
+            haystack = " ".join(
+                (pg["kw"], pg["label"], pg["label_zh"], pg["en"], pg["zh"])
+            ).lower().replace('"', "")
             out.append(
                 '<button class="std-card" data-target="%s" data-search="%s">'
                 '<div class="card-code">%s</div>'
                 '<div class="card-title-zh">%s</div>'
                 '<div class="card-desc">%s</div>'
-                "</button>" % (pid, haystack, label, label_zh, summary_zh)
+                '<div class="card-desc card-desc-zh">%s</div>'
+                "</button>"
+                % (pg["id"], haystack, pg["label"], pg["label_zh"], pg["en"], pg["zh"])
             )
         out.append("</div>")
     return "\n".join(out)
@@ -216,9 +259,9 @@ def build_cards():
 
 def build_nav():
     return "\n".join(
-        '<button class="navlink" data-target="%s">%s</button>' % (pid, label)
-        for pid, src, label, label_zh, grp, summary_zh, kw in PAGES
-        if grp == "Start here"
+        '<button class="navlink" data-target="%s">%s</button>' % (pg["id"], pg["label"])
+        for pg in PAGES
+        if pg["group"] == "Start here"
     )
 
 
@@ -318,6 +361,7 @@ FRAME_CSS = """
 .std-card .card-code{font-weight:700;font-size:14.5px;color:var(--brand)}
 .std-card .card-title-zh{font-size:13px;color:var(--text);margin-top:3px}
 .std-card .card-desc{font-size:12px;color:var(--text-muted);margin-top:6px;line-height:1.5}
+.std-card .card-desc-zh{margin-top:4px;padding-top:4px;border-top:1px dotted var(--border)}
 .no-match{color:var(--text-muted);font-size:13.5px;padding:14px 0;display:none}
 
 /* ---------- bilingual notes carried from the previous edition ---------- */
@@ -552,8 +596,10 @@ def main():
     )
 
     panels = []
-    for pid, src, label, label_zh, grp, summary_zh, kw in PAGES:
-        panels.append(build_panel(pid, label, src, label_zh, summary_zh))
+    for pg in PAGES:
+        panels.append(
+            build_panel(pg["id"], pg["label"], pg["src"], pg["label_zh"], pg["zh"])
+        )
 
     html = """<!DOCTYPE html>
 <html lang="en">
@@ -582,7 +628,12 @@ def main():
   <div class="hero">
     <h1>Hong Kong Tax Study Hub</h1>
     <p>Consolidated internal reference for HK profits, property and salaries tax, stamp duty, and depreciation allowances — built for (1) tax computation and taxable/deductible analysis on Hong Kong incorporated companies' financial statements, and (2) team study with worked illustrations drawn from IRD's Departmental Interpretation &amp; Practice Notes (DIPNs).</p>
-    <p>雙語內部參考資料，涵蓋香港利得稅、物業稅、薪俸稅、印花稅及折舊免稅額，供稅務計算分析及團隊溫習之用。本平台僅供內部學習參考，不能取代《稅務條例》（第112章）及稅務局現行指引。</p>
+    <p>雙語參考資料，涵蓋香港利得稅、物業稅、薪俸稅、印花稅及折舊免稅額，供稅務計算分析及團隊溫習之用。本平台僅供學習參考，不能取代《稅務條例》（第112章）及稅務局現行指引。</p>
+    <div class="callout watch" style="max-width:860px">
+      <span class="lbl">Study material — not professional advice · 學習材料，非專業意見</span>
+      Nothing here is tax advice, and reading it creates no adviser–client relationship. This is written to one finance team's internal working standard and published openly because the underlying material is public — not because it has been reviewed for anyone else's use. It contains mistakes and goes out of date as the law changes. <strong>Verify against the Inland Revenue Ordinance (Cap. 112), the Stamp Duty Ordinance (Cap. 117) and current IRD guidance before relying on any figure for a filing position.</strong>
+      <div style="margin-top:6px">本平台所載內容並非稅務意見，閱讀不構成顧問關係。內容按某財務團隊的內部工作標準撰寫，因所依據的資料屬公開而公開發布，並未經審核供他人使用；內容或有錯誤，亦會隨法例變動而過時。<strong>在依賴任何數字作報稅立場前，請核對《稅務條例》（第112章）、《印花稅條例》（第117章）及稅務局現行指引。</strong></div>
+    </div>
   </div>
   <div class="hub-freshness">
     <div class="freshness ok">
@@ -625,11 +676,12 @@ def main():
 
     # Clean-URL twin for the published site: the spaced filename is what people
     # recognise as an email attachment, but it URL-encodes badly in a link.
-    with io.open(OUT_WEB, "w", encoding="utf-8", newline="\n") as fh:
-        fh.write(html)
+    for extra in (OUT_WEB, OUT_INDEX):
+        with io.open(extra, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(html)
 
     print("wrote %s (%.1f KB)" % (os.path.basename(OUT), len(html.encode("utf-8")) / 1024.0))
-    print("wrote %s (same content, clean URL)" % os.path.basename(OUT_WEB))
+    print("wrote combined.html and index.html (same content)")
     print("panels: %d + MAIN" % len(panels))
     for bad in ("??", "禮"):
         n = html.count(bad)
