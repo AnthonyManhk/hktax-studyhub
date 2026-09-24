@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IRD Administration — HK Tax Study Hub</title>
 <link rel="stylesheet" href="../assets/css/main.css">
+<style>
+  .proforma table{font-size:13.5px}
+  .proforma td:first-child{width:56%}
+  .dbl td,.dbl th{border-top:1px solid var(--text-muted);border-bottom:3px double var(--text-muted);font-weight:600}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -39,6 +44,7 @@
     <a href="#assessment">Assessment &amp; Estimated Assessment</a>
     <a href="#objections">Objections &amp; Appeals</a>
     <a href="#provisional">Provisional Tax &amp; Holdover</a>
+    <a href="#latepayment">Late Payment — Surcharge &amp; Recovery</a>
     <a href="#penalties">Penalties</a>
     <a href="#relief">Double Taxation Relief &amp; Tax Clearance</a>
     <a href="#exchange">AEOI &amp; Crypto-Asset Reporting</a>
@@ -117,8 +123,102 @@
       </div>
     </section>
 
+    <section class="block" id="latepayment">
+      <h2>6. Late Payment of Tax — Surcharge and Recovery <span class="sec-ref">IRO s.71; Part 12</span></h2>
+      <p class="lede">The consequence almost every taxpayer actually meets, and the one most often confused with the penalties in §7. A surcharge under s.71 is <strong>not</strong> a penalty for an offence — it is automatic, needs no intent, no reasonable-excuse enquiry and no hearing. Miss the date and it is imposed.</p>
+
+      <table>
+        <thead><tr><th style="width:150px">When</th><th>What happens</th><th style="width:130px">Provision</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>The due date passes</strong></td>
+            <td>A <strong>5% surcharge</strong> is imposed on the tax unpaid. Recovery action may begin <strong>immediately and without prior notice</strong>.</td>
+            <td><strong>s.71(5)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>6 months after the due date</strong></td>
+            <td>A <strong>further 10% surcharge</strong> on the amount still unpaid — <strong>including the 5% already imposed</strong>.</td>
+            <td><strong>s.71(5A)</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout watch">
+        <span class="lbl">The 10% is charged on the tax <em>plus</em> the first surcharge — so it is not 15%</span>
+        On tax of <strong>$100,000</strong> left unpaid for over six months:
+        <table style="margin-top:8px;box-shadow:none">
+          <tbody>
+            <tr><td style="width:62%">Tax due</td><td class="num">100,000</td></tr>
+            <tr><td>Add: 5% surcharge — s.71(5)</td><td class="num">5,000</td></tr>
+            <tr><td><em>Amount unpaid after the due date</em></td><td class="num"><em>105,000</em></td></tr>
+            <tr><td>Add: further 10% on <strong>$105,000</strong> — s.71(5A)</td><td class="num">10,500</td></tr>
+            <tr><td><strong>Total payable</strong></td><td class="num"><strong>115,500</strong></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:8px">Total surcharge <strong>$15,500 — 15.5%</strong> of the original tax, not 15%. The second surcharge compounds on the first.</div>
+      </div>
+
+      <h3>The instalment trap</h3>
+      <p>Where a demand note is split into two instalments, <strong>missing the first makes the second immediately due</strong>, and the 5% is then charged on the <strong>whole</strong> outstanding balance — not just on the instalment that was missed.</p>
+      <div class="proforma">
+        <table>
+          <caption>Demand note of $100,000: first instalment $70,000, second $30,000</caption>
+          <tbody>
+            <tr><td style="width:62%">First instalment paid on time, second missed — 5% × $30,000</td><td class="num">1,500</td></tr>
+            <tr><td><strong>First instalment missed</strong> — the second accelerates, so 5% × <strong>$100,000</strong></td><td class="num"><strong>5,000</strong></td></tr>
+            <tr class="dbl"><td>Cost of missing the earlier date rather than the later one</td><td class="num">3,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Left unpaid for six months, that same note reaches <strong>$115,500</strong>.</p>
+
+      <h3>Recovery of tax in default <span class="sec-ref">IRO Part 12</span></h3>
+      <p>IRD does not wait for the six-month mark before acting. Its own notice states that other than imposing the 5% surcharge it "will also immediately commence other recovery actions <strong>without prior notice</strong>":</p>
+      <table>
+        <thead><tr><th style="width:30%">Action</th><th>What it means in practice</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Recovery notice to a third party</strong><br><span class="sec-ref">s.76</span></td>
+            <td>Served on anyone who owes or holds money for the defaulter — <strong>employer, bank, tenant, debtor, customer</strong>. That person must pay the money to IRD instead, and is discharged to the extent they do. This is why a tax default can become visible to an employer or banker.</td>
+          </tr>
+          <tr>
+            <td><strong>Civil proceedings</strong><br><span class="sec-ref">s.75</span></td>
+            <td>Tax in default is recoverable as a <strong>civil debt in the District Court</strong>. A judgment carries the usual consequences, including costs and interest on the judgment debt.</td>
+          </tr>
+          <tr>
+            <td><strong>Departure prevention order</strong><br><span class="sec-ref">s.77</span></td>
+            <td>The Commissioner may apply to a District Judge for a direction stopping a defaulter from <strong>leaving Hong Kong</strong> until the tax is paid or security given.</td>
+          </tr>
+          <tr>
+            <td><strong>Joint and several liability</strong><br><span class="sec-ref">property tax co-owners</span></td>
+            <td>Co-owners are liable <strong>jointly and severally</strong>: IRD may pursue any one of them for the <strong>whole</strong> amount, not merely their share. Once one pays in full, recovery against the others stops. Tax is never collected twice, and any overpayment is refunded.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout tip">
+        <span class="lbl">Applying to pay by instalments does not stop the surcharge</span>
+        A taxpayer in genuine financial difficulty may apply to settle by instalments. But IRD is explicit that <strong>even where the application is approved, surcharges are still imposed</strong> on tax remaining unpaid after the due date. An instalment arrangement buys time and heads off recovery action; it is not a waiver. Conditional waiver schemes have been offered in particular years as a relief measure, but they are exceptional and year-specific — never assume one applies.
+      </div>
+
+      <div class="callout law">
+        <span class="lbl">Keep the two regimes apart — this is the distinction to have straight</span>
+        <table style="margin-top:8px;box-shadow:none">
+          <thead><tr><th style="width:26%"></th><th>Surcharge, s.71</th><th>Penalty, ss.80 / 82A / 82</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Triggered by</strong></td><td>Paying <strong>late</strong></td><td>Failing to <strong>file</strong> or notify, filing an <strong>incorrect</strong> return, or <strong>evading</strong> tax</td></tr>
+            <tr><td><strong>Fault required</strong></td><td>None — automatic on the date</td><td>Absence of reasonable excuse; for s.82, wilful intent</td></tr>
+            <tr><td><strong>Amount</strong></td><td>5%, then a further 10% on the total</td><td>Up to <strong>treble the tax undercharged</strong>, plus a fine and, under s.82, imprisonment</td></tr>
+            <tr><td><strong>Who imposes it</strong></td><td>The Commissioner, administratively</td><td>The Commissioner (s.82A) or a court (ss.80, 82)</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:8px">A taxpayer who files a correct return on time but pays late faces the <strong>surcharge only</strong>. One who files late <em>and</em> pays late faces <strong>both</strong>.</div>
+      </div>
+      <p style="font-size:13px">Source: IRD, <a href="https://www.ird.gov.hk/eng/pdf/e_remindpaytax.pdf" target="_blank" rel="noopener">Pay Tax On Time to Avoid Penalty and Recovery Actions</a>, and GovHK <a href="https://www.gov.hk/en/residents/taxes/taxfiling/consequences/consequencenotpaytax.htm" target="_blank" rel="noopener">Consequences of Not Paying Tax On Time</a> and <a href="https://www.gov.hk/en/residents/taxes/taxfiling/consequences/recovertax.htm" target="_blank" rel="noopener">Recovering Tax in Default</a>.</p>
+    </section>
+
     <section class="block" id="penalties">
-      <h2>6. Penalties <span class="sec-ref">IRO ss.80, 82, 82A</span></h2>
+      <h2>7. Penalties <span class="sec-ref">IRO ss.80, 82, 82A</span></h2>
       <table>
         <thead><tr><th>Contravention</th><th>Consequence</th></tr></thead>
         <tbody>
@@ -131,13 +231,13 @@
     </section>
 
     <section class="block" id="relief">
-      <h2>7. Double Taxation Relief &amp; Tax Clearance <span class="sec-ref">IRO ss.49, 50, 51D</span></h2>
+      <h2>8. Double Taxation Relief &amp; Tax Clearance <span class="sec-ref">IRO ss.49, 50, 51D</span></h2>
       <p>Where Hong Kong has a comprehensive double taxation agreement (CDTA) with another jurisdiction, s.50 provides a tax credit for foreign tax paid on income also taxed in Hong Kong (interacting with the s.16(1)(c)/(2J) deduction restriction on the Profits Tax page). Employers must comply with tax clearance obligations (s.51D) before an employee who is about to leave Hong Kong permanently, or for a substantial period, ceases employment — including withholding final payments until IRD confirms clearance or a specified period has elapsed.</p>
       <p><strong>CDTA network (as at 24 September 2026):</strong> Hong Kong signed its <strong>60th</strong> comprehensive double taxation agreement with <strong>Slovenia</strong> on 4 September 2026, following <strong>Nigeria</strong> (13 July 2026) and <strong>Cyprus</strong> (12 June 2026). Each enters into force only after both sides complete ratification — check the <a href="https://www.ird.gov.hk/eng/tax/dta_inc.htm" target="_blank" rel="noopener">IRD CDTA list</a> for the in-force date before claiming treaty relief.</p>
     </section>
 
     <section class="block" id="exchange">
-      <h2>7A. Automatic Exchange of Information &amp; Crypto-Asset Reporting <span class="sec-ref">IRO Part 8A</span></h2>
+      <h2>9. Automatic Exchange of Information &amp; Crypto-Asset Reporting <span class="sec-ref">IRO Part 8A</span></h2>
       <p>Two separate 2026 measures extend Hong Kong's information-exchange obligations, and both change what a reporting financial institution has to collect:</p>
       <ul>
         <li><strong>Amended CRS — enacted.</strong> The <a href="https://www.ird.gov.hk/eng/ppr/archives/26061706.htm" target="_blank" rel="noopener">Inland Revenue (Amendment) (Automatic Exchange of Information) Bill 2026</a> passed on 17 June 2026, implementing the OECD's amended Common Reporting Standard.</li>
@@ -154,7 +254,7 @@
     </section>
 
     <section class="block" id="sources">
-      <h2>8. Source Documents</h2>
+      <h2>10. Source Documents</h2>
       <p>CAP112 Parts referenced above: Part 9 (Returns and Information), Part 10/10A–10C (Assessment, Provisional Tax), Part 11 (Objections and Appeals), Part 12 (Payment and Recovery), Part 14 (Penalties). Consolidated text: <code>Data/CAP112/</code>. As noted at the top of this page, re-verify exact subsection wording against a fresh, fully-extractable copy of Cap. 112 before relying on a specific citation.</p>
       <p>Recommended additions to <code>Data/IRD-Administration/</code>: IRD's "A Guide on the Objection and Appeal Procedures under the Inland Revenue Ordinance," and the annual Block Extension Scheme circular (both published on ird.gov.hk).</p>
     </section>

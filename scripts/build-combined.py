@@ -216,6 +216,38 @@ def localise(fragment, pid):
     return fragment
 
 
+def page_style(html, pid):
+    """Pull a page's own <style> block and namespace it to that panel.
+
+    The builder only lifts <main class="content">, so without this a page's
+    local CSS silently vanishes from the combined edition while its class
+    names are still used in the markup. Each selector is prefixed with the
+    panel id so two pages defining the same class cannot collide.
+    """
+    head = html.split("</head>", 1)[0]
+    m = re.search(r"<style>(.*?)</style>", head, re.S)
+    if not m:
+        return ""
+    css = m.group(1).strip()
+    if not css:
+        return ""
+    if "@" in css:
+        sys.exit("!! %s has an at-rule in its <style>; namespacing not implemented" % pid)
+
+    out = []
+    for rule in re.finditer(r"([^{}]+)\{([^{}]*)\}", css):
+        selectors, body = rule.group(1).strip(), rule.group(2).strip()
+        if selectors.startswith("/*"):
+            selectors = re.sub(r"/\*.*?\*/", "", selectors, flags=re.S).strip()
+        if not selectors:
+            continue
+        scoped = ", ".join(
+            "#%s %s" % (pid, sel.strip()) for sel in selectors.split(",") if sel.strip()
+        )
+        out.append("%s{%s}" % (scoped, body))
+    return "\n/* ---- %s ---- */\n%s\n" % (pid, "\n".join(out)) if out else ""
+
+
 def zh_note(label_zh, summary_zh):
     """Traditional Chinese orientation note shown at the head of every panel."""
     return (
@@ -250,11 +282,12 @@ def build_panel(pid, label, src, label_zh, summary_zh):
 
     shell_style = "" if toc else ' style="grid-template-columns:1fr"'
     aside = '<aside class="toc">%s</aside>' % toc if toc else ""
-    return (
+    panel = (
         '<section class="tab-panel" id="%s" data-label="%s">\n'
         '  <div class="shell"%s>%s<main class="content">%s</main></div>\n'
         "</section>\n" % (pid, label, shell_style, aside, content)
     )
+    return panel, page_style(html, pid)
 
 
 def build_cards():
@@ -613,18 +646,21 @@ FRAME_JS = r"""
 
 
 def main():
-    css = read(os.path.join(ROOT, "assets", "css", "main.css")) + FRAME_CSS
+    base_css = read(os.path.join(ROOT, "assets", "css", "main.css")) + FRAME_CSS
 
     data_js = "\n".join(
         read(os.path.join(ROOT, "assets", "js", f))
         for f in ("transactions-data.js", "dipn-index-data.js", "bir-finder-data.js")
     )
 
-    panels = []
+    panels, page_css = [], []
     for pg in PAGES:
-        panels.append(
-            build_panel(pg["id"], pg["label"], pg["src"], pg["label_zh"], pg["zh"])
+        panel, css_ = build_panel(
+            pg["id"], pg["label"], pg["src"], pg["label_zh"], pg["zh"]
         )
+        panels.append(panel)
+        if css_:
+            page_css.append(css_)
 
     html = """<!DOCTYPE html>
 <html lang="en">
@@ -686,7 +722,7 @@ def main():
 </body>
 </html>
 """ % {
-        "css": css,
+        "css": base_css + "".join(page_css),
         "nav": build_nav(),
         "cards": build_cards(),
         "panels": "\n".join(panels),
@@ -707,7 +743,7 @@ def main():
 
     print("wrote %s (%.1f KB)" % (os.path.basename(OUT), len(html.encode("utf-8")) / 1024.0))
     print("wrote combined.html and index.html (same content)")
-    print("panels: %d + MAIN" % len(panels))
+    print("panels: %d + MAIN | page CSS blocks inlined: %d" % (len(panels), len(page_css)))
     for bad in ("??", "禮"):
         n = html.count(bad)
         print("corruption check %r: %d" % (bad, n))
