@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computation Formats — HK Tax Study Hub</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+  .proforma table{font-size:13.5px}
+  .proforma td:first-child{width:56%}
+  .sub{padding-left:26px}
+  .sub2{padding-left:46px}
+  .rule td{border-top:2px solid var(--text-muted)}
+  .dbl td{border-top:1px solid var(--text-muted);border-bottom:3px double var(--text-muted);font-weight:600}
+  .lbl-col{text-align:right;font-variant-numeric:tabular-nums;color:var(--text-muted);width:70px}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <div class="brand">HK Tax Study Hub<small>Study aid — not professional advice</small></div>
+    <nav class="site-nav">
+      <a href="../index.html">Hub</a>
+      <a href="ird-updates.html">IRD What's New</a>
+      <a href="computation-formats.html" class="active">Computation Formats</a>
+      <a href="transaction-checker.html">Transaction Checker</a>
+      <a href="dipn-index.html">DIPN Index</a>
+      <a href="profits-tax.html">Profits Tax</a>
+      <a href="property-tax.html">Property Tax</a>
+      <a href="salaries-tax.html">Salaries Tax</a>
+      <a href="personal-assessment.html">Personal Assessment</a>
+      <a href="stamp-duty.html">Stamp Duty</a>
+      <a href="depreciation-allowances.html">Depreciation &amp; Allowances</a>
+      <a href="ird-administration.html">IRD Administration</a>
+    </nav>
+    <button id="theme-toggle" title="Toggle light/dark" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px">Theme</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#how">How to use these</a>
+    <a href="#property">1. Property Tax</a>
+    <a href="#salaries">2. Salaries Tax</a>
+    <a href="#profits">3. Profits Tax</a>
+    <a href="#da">4. Depreciation allowances</a>
+    <a href="#pa">5. Personal Assessment</a>
+    <a href="#revisions">What has changed since the textbook</a>
+    <a href="#sources">Source documents</a>
+  </aside>
+
+  <main class="content">
+    <div class="page-title">
+      <div>
+        <span class="badge badge-common">Revision aid — one page, every format</span>
+        <h1>Computation Formats</h1>
+        <p class="subtitle">The standard pro-forma layout for each Hong Kong tax, in the order the lines belong, with what goes on each line and one worked example apiece.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="lbl">Where these come from</span>
+      The layouts follow <em>Hong Kong Taxation and Tax Planning</em> (22nd ed., Ho &amp; Mak) — Ch.7 property tax, Ch.12 salaries tax, Ch.20 profits tax, Ch.31 plant and machinery. That book states the law <strong>to 31 May 2024</strong>, so every rate and allowance has been re-checked against IRD and updated where it has moved. <a href="#revisions">§ What has changed</a> lists each difference rather than silently absorbing it.
+    </div>
+
+    <section class="block" id="how">
+      <h2>How to use these</h2>
+      <p class="lede">A tax computation is marked on structure as much as on arithmetic. Getting a figure into the wrong line — or the right figure in the right line but the wrong order — loses the marks even when the final number is close. These are the skeletons to have in your head before you start writing.</p>
+      <table>
+        <thead><tr><th style="width:170px">Convention</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>X</strong></td><td>A figure goes here. Letters (A, B, Y, ZB…) mark subtotals that a later line refers back to.</td></tr>
+          <tr><td><strong>Indentation</strong></td><td>Indented lines are workings feeding the subtotal on the right; they do not themselves enter the main column.</td></tr>
+          <tr><td><strong>Single rule</strong></td><td>A subtotal.</td></tr>
+          <tr><td><strong>Double rule</strong></td><td>A figure the question asks for, or one that carries into the next stage.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout law">
+        <span class="lbl">Three rules that apply to every computation here</span>
+        <ol style="margin:4px 0 0 18px;padding:0">
+          <li><strong>Head the computation.</strong> Taxpayer name, which tax, and the year of assessment. Three lines, and they are marks.</li>
+          <li><strong>Show the working, not just the answer.</strong> <code>($30,000 × 12)</code> beside the figure earns the mark even if the arithmetic slips.</li>
+          <li><strong>Name every subtotal correctly.</strong> "Assessable value", "net assessable value", "assessable profit", "net assessable profit", "net chargeable income" are defined terms with different meanings. They are not interchangeable.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="block" id="property">
+      <h2>1. Property Tax <span class="sec-ref">IRO ss.5, 5B, 7C — textbook Ch.7</span></h2>
+      <div class="proforma">
+        <table>
+          <caption><strong>Property Tax Computation</strong> · Year of Assessment 20XX/XX</caption>
+          <tbody>
+            <tr><td>Rent receivable</td><td class="num">X</td></tr>
+            <tr><td>Premium, spread over the lease term</td><td class="num">X</td></tr>
+            <tr><td>Service charges / management fees borne by the tenant and paid to the owner</td><td class="num">X</td></tr>
+            <tr><td>Recovery of rent previously written off as irrecoverable</td><td class="num">X</td></tr>
+            <tr><td class="sub">Less: irrecoverable rent of the year</td><td class="num">(X)</td></tr>
+            <tr class="rule"><th>Assessable value</th><td class="num">X</td></tr>
+            <tr><td class="sub">Less: rates paid <strong>by the owner</strong></td><td class="num">(X)</td></tr>
+            <tr class="rule"><td></td><td class="num">X</td></tr>
+            <tr><td class="sub">Less: statutory allowance for repairs and outgoings, <strong>20%</strong> of the above</td><td class="num">(X)</td></tr>
+            <tr class="rule"><th>Net assessable value</th><td class="num">X</td></tr>
+            <tr class="dbl"><td>Property tax at the standard rate, <strong>15%</strong></td><td class="num">X</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <table>
+        <thead><tr><th style="width:38%">Line</th><th>What belongs there</th></tr></thead>
+        <tbody>
+          <tr><td>Premium</td><td>Spread evenly over the lease term, capped at 36 months (s.5B(4)). A 3-year lease premium received in one year is taxed <sup>12</sup>⁄<sub>36</sub> in each.</td></tr>
+          <tr><td>Irrecoverable rent</td><td>Deducted in the year it is <strong>recognised as irrecoverable</strong>, not the year the rent accrued (s.7C(1)). Recovery later is assessable in the year of recovery, not related back.</td></tr>
+          <tr><td>Rates</td><td>Only rates <strong>paid by the owner</strong>. Rates paid by the tenant never enter the computation.</td></tr>
+          <tr><td>20% statutory allowance</td><td>Fixed, automatic, and taken <strong>after</strong> rates. It is not a claim and no receipts are needed — and no more can be claimed however much was actually spent.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout watch">
+        <span class="lbl">The four things that never get deducted</span>
+        <strong>Government rent, mortgage interest, actual repairs, and improvements</strong> are all non-deductible under property tax. The 20% allowance is the <em>only</em> relief for outgoings. Mortgage interest is exactly why a mortgaged property owner should look at <a href="personal-assessment.html">Personal Assessment</a>.
+      </div>
+
+      <div class="illustration">
+        <div class="lbl">Worked example <span class="src">Textbook Example 7.1 (Mr Gap), p.101 — rate unchanged, so still current</span></div>
+        <p>Mr Gap let a Sai Kung house on a three-year lease from 1 January 2022 at $30,000 a month, with a premium of $180,000 payable on 1 January 2022. In the year ended 31 March 2024 he paid Government rent $10,800, mortgage interest $110,000, rates $18,000, and repairs and improvement $20,000.</p>
+        <div class="proforma">
+          <table>
+            <caption><strong>Mr Gap — Property Tax Computation</strong> · Year of Assessment 2023/24</caption>
+            <tbody>
+              <tr><td>Rent ($30,000 × 12)</td><td class="num">360,000</td></tr>
+              <tr><td>Premium ($180,000 × <sup>12</sup>⁄<sub>36</sub>)</td><td class="num">60,000</td></tr>
+              <tr class="rule"><th>Assessable value</th><td class="num">420,000</td></tr>
+              <tr><td class="sub">Less: rates paid by owner</td><td class="num">(18,000)</td></tr>
+              <tr class="rule"><td></td><td class="num">402,000</td></tr>
+              <tr><td class="sub">Less: statutory deduction ($402,000 × 20%)</td><td class="num">(80,400)</td></tr>
+              <tr class="rule"><th>Net assessable value</th><td class="num">321,600</td></tr>
+              <tr class="dbl"><td>Property tax ($321,600 × 15%)</td><td class="num">48,240</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Government rent $10,800, interest $110,000 and repairs $20,000 — <strong>$140,800 of real cash cost</strong> — get no deduction at all. That is the point of the example.</p>
+      </div>
+      <p style="font-size:13px"><a href="property-tax.html">Property Tax rules →</a> &middot; <a href="property-tax-illustrations.html">more worked illustrations →</a></p>
+    </section>
+
+    <section class="block" id="salaries">
+      <h2>2. Salaries Tax <span class="sec-ref">IRO ss.8–13 — textbook Ch.12</span></h2>
+      <div class="callout law">
+        <span class="lbl">The structural point worth memorising</span>
+        There is <strong>no statutory format</strong> for a salaries tax computation. But the layout below puts <strong>every item affecting rental value before the rental value line</strong> — because rental value is 10% of income <em>after</em> allowable outgoings. Lay it out any other way and you will compute rental value on the wrong base.
+      </div>
+      <div class="proforma">
+        <table>
+          <caption><strong>Salaries Tax Computation</strong> · Year of Assessment 20XX/XX</caption>
+          <tbody>
+            <tr><td>Salaries</td><td class="lbl-col">A</td><td class="num"></td></tr>
+            <tr><td>Bonus, commission, gratuity</td><td class="lbl-col">B</td><td class="num"></td></tr>
+            <tr><td>Allowances (cash or convertible into cash)</td><td class="lbl-col">C</td><td class="num"></td></tr>
+            <tr class="rule"><td></td><td class="lbl-col"></td><td class="num">D</td></tr>
+            <tr><td>Less: allowable expenses — s.12(1)(a)</td><td class="lbl-col"></td><td class="num"></td></tr>
+            <tr><td class="sub2">Travelling from office to office</td><td class="lbl-col">E</td><td class="num"></td></tr>
+            <tr><td class="sub2">Professional subscription</td><td class="lbl-col">F</td><td class="num">(G)</td></tr>
+            <tr class="rule"><th>Income after allowable outgoings</th><td class="lbl-col"></td><td class="num">H</td></tr>
+            <tr><td>Add: rental value of employer-provided quarters (<strong>H × 10%</strong>)</td><td class="lbl-col">J</td><td class="num"></td></tr>
+            <tr><td class="sub">Less: rent suffered (rent paid by employee − rent refunded)</td><td class="lbl-col">(K)</td><td class="num">L</td></tr>
+            <tr class="rule"><td></td><td class="lbl-col"></td><td class="num">M</td></tr>
+            <tr><td>Add: lump sum on termination of employment</td><td class="lbl-col"></td><td class="num">N</td></tr>
+            <tr><td>Add: gain on exercise of share option</td><td class="lbl-col"></td><td class="num">O</td></tr>
+            <tr class="rule"><td></td><td class="lbl-col"></td><td class="num">P</td></tr>
+            <tr><td class="sub">Less: self-education expenses — s.12(1)(e)</td><td class="lbl-col"></td><td class="num">(Q)</td></tr>
+            <tr class="rule"><th>Net assessable income, before concessionary deductions</th><td class="lbl-col"></td><td class="num">R</td></tr>
+            <tr><td>Less: concessionary deductions</td><td class="lbl-col"></td><td class="num"></td></tr>
+            <tr><td class="sub2">Approved charitable donations (max 35% of P)</td><td class="lbl-col">S</td><td class="num"></td></tr>
+            <tr><td class="sub2">Elderly residential care expenses</td><td class="lbl-col">T</td><td class="num"></td></tr>
+            <tr><td class="sub2">Home loan interest</td><td class="lbl-col">U</td><td class="num"></td></tr>
+            <tr><td class="sub2">Mandatory contributions to MPF / recognised scheme</td><td class="lbl-col">V</td><td class="num"></td></tr>
+            <tr><td class="sub2">VHIS premiums</td><td class="lbl-col">W</td><td class="num"></td></tr>
+            <tr><td class="sub2">Qualifying annuity premiums and MPF voluntary contributions</td><td class="lbl-col">X</td><td class="num"></td></tr>
+            <tr><td class="sub2">Domestic rents</td><td class="lbl-col">Y</td><td class="num"></td></tr>
+            <tr><td class="sub2">Assisted reproductive service expenses</td><td class="lbl-col">Z</td><td class="num">(ZA)</td></tr>
+            <tr class="rule"><th>Net income (net assessable income after concessionary deductions)</th><td class="lbl-col"></td><td class="num">ZB</td></tr>
+            <tr><td>Less: personal allowances</td><td class="lbl-col"></td><td class="num"></td></tr>
+            <tr><td class="sub2">Basic / married person's allowance</td><td class="lbl-col">AA</td><td class="num"></td></tr>
+            <tr><td class="sub2">Child allowance</td><td class="lbl-col">BB</td><td class="num"></td></tr>
+            <tr><td class="sub2">Dependent parent and other allowances</td><td class="lbl-col">CC</td><td class="num">(DD)</td></tr>
+            <tr class="dbl"><th>Net chargeable income</th><td class="lbl-col"></td><td class="num">EE</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="proforma">
+        <table>
+          <caption><strong>Then compute the tax twice and pay the lower</strong></caption>
+          <tbody>
+            <tr><td>(b) Progressive rates on <strong>EE</strong>: 2% / 6% / 10% / 14% on the first four $50,000 bands, then 17%</td><td class="num">b</td></tr>
+            <tr><td>(c) Standard rate on <strong>ZB</strong> (net income, <em>before</em> personal allowances) — s.13(2)</td><td class="num">c</td></tr>
+            <tr class="dbl"><td>Salaries tax liability = <strong>the lower of (b) and (c)</strong></td><td class="num">X</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout watch">
+        <span class="lbl">Updated: the standard rate is two-tiered from 2024/25</span>
+        The textbook's format shows the standard rate as a flat <strong>15%</strong>. From <strong>YA 2024/25</strong> the standard rate is <strong>two-tiered: 15% on the first HKD 5,000,000 of net income, 16% on the remainder.</strong> Under HKD 5,000,000 the book's line still gives the right answer; above it, the book understates. Write line (c) as the two-tier calculation.
+      </div>
+      <table>
+        <thead><tr><th style="width:38%">Line</th><th>What catches people out</th></tr></thead>
+        <tbody>
+          <tr><td>Rental value base (H)</td><td>10% of income <strong>after</strong> s.12(1)(a) outgoings — not of gross salary. 4% for a hotel room / shared boarding-type accommodation, 8% for two rooms in a hotel.</td></tr>
+          <tr><td>Rent suffered (K)</td><td>Deducted from rental value, and only down to <strong>nil</strong> — it cannot create a negative.</td></tr>
+          <tr><td>Donations cap (S)</td><td>35% of <strong>P</strong> — income after the outgoings and rental value but before self-education and the other concessionary deductions.</td></tr>
+          <tr><td>Order of Q and S–Z</td><td>Self-education is a s.12 deduction and comes <strong>before</strong> the concessionary block. Putting it among the concessionary deductions changes the donations cap base.</td></tr>
+          <tr><td>The standard-rate base (ZB)</td><td>Net income <strong>before</strong> personal allowances. Applying it to EE is the single most common error in this computation.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="illustration">
+        <div class="lbl">Worked example <span class="src">Built on the textbook's Ch.12 layout, at YA 2026/27 rates</span></div>
+        <p>Mr Pak earns salary $900,000 and a bonus $100,000, pays a professional subscription of $2,000, and is provided with a rent-free flat by his employer. He donated $30,000 to an approved charity and made mandatory MPF contributions of $18,000. He is single with no dependants.</p>
+        <div class="proforma">
+          <table>
+            <caption><strong>Mr Pak — Salaries Tax Computation</strong> · Year of Assessment 2026/27</caption>
+            <tbody>
+              <tr><td>Salary and bonus</td><td class="num">1,000,000</td></tr>
+              <tr><td class="sub">Less: professional subscription — s.12(1)(a)</td><td class="num">(2,000)</td></tr>
+              <tr class="rule"><th>Income after allowable outgoings (H)</th><td class="num">998,000</td></tr>
+              <tr><td>Add: rental value ($998,000 × 10%)</td><td class="num">99,800</td></tr>
+              <tr class="rule"><th>Net assessable income before concessionary deductions</th><td class="num">1,097,800</td></tr>
+              <tr><td class="sub">Less: approved charitable donations (well under the 35% cap)</td><td class="num">(30,000)</td></tr>
+              <tr><td class="sub">Less: mandatory MPF contributions (capped at 18,000)</td><td class="num">(18,000)</td></tr>
+              <tr class="rule"><th>Net income (ZB)</th><td class="num">1,049,800</td></tr>
+              <tr><td class="sub">Less: basic allowance</td><td class="num">(145,000)</td></tr>
+              <tr class="dbl"><th>Net chargeable income (EE)</th><td class="num">904,800</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="proforma">
+          <table>
+            <tbody>
+              <tr><td>(b) Progressive on 904,800: 1,000 + 3,000 + 5,000 + 7,000 + (704,800 × 17%)</td><td class="num">135,816</td></tr>
+              <tr><td>(c) Standard rate on net income 1,049,800 × 15% (under the 5,000,000 threshold)</td><td class="num">157,470</td></tr>
+              <tr class="dbl"><td>Tax payable — the lower</td><td class="num">135,816</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Note the rental value is <strong>$99,800, not $100,000</strong> — 10% of income after the subscription, not of the $1,000,000 gross. A two-dollar difference in the wrong direction, but it is the line the marks are on. Any one-off Budget reduction would come off at the end; none is assumed here.</p>
+      </div>
+      <p style="font-size:13px"><a href="salaries-tax.html">Salaries Tax rules →</a> &middot; <a href="salaries-tax-illustrations.html">more worked illustrations →</a></p>
+    </section>
+
+    <section class="block" id="profits">
+      <h2>3. Profits Tax <span class="sec-ref">IRO ss.14–19C — textbook Ch.20</span></h2>
+      <div class="callout watch">
+        <span class="lbl">Start from profit per the accounts — never rebuild from gross profit</span>
+        The textbook sets this out as an explicit <strong>WRONG vs CORRECT</strong> contrast, and it is worth the space. A profits tax computation is an <strong>adjustment</strong> of the accounting profit, not a fresh income statement.
+      </div>
+      <div class="secrow">
+        <div class="sec-zh">
+          <h4>✗ Wrong — the gross profits method</h4>
+          <div class="body">
+            <table style="box-shadow:none;background:transparent">
+              <tbody>
+                <tr><td>Gross profit</td><td class="num">X</td></tr>
+                <tr><td>Add: assessable income</td><td class="num">X</td></tr>
+                <tr><td>Less: allowable expenses under the IRO</td><td class="num">(X)</td></tr>
+                <tr><td>Less: depreciation allowances</td><td class="num">(X)</td></tr>
+                <tr><td>Less: charitable donation</td><td class="num">(X)</td></tr>
+                <tr><th>Assessable profit</th><td class="num">X</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:12.5px;margin-top:6px">Rebuilding the whole profit from scratch. It loses the audit trail back to the accounts, and any expense you forget to re-add is silently allowed.</p>
+          </div>
+        </div>
+        <div class="sec-en">
+          <h4>✓ Correct — adjust the accounting profit</h4>
+          <div class="body">
+            <table style="box-shadow:none;background:transparent">
+              <tbody>
+                <tr><td>Profit / (loss) per the accounts</td><td class="num">X</td></tr>
+                <tr><td>Add: non-allowable expenses charged</td><td class="num">X</td></tr>
+                <tr><td>Less: non-assessable income credited, and deductible amounts not in the accounts</td><td class="num">(X)</td></tr>
+                <tr><td>Less: depreciation allowances</td><td class="num">(X)</td></tr>
+                <tr><td>Less: charitable donation (capped)</td><td class="num">(X)</td></tr>
+                <tr><th>Assessable profit</th><td class="num">X</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:12.5px;margin-top:6px">Every line is a reconciling difference an assessor can trace to the accounts. This is the format to use.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="proforma">
+        <table>
+          <caption><strong>Profits Tax Computation</strong> · Year of Assessment 20XX/XX · basis period ______</caption>
+          <tbody>
+            <tr><th>Profit / (loss) per the accounts</th><td class="num">X</td></tr>
+            <tr><td><strong>Add: non-allowable expenses</strong></td><td class="num"></td></tr>
+            <tr><td class="sub2">Charitable donation (added back here, relieved later)</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Depreciation per the accounts</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Expenses attributable to offshore profits</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Fines and penalties</td><td class="num">X</td></tr>
+            <tr><td class="sub2">General provision for doubtful debts</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Improvements (capital)</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Initial purchase of carpets, curtains and similar</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Interest failing ss.16(2), (2A)–(2CC)</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Legal fees of a capital nature</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Profits tax and property tax charged in the accounts</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Salaries paid to the proprietor or partners</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Share of joint venture loss per the accounts</td><td class="num">X</td></tr>
+            <tr><td class="sub2">Retirement scheme contributions above the allowable proportion</td><td class="num">X</td></tr>
+            <tr class="rule"><td></td><td class="num">X</td></tr>
+            <tr><td><strong>Less: non-assessable income, and deductions not in the accounts</strong></td><td class="num"></td></tr>
+            <tr><td class="sub2">Dividends</td><td class="num">(X)</td></tr>
+            <tr><td class="sub2">Interest exempt from profits tax</td><td class="num">(X)</td></tr>
+            <tr><td class="sub2">Offshore interest and offshore profits</td><td class="num">(X)</td></tr>
+            <tr><td class="sub2">Prescribed fixed assets (100% deduction)</td><td class="num">(X)</td></tr>
+            <tr><td class="sub2">Recovery of bad debts not previously allowed</td><td class="num">(X)</td></tr>
+            <tr><td class="sub2">Share of joint venture profit per the accounts</td><td class="num">(X)</td></tr>
+            <tr class="rule"><td></td><td class="num">X</td></tr>
+            <tr><td><strong>Less: depreciation allowances</strong></td><td class="num"></td></tr>
+            <tr><td class="sub2">Plant and machinery</td><td class="num">(X)</td></tr>
+            <tr><td class="sub2">Industrial building allowance</td><td class="num">(X)</td></tr>
+            <tr><td class="sub2">Commercial building allowance</td><td class="num">(X)</td></tr>
+            <tr class="rule"><th>Subtotal — call this Y</th><td class="num">Y</td></tr>
+            <tr><td class="sub">Less: charitable donation, <strong>restricted to 35% of Y</strong></td><td class="num">(Z)</td></tr>
+            <tr class="rule"><th>Assessable profit</th><td class="num">P</td></tr>
+            <tr><td class="sub">Less: loss brought forward</td><td class="num">(X)</td></tr>
+            <tr><td class="sub">Less: loss set off under s.19C(5)</td><td class="num">(X)</td></tr>
+            <tr class="dbl"><th>Net assessable profit</th><td class="num">N</td></tr>
+            <tr><td>Profits tax: two-tiered rates on N — corporations <strong>8.25%</strong> on the first $2,000,000 and <strong>16.5%</strong> on the remainder; unincorporated <strong>7.5%</strong> / <strong>15%</strong></td><td class="num">T</td></tr>
+            <tr><td class="sub">Less: provisional profits tax paid</td><td class="num">(X)</td></tr>
+            <tr><td class="sub">Less: property tax set off under s.25</td><td class="num">(X)</td></tr>
+            <tr class="dbl"><th>Profits tax liability</th><td class="num">R</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout watch">
+        <span class="lbl">Three ordering traps in this format</span>
+        <strong>1.</strong> The charitable donation is <strong>added back first and relieved last</strong>, because its 35% cap is measured on Y — after depreciation allowances. Deducting it early gives the wrong cap.<br>
+        <strong>2.</strong> Depreciation allowances come off <strong>before</strong> the donation, never after.<br>
+        <strong>3.</strong> Only <strong>one entity in a group</strong> may claim the two-tiered first-tier rate in a year. Where the question mentions connected entities, say which one is nominated.
+      </div>
+
+      <div class="illustration">
+        <div class="lbl">Worked example <span class="src">Built on the textbook's Ch.20 format, current rates</span></div>
+        <p>A Hong Kong company's accounts show a profit of $2,500,000. Charged in arriving at it: depreciation $300,000, a charitable donation $80,000, a fine $20,000, and a general provision for doubtful debts $50,000. Credited to it: dividend income $100,000 and offshore trading profit $200,000. Depreciation allowances for the year are $260,000, and there is a loss brought forward of $310,000. It is the nominated group entity for the two-tiered rate.</p>
+        <div class="proforma">
+          <table>
+            <caption><strong>Profits Tax Computation</strong> · Year of Assessment 2026/27</caption>
+            <tbody>
+              <tr><th>Profit per the accounts</th><td class="num">2,500,000</td></tr>
+              <tr><td class="sub2">Add: depreciation</td><td class="num">300,000</td></tr>
+              <tr><td class="sub2">Add: charitable donation</td><td class="num">80,000</td></tr>
+              <tr><td class="sub2">Add: fine</td><td class="num">20,000</td></tr>
+              <tr><td class="sub2">Add: general provision for doubtful debts</td><td class="num">50,000</td></tr>
+              <tr class="rule"><td></td><td class="num">2,950,000</td></tr>
+              <tr><td class="sub2">Less: dividend income</td><td class="num">(100,000)</td></tr>
+              <tr><td class="sub2">Less: offshore profit</td><td class="num">(200,000)</td></tr>
+              <tr class="rule"><td></td><td class="num">2,650,000</td></tr>
+              <tr><td class="sub">Less: depreciation allowances</td><td class="num">(260,000)</td></tr>
+              <tr class="rule"><th>Y</th><td class="num">2,390,000</td></tr>
+              <tr><td class="sub">Less: charitable donation — 35% of Y is 836,500, so the full $80,000 is allowed</td><td class="num">(80,000)</td></tr>
+              <tr class="rule"><th>Assessable profit</th><td class="num">2,310,000</td></tr>
+              <tr><td class="sub">Less: loss brought forward</td><td class="num">(310,000)</td></tr>
+              <tr class="dbl"><th>Net assessable profit</th><td class="num">2,000,000</td></tr>
+              <tr class="dbl"><td>Profits tax: $2,000,000 × 8.25% (all within the first tier)</td><td class="num">165,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Watch the donation: added back at $80,000 and then allowed at $80,000 — it looks like a wasted round trip, and it is, <em>until</em> the 35% cap bites. Had Y been $200,000, the cap would be $70,000 and only that much would come back. The round trip is what makes the cap computable.</p>
+      </div>
+      <p style="font-size:13px"><a href="profits-tax.html">Profits Tax rules →</a> &middot; <a href="profits-tax-illustrations.html">more worked illustrations →</a> &middot; <a href="profits-tax-return-guide.html">how this maps to BIR51 →</a></p>
+    </section>
+
+    <section class="block" id="da">
+      <h2>4. Depreciation allowances — plant and machinery <span class="sec-ref">IRO Part 6 — textbook Ch.31</span></h2>
+      <p class="lede">Plant and machinery is grouped into three pools by annual allowance rate — <strong>10%, 20% and 30%</strong>. The schedule below is the standard layout; with it memorised the work becomes filling in blanks.</p>
+      <div class="proforma">
+        <table>
+          <caption><strong>Depreciation Allowance Schedule</strong> · Year of Assessment 20XX/XX</caption>
+          <thead><tr><th style="width:40%"></th><th class="num">10%</th><th class="num">20%</th><th class="num">30%</th><th class="num">Allowances</th></tr></thead>
+          <tbody>
+            <tr><td>Written down value b/f</td><td class="num">X</td><td class="num">X</td><td class="num">X</td><td class="num"></td></tr>
+            <tr><td>Additions (qualifying cash purchases)</td><td class="num">X</td><td class="num">X</td><td class="num">X</td><td class="num"></td></tr>
+            <tr><td class="sub">Less: initial allowance, <strong>60%</strong> of the addition</td><td class="num">(X)</td><td class="num">(X)</td><td class="num">(X)</td><td class="num">X</td></tr>
+            <tr class="rule"><td></td><td class="num">X</td><td class="num">X</td><td class="num">X</td><td class="num"></td></tr>
+            <tr><td class="sub">Less: disposal proceeds (limited to original cost)</td><td class="num">(X)</td><td class="num">(X)</td><td class="num">(X)</td><td class="num"></td></tr>
+            <tr class="rule"><td>Reduced value</td><td class="num">X</td><td class="num">X</td><td class="num">X</td><td class="num"></td></tr>
+            <tr><td class="sub">Less: annual allowance at the pool rate</td><td class="num">(X)</td><td class="num">(X)</td><td class="num">(X)</td><td class="num">X</td></tr>
+            <tr class="dbl"><th>Written down value c/f</th><td class="num">X</td><td class="num">X</td><td class="num">X</td><td class="num"></td></tr>
+            <tr class="dbl"><th>Total depreciation allowances</th><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">X</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <table>
+        <thead><tr><th style="width:38%">Point</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Initial allowance, 60%</strong></td><td>On the <strong>addition</strong>, not on the pool. Taken before the annual allowance, so the annual allowance is computed on the reduced figure.</td></tr>
+          <tr><td><strong>Order: IA → disposal → AA</strong></td><td>Disposals come out <em>after</em> the initial allowance and <em>before</em> the annual allowance. Reversing this changes every figure below it.</td></tr>
+          <tr><td><strong>Four kinds of addition</strong></td><td><strong>Cash purchase</strong> — pooled, 60% IA on the cash price. <strong>Hire purchase</strong> — <em>not</em> pooled; 60% IA only on the capital portion of the deposit and instalments paid in the year. <strong>Private asset introduced into the business</strong> — pooled, but <strong>no</strong> initial allowance. <strong>Asset used partly privately</strong> — not pooled; dealt with separately and apportioned.</td></tr>
+          <tr><td><strong>Balancing adjustment</strong></td><td>Arises only when the pool is <strong>emptied</strong> — proceeds exceeding the pool give a balancing charge; a residue with no assets left gives a balancing allowance. A disposal from a continuing pool creates neither.</td></tr>
+          <tr><td><strong>Prescribed fixed assets</strong></td><td>100% deduction under s.16G — these never enter the pool at all. They belong in the profits tax computation, not here.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="illustration">
+        <div class="lbl">Worked example <span class="src">Built on the textbook's Ch.31 schedule</span></div>
+        <p>Pools brought forward: 10% $100,000, 20% $200,000, 30% $300,000. During the year the business bought machinery for cash $150,000 (a 20% pool item) and sold an item from the 30% pool for $50,000, below its original cost.</p>
+        <div class="proforma">
+          <table>
+            <thead><tr><th style="width:40%"></th><th class="num">10%</th><th class="num">20%</th><th class="num">30%</th><th class="num">Allowances</th></tr></thead>
+            <tbody>
+              <tr><td>Written down value b/f</td><td class="num">100,000</td><td class="num">200,000</td><td class="num">300,000</td><td class="num"></td></tr>
+              <tr><td>Additions</td><td class="num">—</td><td class="num">150,000</td><td class="num">—</td><td class="num"></td></tr>
+              <tr><td class="sub">Less: initial allowance (60% × 150,000)</td><td class="num">—</td><td class="num">(90,000)</td><td class="num">—</td><td class="num">90,000</td></tr>
+              <tr class="rule"><td></td><td class="num">100,000</td><td class="num">260,000</td><td class="num">300,000</td><td class="num"></td></tr>
+              <tr><td class="sub">Less: disposal proceeds</td><td class="num">—</td><td class="num">—</td><td class="num">(50,000)</td><td class="num"></td></tr>
+              <tr class="rule"><td>Reduced value</td><td class="num">100,000</td><td class="num">260,000</td><td class="num">250,000</td><td class="num"></td></tr>
+              <tr><td class="sub">Less: annual allowance</td><td class="num">(10,000)</td><td class="num">(52,000)</td><td class="num">(75,000)</td><td class="num">137,000</td></tr>
+              <tr class="dbl"><th>Written down value c/f</th><td class="num">90,000</td><td class="num">208,000</td><td class="num">175,000</td><td class="num"></td></tr>
+              <tr class="dbl"><th>Total depreciation allowances</th><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">227,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">The 20% pool's annual allowance is <strong>$52,000, not $70,000</strong> — 20% of $260,000 after the initial allowance, not of the $350,000 before it. The $227,000 total is the single figure that carries into the profits tax computation above.</p>
+      </div>
+      <p style="font-size:13px"><a href="depreciation-allowances.html">Depreciation &amp; Allowances rules →</a> &middot; <a href="depreciation-allowances-illustrations.html">more worked illustrations →</a></p>
+    </section>
+
+    <section class="block" id="pa">
+      <h2>5. Personal Assessment <span class="sec-ref">IRO ss.40–43</span></h2>
+      <p class="lede">The one format that consumes the other four: it takes the net assessable value from the property computation, the net assessable income from the salaries computation and the net assessable profit from the profits computation, and re-taxes the lot at progressive rates.</p>
+      <div class="proforma">
+        <table>
+          <caption><strong>Personal Assessment Computation</strong> · Year of Assessment 20XX/XX</caption>
+          <tbody>
+            <tr><td>Net assessable value — from the property tax computation</td><td class="num">X</td></tr>
+            <tr><td>Net assessable income — from the salaries tax computation</td><td class="num">X</td></tr>
+            <tr><td>Net assessable profit — sole proprietorships and share of partnerships</td><td class="num">X</td></tr>
+            <tr class="rule"><th>Total income</th><td class="num">X</td></tr>
+            <tr><td class="sub">Less: interest on money borrowed to produce property income (capped at that property's NAV)</td><td class="num">(X)</td></tr>
+            <tr><td class="sub">Less: concessionary deductions</td><td class="num">(X)</td></tr>
+            <tr><td class="sub">Less: business loss of the year</td><td class="num">(X)</td></tr>
+            <tr><td class="sub">Less: loss brought forward under Personal Assessment</td><td class="num">(X)</td></tr>
+            <tr class="rule"><th>Reduced total income</th><td class="num">RTI</td></tr>
+            <tr><td class="sub">Less: personal allowances</td><td class="num">(X)</td></tr>
+            <tr class="dbl"><th>Net chargeable income</th><td class="num">NCI</td></tr>
+            <tr><td>(b) Progressive rates on <strong>NCI</strong></td><td class="num">b</td></tr>
+            <tr><td>(c) Standard rate on <strong>RTI</strong> — before allowances</td><td class="num">c</td></tr>
+            <tr class="dbl"><td>Tax payable — the lower of (b) and (c)</td><td class="num">X</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout law">
+        <span class="lbl">Joint election — apportioning the tax</span>
+        Where a married couple elects jointly, the allowances come off the <strong>joint</strong> reduced total income and the tax is computed once, then split in the ratio of each spouse's <strong>reduced</strong> total income — not gross. Each receives their own notice of assessment.
+      </div>
+      <p style="font-size:13px">Four full worked examples, including one where electing <em>costs</em> money, are on the <a href="personal-assessment.html#illustrations">Personal Assessment page →</a></p>
+    </section>
+
+    <section class="block" id="revisions">
+      <h2>What has changed since the textbook</h2>
+      <p class="lede">The 22nd edition states the law <strong>to 31 May 2024</strong>. Every rate and figure in the formats above was re-checked against IRD. Here is what moved and what did not, so you can see that the unchanged items were checked rather than assumed.</p>
+      <table>
+        <thead><tr><th style="width:26%">Item</th><th>Textbook (to 31 May 2024)</th><th>Current — used above</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Salaries tax standard rate</strong></td>
+            <td>Flat <strong>15%</strong> on net income (Ch.12 format, line c)</td>
+            <td><span class="tag tag-taxable">changed</span> <strong>Two-tiered from YA 2024/25</strong>: 15% on the first $5,000,000, 16% on the remainder</td>
+          </tr>
+          <tr>
+            <td><strong>Personal allowances</strong></td>
+            <td>Basic $132,000 / married $264,000 / child $130,000 era</td>
+            <td><span class="tag tag-taxable">changed</span> From <strong>YA 2026/27</strong>: basic <strong>$145,000</strong>, married <strong>$290,000</strong>, child <strong>$140,000</strong>, single parent $145,000, dependent parent 60+ $55,000 <em>(IRD pam61e)</em></td>
+          </tr>
+          <tr>
+            <td><strong>One-off tax reduction</strong></td>
+            <td>Table runs to 2023/24, ceiling $3,000</td>
+            <td><span class="tag tag-taxable">changed</span> A 100% reduction capped at $3,000 also applied for <strong>2025/26</strong>. Check the current Budget — none is assumed in the examples above</td>
+          </tr>
+          <tr>
+            <td><strong>Child allowance, newborns</strong></td>
+            <td>Not in this edition</td>
+            <td><span class="tag tag-nontaxable">proposed</span> 2026 Policy Address: <strong>$160,000</strong> for a 2nd or subsequent child born on/after 16 Sep 2026 — needs an amendment ordinance, so not used above. <a href="ird-updates.html">details →</a></td>
+          </tr>
+          <tr><td>Property tax standard rate</td><td>15%</td><td><span class="tag tag-deductible">unchanged</span> 15%</td></tr>
+          <tr><td>20% statutory repair allowance</td><td>20% of AV after rates</td><td><span class="tag tag-deductible">unchanged</span></td></tr>
+          <tr><td>Two-tiered profits tax rates</td><td>8.25% / 16.5% and 7.5% / 15%, first $2,000,000</td><td><span class="tag tag-deductible">unchanged</span></td></tr>
+          <tr><td>Salaries tax progressive bands</td><td>2/6/10/14% on four $50,000 bands, then 17%</td><td><span class="tag tag-deductible">unchanged</span></td></tr>
+          <tr><td>Initial allowance on P&amp;M</td><td>60%</td><td><span class="tag tag-deductible">unchanged</span></td></tr>
+          <tr><td>Annual allowance pools</td><td>10% / 20% / 30%</td><td><span class="tag tag-deductible">unchanged</span></td></tr>
+          <tr><td>Donations cap</td><td>35%</td><td><span class="tag tag-deductible">unchanged</span></td></tr>
+          <tr><td>Rental value percentages</td><td>10% / 8% / 4%</td><td><span class="tag tag-deductible">unchanged</span></td></tr>
+        </tbody>
+      </table>
+      <div class="callout watch">
+        <span class="lbl">Not reflected in the textbook's chapters at all</span>
+        The 22nd edition predates the 2026 stamp duty amendments, the 2026 bills on funds/FIHV/carried interest and on shipping and commodity trading, the CARF and amended-CRS legislation, and the September 2026 Policy Address measures. None of those change the five computation <em>formats</em> above, but they do change the surrounding rules — see <a href="ird-updates.html">IRD What's New</a>.
+      </div>
+    </section>
+
+    <section class="block" id="sources">
+      <h2>Source documents</h2>
+      <ul class="src-list">
+        <li><span class="file"><em>Hong Kong Taxation and Tax Planning</em>, 22nd ed. (Ho &amp; Mak, Pilot Publishing, June 2024) — Ch.7 pp.99–101, Ch.12 pp.212–213, Ch.20 pp.417–418, Ch.31 p.599</span><span class="date">law to 31 May 2024</span></li>
+        <li><span class="file">IRD — <a href="https://www.ird.gov.hk/eng/pdf/pam61e.pdf" target="_blank" rel="noopener">Allowances, Deductions and Tax Rate Table</a> (pam61e): the 2026/27 allowance and rate figures</span><span class="date">read 24 Sep 2026</span></li>
+        <li><span class="file">IRD — <a href="https://www.ird.gov.hk/eng/pdf/pam37e.pdf" target="_blank" rel="noopener">A Brief Guide to Personal Assessment</a> (pam37e)</span><span class="date">read 24 Sep 2026</span></li>
+        <li><span class="file">IRD — <a href="https://www.ird.gov.hk/eng/new/index.htm" target="_blank" rel="noopener">What's New</a>, for changes after the textbook's cut-off</span><span class="date">read 24 Sep 2026</span></li>
+      </ul>
+      <div class="callout tip">
+        <span class="lbl">How the textbook was read</span>
+        The 22nd edition is a scanned PDF with no text layer, and no OCR is available in this environment. The pages above were located through the book's own index and read by <strong>rendering each page as an image</strong>. Layouts are reproduced as structure — line order, subtotal names and captions — not as copied text, and every figure in the worked examples was recomputed independently. The one example carried over directly (Mr Gap) is labelled as the textbook's own.
+      </div>
+    </section>
+
+    <div class="section-nav">
+      <a href="../index.html">&larr; Back to Hub</a>
+      <a href="personal-assessment.html">Personal Assessment &rarr;</a>
+    </div>
+  </main>
+</div>
+
+<footer class="site-footer">HK Tax Study Hub — study aid, not professional advice. Verify against the Inland Revenue Ordinance (Cap. 112) and current IRD guidance before relying on any figure for a filing position.</footer>
+
+<script src="../assets/js/theme.js"></script>
+</body>
+</html>

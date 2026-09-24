@@ -141,12 +141,18 @@ labelled inline:
   pre-2023 flat-15% stamp duty rate) — each correction is flagged inline as
   "Original book figure used X; current law is Y."
 
-A second textbook — *Hong Kong Taxation and Tax Planning* (22nd ed.) — could
-**not** be processed: it's a scanned PDF with no text layer, and this build
-environment has no OCR or PDF-rendering tools installed (poppler, Ghostscript,
-ImageMagick all absent). If you can run it through OCR (e.g. Adobe Acrobat's
-"Recognize Text") and provide a text-searchable version, ask Claude to
-extract illustrations from it the same way.
+A second textbook — *Hong Kong Taxation and Tax Planning* (22nd ed., Ho & Mak)
+— **can** now be used, correcting an earlier note here. It is still a scanned
+PDF with no text layer and there is still no OCR, so text extraction returns
+nothing. But PyMuPDF renders each page to an image, and those images can be
+read directly. The workflow that works: locate pages through the book's own
+index at the back, convert book page to PDF page (**PDF page = book page + 21**
+for this file), render at ~135 dpi, then read. The
+[Computation Formats](pages/computation-formats.html) page was built this way.
+
+Two limits: reading is one page at a time, so target chapters rather than
+sweeping all 920 pages; and the book states the law only **to 31 May 2024**, so
+every rate and allowance taken from it must be re-checked against IRD.
 
 ## Folder structure
 
