@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profits Tax by Entity — HK Tax Study Hub</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+  .proforma table{font-size:13.5px}
+  .proforma td:first-child{width:56%}
+  .sub{padding-left:26px}
+  .sub2{padding-left:46px}
+  .rule td,.rule th{border-top:2px solid var(--text-muted)}
+  .dbl td,.dbl th{border-top:1px solid var(--text-muted);border-bottom:3px double var(--text-muted);font-weight:600}
+  .dual{font-size:12px;color:var(--text-muted);display:block}
+  .qbox{background:var(--surface-alt);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius);padding:16px 18px;margin:14px 0}
+  .qbox h4{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <div class="brand">HK Tax Study Hub<small>Study aid — not professional advice</small></div>
+    <nav class="site-nav">
+      <a href="../index.html">Hub</a>
+      <a href="ird-updates.html">IRD What's New</a>
+      <a href="acca-tx-hkg.html">ACCA TX-HKG</a>
+      <a href="computation-formats.html">Computation Formats</a>
+      <a href="profits-tax-entities.html" class="active">Profits Tax by Entity</a>
+      <a href="tax-reconciliation.html">Tax Reconciliation</a>
+      <a href="transaction-checker.html">Transaction Checker</a>
+      <a href="dipn-index.html">DIPN Index</a>
+      <a href="profits-tax.html">Profits Tax</a>
+      <a href="property-tax.html">Property Tax</a>
+      <a href="salaries-tax.html">Salaries Tax</a>
+      <a href="personal-assessment.html">Personal Assessment</a>
+      <a href="stamp-duty.html">Stamp Duty</a>
+      <a href="depreciation-allowances.html">Depreciation &amp; Allowances</a>
+      <a href="ird-administration.html">IRD Administration</a>
+    </nav>
+    <button id="theme-toggle" title="Toggle light/dark" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px">Theme</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#why">Why the entity changes the computation</a>
+    <a href="#compare">The three side by side</a>
+    <a href="#sole">1. Sole proprietorship</a>
+    <a href="#partnership">2. Partnership</a>
+    <a href="#mixed">2b. Corporate partners</a>
+    <a href="#pa">2c. Flow into personal assessment</a>
+    <a href="#corp">3. Corporation</a>
+    <a href="#same">Same business, three forms</a>
+    <a href="#checklist">Exam checklist</a>
+  </aside>
+
+  <main class="content">
+    <div class="page-title">
+      <div>
+        <span class="badge badge-business">Business — Profits Tax</span>
+        <h1>Profits Tax by Entity</h1>
+        <p class="subtitle">The same charge under s.14, but three materially different computations: sole proprietorship, partnership, and corporation. The partnership carries allocation mechanics on top, and only individuals can carry their share into personal assessment.</p>
+      </div>
+    </div>
+
+    <section class="block" id="why">
+      <h2>1. Why the entity changes the computation</h2>
+      <p class="lede">Profits tax has one charging section for all three. What differs is <strong>the rate</strong>, <strong>what counts as a deductible payment to the owner</strong>, and <strong>what happens after the assessable profit is struck</strong>.</p>
+      <div class="callout law">
+        <span class="lbl">The idea underneath all of it</span>
+        An unincorporated business is <strong>not separate from its owner</strong>. A sole proprietor cannot employ himself, and a partner cannot be an employee of his own partnership — so a "salary" to them is an <strong>appropriation of profit</strong>, not an expense. A company <em>is</em> a separate person, so it genuinely can employ its director and genuinely does pay them a salary.<br><br>
+        Nearly every difference below follows from that one point. Once you see it, you do not have to memorise the table — you can derive it.
+      </div>
+      <p>The second consequence is who bears the tax. A company pays its own profits tax and the director separately pays salaries tax on the salary. A sole proprietor's profit is taxed once, in the business — but the proprietor may then elect <a href="personal-assessment.html">personal assessment</a> to have it re-taxed at progressive rates after allowances. A company cannot elect at all.</p>
+    </section>
+
+    <section class="block" id="compare">
+      <h2>2. The three side by side</h2>
+      <table>
+        <thead><tr><th style="width:23%">Point</th><th>Sole proprietorship</th><th>Partnership</th><th>Corporation</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Two-tiered rates</strong></td>
+            <td><strong>7.5%</strong> on the first $2m, <strong>15%</strong> above</td>
+            <td><strong>7.5% / 15%</strong> — but see <a href="#mixed">§2b</a> where a partner is a company</td>
+            <td><strong>8.25%</strong> on the first $2m, <strong>16.5%</strong> above</td>
+          </tr>
+          <tr>
+            <td><strong>Salary to the owner</strong></td>
+            <td><span class="tag tag-nondeductible">Not deductible</span> s.17(2) — an appropriation</td>
+            <td><span class="tag tag-nondeductible">Not deductible</span> s.17(2)</td>
+            <td><span class="tag tag-deductible">Deductible</span> — a director is an employee</td>
+          </tr>
+          <tr>
+            <td><strong>Salary to the owner's spouse</strong></td>
+            <td><span class="tag tag-nondeductible">Not deductible</span> s.17(2), even if genuinely employed</td>
+            <td><span class="tag tag-nondeductible">Not deductible</span> s.17(2)</td>
+            <td><span class="tag tag-deductible">Deductible</span> if genuine employment at a commercial rate</td>
+          </tr>
+          <tr>
+            <td><strong>Owner's own mandatory MPF</strong></td>
+            <td><span class="tag tag-deductible">Deductible</span> s.16AA, capped at $18,000 — self-employed contributions</td>
+            <td><span class="tag tag-deductible">Deductible</span> s.16AA for each partner</td>
+            <td>n/a — the company's contributions for the director are ordinary staff costs</td>
+          </tr>
+          <tr>
+            <td><strong>Interest on a loan from the owner</strong></td>
+            <td><span class="tag tag-nondeductible">Not deductible</span> s.17(2)</td>
+            <td><span class="tag tag-nondeductible">Not deductible</span> s.17(2)</td>
+            <td><span class="tag tag-taxable">Conditional</span> — deductible only if s.16(2) is satisfied</td>
+          </tr>
+          <tr>
+            <td><strong>Allocation between owners</strong></td>
+            <td>n/a</td>
+            <td><strong>Required</strong> — see <a href="#partnership">§2</a></td>
+            <td>n/a</td>
+          </tr>
+          <tr>
+            <td><strong>Personal assessment</strong></td>
+            <td><span class="tag tag-deductible">Available</span> — the assessable profit enters the proprietor's PA</td>
+            <td><span class="tag tag-deductible">Available to individual partners</span> on their allocated share</td>
+            <td><span class="tag tag-nondeductible">Not available</span> — companies cannot elect</td>
+          </tr>
+          <tr>
+            <td><strong>Losses</strong></td>
+            <td>Carried forward indefinitely, or set against other income under PA</td>
+            <td>Allocated to partners; a corporate partner's share can shelter its own other profits</td>
+            <td>Carried forward indefinitely against the company's own profits only</td>
+          </tr>
+          <tr>
+            <td><strong>Return form</strong></td>
+            <td>BIR60 (individual), with the business schedule</td>
+            <td><strong>BIR52</strong></td>
+            <td><strong>BIR51</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout watch">
+        <span class="lbl">s.17(2) reaches the spouse, and that surprises people</span>
+        A salary to a sole proprietor's or partner's <strong>spouse is not deductible</strong> even where the spouse works full time for a commercial wage. Worse, the spouse is <strong>still chargeable to salaries tax</strong> on what they receive — so the same money is taxed in the business and again in the spouse's hands. The equivalent payment in a company is deductible. This is one of the sharper practical differences between the forms.
+      </div>
+    </section>
+
+    <section class="block" id="sole">
+      <h2>3. Sole proprietorship</h2>
+      <p class="lede">One computation, one taxpayer. The whole assessable profit belongs to the proprietor, and the only question after that is whether personal assessment improves on it.</p>
+      <div class="qbox">
+        <h4>Illustration</h4>
+        <p><strong>Fiona</strong> carries on a design studio as a sole proprietor. The accounts for the year ended 31 March 2027 show a profit of <strong>$960,000</strong>, after charging a salary of <strong>$360,000</strong> to Fiona, a salary of <strong>$180,000</strong> to her husband (who works full time in the business at a commercial wage), and Fiona's own mandatory MPF contributions of <strong>$18,000</strong>. Depreciation allowances are <strong>$80,000</strong>.</p>
+      </div>
+      <div class="proforma">
+        <table>
+          <caption><strong>Fiona — Profits Tax Computation</strong> · YA 2026/27</caption>
+          <tbody>
+            <tr><th>Profit per accounts</th><td class="num">960,000</td></tr>
+            <tr><td class="sub2">Add: salary to the proprietor — s.17(2)</td><td class="num">360,000</td></tr>
+            <tr><td class="sub2">Add: salary to the proprietor's spouse — s.17(2)</td><td class="num">180,000</td></tr>
+            <tr><td class="sub2">Proprietor's own mandatory MPF — <strong>deductible, s.16AA</strong></td><td class="num">0</td></tr>
+            <tr class="rule"><td></td><td class="num">1,500,000</td></tr>
+            <tr><td class="sub">Less: depreciation allowances</td><td class="num">(80,000)</td></tr>
+            <tr class="dbl"><th>Assessable profit</th><td class="num">1,420,000</td></tr>
+            <tr class="dbl"><td>Profits tax, unincorporated: $1,420,000 × 7.5% (within the first $2,000,000)</td><td class="num">106,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Then two further consequences that are easy to forget:</strong></p>
+      <table>
+        <tbody>
+          <tr>
+            <td style="width:40%"><strong>The husband is still taxed</strong></td>
+            <td>His $180,000 is disallowed to the business but remains <strong>his</strong> employment income. Salaries tax: $180,000 − $145,000 basic allowance = $35,000 net chargeable income, at 2% = <strong>$700</strong>. The money is taxed twice.</td>
+          </tr>
+          <tr>
+            <td><strong>Personal assessment is available — but here it is worse</strong></td>
+            <td>Fiona could elect PA on the $1,420,000. Net chargeable income would be $1,275,000, giving <strong>$198,750</strong> at progressive rates (the standard-rate comparison on $1,420,000 gives $213,000, so progressive wins). That is well above the <strong>$106,500</strong> profits tax she already pays. <strong>Do not elect.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout tip">
+        <span class="lbl">The general shape</span>
+        Personal assessment helps a sole proprietor whose profit is <strong>low</strong> — where allowances and progressive rates beat a flat 7.5% — or who has property income or a loss to bring in. At $1.4m of profit the 17% marginal rate is already above 7.5%, so it costs money. Compute both; never assume.
+      </div>
+    </section>
+
+    <section class="block" id="partnership">
+      <h2>4. Partnership</h2>
+      <p class="lede">One assessment is raised <strong>on the partnership</strong>, not on the partners. But the profit must still be allocated partner by partner — because the allocation drives loss relief, personal assessment, and (where a partner is a company) the rate itself.</p>
+      <table>
+        <thead><tr><th style="width:56px">Step</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>Compute the partnership's <strong>assessable profit or adjusted loss</strong> in the ordinary way, adding back salaries and interest to partners and to partners' spouses under s.17(2).</td></tr>
+          <tr><td><strong>2</strong></td><td>Allocate <strong>prior allocations</strong> first — the salaries and interest just added back go to the partner they relate to, not into the profit-sharing ratio.</td></tr>
+          <tr><td><strong>3</strong></td><td>Share the <strong>balance</strong> in the profit-sharing ratio. The balance is often negative once the prior allocations are taken out.</td></tr>
+          <tr><td><strong>4</strong></td><td><strong>Reallocate</strong> so that no partner is left on the wrong side of zero: where the partnership has assessable profits, a partner cannot keep a loss share, and vice versa.</td></tr>
+          <tr><td><strong>5</strong></td><td>Apply the rates — <strong>by partner</strong> if their natures differ (<a href="#mixed">§2b</a>).</td></tr>
+        </tbody>
+      </table>
+      <div class="callout watch">
+        <span class="lbl">Step 4 is the one candidates miss</span>
+        If the partnership's bottom line is a <strong>profit</strong>, no partner may be allocated a <strong>loss</strong>: any negative share is reallocated to the profit-making partners in proportion. If the partnership's bottom line is a <strong>loss</strong>, the mirror applies — any partner allocated a profit has it reallocated to the loss-making partners. The June 2025 examiner's report names this explicitly.
+      </div>
+      <p style="font-size:13px">A full worked partnership allocation, with a loss per the accounts that adjusts to a profit, is <a href="acca-tx-hkg.html#secB4">Question 9 on the ACCA TX-HKG page →</a></p>
+    </section>
+
+    <section class="block" id="mixed">
+      <h2>5. Partnerships with a corporate partner</h2>
+      <p class="lede">A company can be a partner. When it is, the partnership contains partners taxed at <strong>different rates</strong>, and the two-tiered threshold has to be shared out.</p>
+      <div class="callout law">
+        <span class="lbl">The rule</span>
+        Each partner's share of the assessable profits is taxed at <strong>that partner's own rate</strong> — 8.25%/16.5% for a corporate partner, 7.5%/15% for an individual. And the <strong>$2,000,000 first-tier band is itself apportioned</strong> between the partners in their profit-sharing ratio. The partnership does not get one $2,000,000 band at a single rate.
+      </div>
+      <div class="qbox">
+        <h4>Illustration</h4>
+        <p><strong>Novena Trading</strong> is a partnership with assessable profits of <strong>$3,000,000</strong> for YA 2026/27. The partners share profits equally: <strong>Carol</strong>, an individual, and <strong>Elm Holdings Limited</strong>, a company.</p>
+      </div>
+      <div class="proforma">
+        <table>
+          <caption><strong>Novena Trading — profits tax by partner</strong> · YA 2026/27</caption>
+          <thead><tr><th style="width:34%"></th><th class="num">Carol (individual)</th><th class="num">Elm Holdings Ltd</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>Share of assessable profits, 50 : 50</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="num">3,000,000</td></tr>
+            <tr><td>Share of the $2,000,000 first-tier band<br><span class="dual">apportioned in the profit-sharing ratio</span></td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="num">2,000,000</td></tr>
+            <tr class="rule"><td>First tier, at the partner's own rate</td><td class="num">1,000,000 × 7.5%<br>= 75,000</td><td class="num">1,000,000 × 8.25%<br>= 82,500</td><td class="num">157,500</td></tr>
+            <tr><td>Balance, at the partner's own rate</td><td class="num">500,000 × 15%<br>= 75,000</td><td class="num">500,000 × 16.5%<br>= 82,500</td><td class="num">157,500</td></tr>
+            <tr class="dbl"><th>Profits tax</th><td class="num">150,000</td><td class="num">165,000</td><td class="num">315,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <table>
+        <caption>What the answer would have been in a uniform partnership</caption>
+        <thead><tr><th>Composition</th><th class="num">Profits tax on $3,000,000</th></tr></thead>
+        <tbody>
+          <tr><td>All partners individuals</td><td class="num">300,000</td></tr>
+          <tr><td><strong>Mixed, 50 : 50 as above</strong></td><td class="num"><strong>315,000</strong></td></tr>
+          <tr><td>All partners corporate</td><td class="num">330,000</td></tr>
+        </tbody>
+      </table>
+      <p>The mixed partnership lands exactly between the two — which is the point. A single blended rate applied to the whole $3,000,000 would not produce $315,000, and computing the first tier once at either rate would be wrong for one of the partners.</p>
+      <div class="callout tip">
+        <span class="lbl">Loss relief for a corporate partner</span>
+        Where the partnership makes a loss, a corporate partner's allocated share can be <strong>set against that company's own other assessable profits</strong> — the loss is not trapped in the partnership. An individual partner's share goes into their personal assessment or is carried forward against future shares of the same partnership. The examining team noted that candidates were "not familiar with the loss relief for corporate partners".
+      </div>
+    </section>
+
+    <section class="block" id="pa">
+      <h2>6. How a partner's share flows into personal assessment</h2>
+      <p class="lede">This is the link between this page and <a href="personal-assessment.html">Personal Assessment</a>, and it only exists for <strong>individual</strong> partners.</p>
+      <div class="proforma">
+        <table>
+          <tbody>
+            <tr><td><strong>Partnership</strong> — assessable profits computed and allocated</td><td class="num">→</td></tr>
+            <tr><td class="sub"><strong>Individual partner's allocated share</strong> enters their personal assessment as <em>net assessable profits</em>, alongside their salary and property income</td><td class="num">✓</td></tr>
+            <tr><td class="sub"><strong>Corporate partner's allocated share</strong> — no personal assessment; the company is assessed on its share at corporate rates and that is the end of it</td><td class="num">✗</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Carol's position, continuing §5.</strong> Her $1,500,000 share has already borne $150,000 of profits tax within the partnership assessment. If she elects personal assessment, that $1,500,000 becomes part of her total income:</p>
+      <div class="proforma">
+        <table>
+          <tbody>
+            <tr><td>Share of partnership assessable profits</td><td class="num">1,500,000</td></tr>
+            <tr><td class="sub">Less: basic allowance</td><td class="num">(145,000)</td></tr>
+            <tr class="rule"><th>Net chargeable income</th><td class="num">1,355,000</td></tr>
+            <tr><td>Progressive rates</td><td class="num">212,350</td></tr>
+            <tr><td>Standard-rate comparison: $1,500,000 × 15%</td><td class="num">225,000</td></tr>
+            <tr class="rule"><th>Tax under personal assessment</th><td class="num">212,350</td></tr>
+            <tr><td>Against her share of the partnership profits tax already charged</td><td class="num">150,000</td></tr>
+            <tr class="dbl"><th>Electing would cost her</th><td class="num">62,350</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout watch">
+        <span class="lbl">The pattern, across both illustrations on this page</span>
+        Fiona at $1.42m and Carol at $1.5m both find personal assessment <strong>worse</strong>. That is not a coincidence. Business profits are taxed at 7.5% in an unincorporated business, and the progressive marginal rate reaches <strong>17%</strong> once net chargeable income passes $200,000. For a profitable business with no other reliefs to unlock, PA is usually a cost.<br><br>
+        It turns beneficial when there is something for it to unlock: <strong>mortgage interest</strong> on a let property, a <strong>business loss</strong> to set against salary, or <strong>allowances going unused</strong> because the income is not employment income. Those are the cases to look for — not size of profit.
+      </div>
+    </section>
+
+    <section class="block" id="corp">
+      <h2>7. Corporation</h2>
+      <p class="lede">The standard case, and the one the <a href="computation-formats.html#profits">general profits tax format</a> is written for. The company is a separate person, so payments to its directors are real expenses.</p>
+      <div class="qbox">
+        <h4>Illustration — the same business as §3, incorporated</h4>
+        <p><strong>Fiona Ltd</strong> carries on the same design studio. The accounts show the same profit of <strong>$960,000</strong> after the same salary of <strong>$360,000</strong> to Fiona, now a director, and <strong>$180,000</strong> to her husband, a genuine employee. Depreciation allowances are <strong>$80,000</strong>.</p>
+      </div>
+      <div class="proforma">
+        <table>
+          <caption><strong>Fiona Ltd — Profits Tax Computation</strong> · YA 2026/27</caption>
+          <tbody>
+            <tr><th>Profit per accounts</th><td class="num">960,000</td></tr>
+            <tr><td class="sub2">Director's salary — <strong>deductible</strong>, no add-back</td><td class="num">0</td></tr>
+            <tr><td class="sub2">Salary to the director's spouse, genuinely employed — <strong>deductible</strong></td><td class="num">0</td></tr>
+            <tr><td class="sub">Less: depreciation allowances</td><td class="num">(80,000)</td></tr>
+            <tr class="dbl"><th>Assessable profit</th><td class="num">880,000</td></tr>
+            <tr class="dbl"><td>Profits tax, corporation: $880,000 × 8.25%</td><td class="num">72,600</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The salaries are then taxed in the recipients' hands, which the sole-proprietorship version largely avoided for Fiona:</p>
+      <div class="proforma">
+        <table>
+          <tbody>
+            <tr><td>Fiona — salaries tax on $360,000 ($215,000 net chargeable income)</td><td class="num">18,550</td></tr>
+            <tr><td>Husband — salaries tax on $180,000 ($35,000 net chargeable income)</td><td class="num">700</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="same">
+      <h2>8. Same business, three forms — the figures side by side</h2>
+      <div class="proforma">
+        <table>
+          <caption>The identical trade, earning $1,500,000 before remunerating the owner and spouse</caption>
+          <thead><tr><th style="width:44%"></th><th class="num">Sole proprietorship</th><th class="num">Corporation</th></tr></thead>
+          <tbody>
+            <tr><td>Profit per accounts</td><td class="num">960,000</td><td class="num">960,000</td></tr>
+            <tr><td>Add back: owner's and spouse's salaries — s.17(2)</td><td class="num">540,000</td><td class="num">—</td></tr>
+            <tr><td>Less: depreciation allowances</td><td class="num">(80,000)</td><td class="num">(80,000)</td></tr>
+            <tr class="rule"><th>Assessable profit</th><td class="num">1,420,000</td><td class="num">880,000</td></tr>
+            <tr><td>Profits tax</td><td class="num">106,500 <span class="dual">@ 7.5%</span></td><td class="num">72,600 <span class="dual">@ 8.25%</span></td></tr>
+            <tr><td>Owner's salaries tax</td><td class="num">— <span class="dual">no salary in law</span></td><td class="num">18,550</td></tr>
+            <tr><td>Spouse's salaries tax</td><td class="num">700</td><td class="num">700</td></tr>
+            <tr class="dbl"><th>Total tax borne</th><td class="num">107,200</td><td class="num">91,850</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The company pays tax at the <em>higher</em> headline rate and still comes out <strong>$15,350 lighter</strong>, because $540,000 of remuneration moves out of the 7.5%-plus-nothing charge and into the progressive salaries tax bands, where the first $145,000 is covered by an allowance and the next slices are taxed at 2%–14%.</p>
+      <div class="callout watch">
+        <span class="lbl">Read that as a structural point, not as advice</span>
+        The comparison isolates one variable to show how s.17(2) drives the difference. A real incorporation decision turns on much more — limited liability, audit and filing costs, business registration, stamp duty on any transfer of the business, how profits are actually extracted, and what happens on a later sale. <strong>The figures above are an illustration of a mechanism, not a recommendation.</strong> And the answer reverses at other profit levels: push the profit high enough and the 17% salaries tax band overtakes the 8.25% corporate rate.
+      </div>
+    </section>
+
+    <section class="block" id="checklist">
+      <h2>9. Exam checklist</h2>
+      <table>
+        <thead><tr><th style="width:36%">Before you start</th><th>Ask</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Which entity is it?</strong></td><td>Sole proprietorship, partnership or company. This sets the rate before anything else. Answering an unincorporated question at 8.25% loses the rate marks and every figure after them.</td></tr>
+          <tr><td><strong>Is anyone paid who is the owner, or married to one?</strong></td><td>In an unincorporated business both are disallowed under s.17(2). In a company both are deductible if genuine.</td></tr>
+          <tr><td><strong>Whose MPF is it?</strong></td><td>The proprietor's or partner's <strong>own mandatory</strong> contributions are deductible under s.16AA, capped at $18,000. Their <strong>spouse's</strong> are not.</td></tr>
+          <tr><td><strong>Is there a corporate partner?</strong></td><td>Then the rates differ by partner and the $2,000,000 band is apportioned in the profit-sharing ratio.</td></tr>
+          <tr><td><strong>Does anyone have a share on the wrong side of zero?</strong></td><td>Reallocate. No loss share when the partnership is in profit; no profit share when it is in loss.</td></tr>
+          <tr><td><strong>Has the question asked about personal assessment?</strong></td><td>Only an individual can elect. Compute it both ways and say which is better — the answer is often "do not elect", and saying so with figures is the mark.</td></tr>
+          <tr><td><strong>Is the spouse's disallowed salary still taxed?</strong></td><td>Yes, on the spouse. If the question gives their personal circumstances, it wants that computation too.</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px"><a href="profits-tax.html">Profits Tax rules →</a> &middot; <a href="computation-formats.html#profits">the general format →</a> &middot; <a href="acca-tx-hkg.html#secB4">worked partnership allocation →</a> &middot; <a href="personal-assessment.html">Personal Assessment →</a></p>
+    </section>
+
+    <section class="block" id="sources">
+      <h2>10. Source documents</h2>
+      <ul class="src-list">
+        <li><span class="file">IRO (Cap. 112) ss.14, 16AA, 16(2), 17(2), 22, 22A, 22B — charge, self-employed MPF, interest, disallowed payments, partnership assessment and allocation</span><span class="date">—</span></li>
+        <li><span class="file">IRD — <a href="https://www.ird.gov.hk/eng/tax/bus_pft.htm" target="_blank" rel="noopener">Profits Tax</a> and the two-tiered rates guidance, including apportionment of the first-tier band in a partnership</span><span class="date">read 24 Sep 2026</span></li>
+        <li><span class="file">IRD — <a href="https://www.ird.gov.hk/eng/pdf/pam61e.pdf" target="_blank" rel="noopener">Allowances, Deductions and Tax Rate Table</a> (pam61e), YA 2026/27</span><span class="date">read 24 Sep 2026</span></li>
+        <li><span class="file">ACCA TX-HKG examiner's report, June 2025 — partnership allocation and corporate partner loss relief identified as weak</span><span class="date">read 24 Sep 2026</span></li>
+        <li><span class="file">All illustrations on this page are original; every figure computed and verified</span><span class="date">24 Sep 2026</span></li>
+      </ul>
+    </section>
+
+    <div class="section-nav">
+      <a href="computation-formats.html">&larr; Computation Formats</a>
+      <a href="personal-assessment.html">Personal Assessment &rarr;</a>
+    </div>
+  </main>
+</div>
+
+<footer class="site-footer">HK Tax Study Hub — study aid, not professional advice. Verify against the Inland Revenue Ordinance (Cap. 112) and current IRD guidance before relying on any figure for a filing position.</footer>
+
+<script src="../assets/js/theme.js"></script>
+</body>
+</html>
