@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tax Reconciliation — HK Tax Study Hub</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+  .proforma table{font-size:13.5px}
+  .proforma td:first-child{width:56%}
+  .sub{padding-left:26px}
+  .sub2{padding-left:46px}
+  .rule td,.rule th{border-top:2px solid var(--text-muted)}
+  .dbl td,.dbl th{border-top:1px solid var(--text-muted);border-bottom:3px double var(--text-muted);font-weight:600}
+  .wrong{border-left:4px solid var(--bad-text)}
+  .wrong caption{color:var(--bad-text);font-weight:700}
+  .right{border-left:4px solid var(--ok-text)}
+  .right caption{color:var(--ok-text);font-weight:700}
+  .note-no{font-weight:700;color:var(--brand);white-space:nowrap}
+  .qbox{background:var(--surface-alt);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius);padding:16px 18px;margin:14px 0}
+  .qbox h4{margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <div class="brand">HK Tax Study Hub<small>Study aid — not professional advice</small></div>
+    <nav class="site-nav">
+      <a href="../index.html">Hub</a>
+      <a href="ird-updates.html">IRD What's New</a>
+      <a href="computation-formats.html">Computation Formats</a>
+      <a href="tax-reconciliation.html" class="active">Tax Reconciliation</a>
+      <a href="transaction-checker.html">Transaction Checker</a>
+      <a href="dipn-index.html">DIPN Index</a>
+      <a href="profits-tax.html">Profits Tax</a>
+      <a href="property-tax.html">Property Tax</a>
+      <a href="salaries-tax.html">Salaries Tax</a>
+      <a href="personal-assessment.html">Personal Assessment</a>
+      <a href="stamp-duty.html">Stamp Duty</a>
+      <a href="depreciation-allowances.html">Depreciation &amp; Allowances</a>
+      <a href="ird-administration.html">IRD Administration</a>
+    </nav>
+    <button id="theme-toggle" title="Toggle light/dark" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px">Theme</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#what">The question type</a>
+    <a href="#method">The six-step method</a>
+    <a href="#q1">A. Profits tax — the question</a>
+    <a href="#a1-working">A. Note-by-note working</a>
+    <a href="#a1-revised">A. Revised computation</a>
+    <a href="#a1-recon">A. The reconciliation</a>
+    <a href="#q2">B. Personal assessment</a>
+    <a href="#planted">Errors examiners plant</a>
+    <a href="#technique">Marking technique</a>
+  </aside>
+
+  <main class="content">
+    <div class="page-title">
+      <div>
+        <span class="badge badge-business">Exam technique — the most heavily weighted question type</span>
+        <h1>Tax Reconciliation</h1>
+        <p class="subtitle">"Here is a computation prepared by someone who got it wrong. Here are ten notes. Produce the revised computation." How to attack it, and how to prove your answer with a reconciliation.</p>
+      </div>
+    </div>
+
+    <section class="block" id="what">
+      <h2>1. The question type, and what it is really testing</h2>
+      <p class="lede">You are given a profits tax or personal assessment computation prepared by a bookkeeper, a client, or "the previous accountant". It is internally consistent — the arithmetic adds up — but several treatments are wrong. A set of numbered notes gives you the facts. You must produce the corrected computation.</p>
+      <div class="callout law">
+        <span class="lbl">It is not a computation question. It is a review question.</span>
+        A blank-page computation tests whether you can build a format. This tests something harder: whether you can <strong>look at a plausible-looking answer and find what is wrong with it</strong>. That is what tax work actually is — almost nothing arrives as a blank page, and the figure in front of you always looks reasonable.
+      </div>
+      <p>Three consequences follow, and they drive everything on this page:</p>
+      <table>
+        <thead><tr><th style="width:30%">Because…</th><th>…therefore</th></tr></thead>
+        <tbody>
+          <tr><td>The given computation looks plausible</td><td>You cannot spot errors by eye. You must work <strong>note by note</strong>, in order, and decide an adjustment for each — including "no adjustment".</td></tr>
+          <tr><td>Some notes are distractors</td><td>A note that needs <strong>no adjustment</strong> still earns a mark if you say so and why. Silence earns nothing and looks like an oversight.</td></tr>
+          <tr><td>Errors can offset each other</td><td>The bottom line can look close to right while several treatments are wrong. <strong>Never sanity-check by the final figure.</strong> Illustration A below is built to show this happening.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="block" id="method">
+      <h2>2. The six-step method</h2>
+      <table>
+        <thead><tr><th style="width:56px">Step</th><th>Do this</th></tr></thead>
+        <tbody>
+          <tr><td class="note-no">1</td><td><strong>Do not edit the given computation.</strong> Start a clean one from <em>profit per the accounts</em> (or, for personal assessment, from each source's own correct figure). Editing someone else's layout inherits their structural errors.</td></tr>
+          <tr><td class="note-no">2</td><td><strong>Rule up a note-by-note working schedule</strong> before touching the computation: note number, treatment, adjustment, amount. Every note gets a row, including the ones needing no adjustment.</td></tr>
+          <tr><td class="note-no">3</td><td><strong>Decide each note in isolation.</strong> Is the item chargeable / deductible? Was it already in the accounts? Those two questions together give the adjustment — an item can be deductible and still need no adjustment because it was already correctly charged.</td></tr>
+          <tr><td class="note-no">4</td><td><strong>Build the revised computation</strong> in the standard format, feeding in the schedule's figures. Keep the donation add-back-then-relieve round trip, and keep depreciation allowances before the donation.</td></tr>
+          <tr><td class="note-no">5</td><td><strong>Reconcile</strong> from the given figure to yours, line by line. This is the step candidates skip, and it is where the marks and the self-check both live.</td></tr>
+          <tr><td class="note-no">6</td><td><strong>Reconcile the tax too</strong>, not just the profit. Rate errors, set-offs and reliefs live below the net assessable profit line and are easy to leave uncorrected.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout tip">
+        <span class="lbl">Why step 5 is worth the minutes it costs</span>
+        The reconciliation is self-marking. If it does not arrive at your revised figure, you have made an error <em>somewhere</em> and you still have time to find it. If it does arrive, you have proved your answer and shown the examiner your reasoning in one compact table. It is the cheapest insurance in the paper.
+      </div>
+    </section>
+
+    <section class="block" id="q1">
+      <h2>3. Illustration A — Profits tax: the question</h2>
+      <div class="qbox">
+        <h4>Question</h4>
+        <p><strong>Kingsway Trading Limited</strong> carries on a trading business in Hong Kong and prepares accounts to 31 December. The profit per the audited accounts for the year ended <strong>31 December 2026</strong> was <strong>$3,200,000</strong>.</p>
+        <p>The company's bookkeeper prepared the following profits tax computation for the year of assessment 2026/27.</p>
+        <p><strong>REQUIRED:</strong> Using the notes below, prepare a revised profits tax computation for the year of assessment 2026/27, and reconcile the revised net assessable profit to the figure computed by the bookkeeper.</p>
+      </div>
+
+      <div class="proforma">
+        <table class="wrong">
+          <caption>✗ As prepared by the bookkeeper — Kingsway Trading Limited, YA 2026/27</caption>
+          <tbody>
+            <tr><th>Profit per accounts</th><td class="num">3,200,000</td></tr>
+            <tr><td class="sub">Add: depreciation</td><td class="num">420,000</td></tr>
+            <tr class="rule"><td></td><td class="num">3,620,000</td></tr>
+            <tr><td class="sub">Less: dividend income</td><td class="num">(150,000)</td></tr>
+            <tr><td class="sub">Less: charitable donations</td><td class="num">(250,000)</td></tr>
+            <tr><td class="sub">Less: depreciation allowances</td><td class="num">(380,000)</td></tr>
+            <tr class="rule"><th>Assessable profit</th><td class="num">2,840,000</td></tr>
+            <tr><td class="sub">Less: loss brought forward</td><td class="num">(240,000)</td></tr>
+            <tr class="rule"><th>Net assessable profit</th><td class="num">2,600,000</td></tr>
+            <tr class="dbl"><th>Profits tax at 8.25%</th><td class="num">214,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <table>
+        <caption>Notes</caption>
+        <thead><tr><th style="width:56px">Note</th><th>Information</th></tr></thead>
+        <tbody>
+          <tr><td class="note-no">1</td><td>The profit is after charging depreciation of $420,000. Depreciation allowances properly computed under Part 6 of the IRO for the year amount to <strong>$505,000</strong>.</td></tr>
+          <tr><td class="note-no">2</td><td>Turnover includes <strong>$680,000</strong> of profit on a contract negotiated and concluded entirely in Singapore by the company's Singapore branch. The Assessor has accepted this profit as offshore.</td></tr>
+          <tr><td class="note-no">3</td><td>Other income includes dividends of <strong>$150,000</strong> from a company listed in Hong Kong.</td></tr>
+          <tr><td class="note-no">4</td><td>Other income includes <strong>$90,000</strong> of interest on a Hong Kong dollar deposit with a licensed bank in Hong Kong.</td></tr>
+          <tr><td class="note-no">5</td><td>Administrative expenses include a <strong>fine of $35,000</strong> imposed for a breach of licensing conditions.</td></tr>
+          <tr><td class="note-no">6</td><td>Administrative expenses include an increase in the <strong>general provision</strong> for doubtful debts of <strong>$60,000</strong>, and a <strong>specific bad debt written off of $45,000</strong> in respect of a trade debtor who has been wound up.</td></tr>
+          <tr><td class="note-no">7</td><td><strong>Charitable donations of $250,000</strong> to approved charitable institutions were charged in arriving at the profit per the accounts.</td></tr>
+          <tr><td class="note-no">8</td><td>Finance costs include <strong>$120,000</strong> of interest paid to a director on a loan to the company. The director is not chargeable to profits tax on that interest, so the conditions in s.16(2) are not satisfied.</td></tr>
+          <tr><td class="note-no">9</td><td>The company owns an office in Hong Kong which it lets to a tenant. The rental income is included in the profit per the accounts. <strong>Property tax of $48,000</strong> for the year was paid and charged in the accounts.</td></tr>
+          <tr><td class="note-no">10</td><td>The agreed loss brought forward from the year of assessment 2025/26 is <strong>$240,000</strong>. Kingsway Trading Limited is the <strong>only Hong Kong entity in its group</strong> and is entitled to the two-tiered profits tax rates.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="block" id="a1-working">
+      <h2>4. Illustration A — note-by-note working</h2>
+      <p class="lede">Build this before the computation. Two questions per note: <strong>is the item chargeable or deductible?</strong> and <strong>how was it treated in the accounts?</strong> The adjustment is the difference between the two.</p>
+      <table>
+        <thead><tr><th style="width:52px">Note</th><th>Correct treatment</th><th style="width:130px">Adjustment</th><th class="num" style="width:100px">$</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="note-no">1</td>
+            <td>Accounting depreciation is not deductible; statutory depreciation allowances replace it. Add back $420,000; deduct the correct allowances of $505,000, <strong>not the bookkeeper's $380,000</strong>.</td>
+            <td><span class="tag tag-taxable">Add</span> / <span class="tag tag-deductible">Deduct</span></td><td class="num">420,000<br>(505,000)</td>
+          </tr>
+          <tr>
+            <td class="note-no">2</td>
+            <td>Offshore profit is outside the s.14 charge. The bookkeeper missed it entirely — <strong>the largest single error</strong>.</td>
+            <td><span class="tag tag-deductible">Deduct</span></td><td class="num">(680,000)</td>
+          </tr>
+          <tr>
+            <td class="note-no">3</td>
+            <td>Dividends from a Hong Kong company are not chargeable (s.26). Correctly deducted by the bookkeeper.</td>
+            <td><span class="tag tag-deductible">Deduct</span></td><td class="num">(150,000)</td>
+          </tr>
+          <tr>
+            <td class="note-no">4</td>
+            <td>Interest on a HKD deposit with a licensed bank is exempt under the Exemption from Profits Tax (Interest Income) Order. Missed.</td>
+            <td><span class="tag tag-deductible">Deduct</span></td><td class="num">(90,000)</td>
+          </tr>
+          <tr>
+            <td class="note-no">5</td>
+            <td>A fine is not incurred in the production of profits and is not deductible. Missed.</td>
+            <td><span class="tag tag-taxable">Add back</span></td><td class="num">35,000</td>
+          </tr>
+          <tr>
+            <td class="note-no">6</td>
+            <td><strong>General</strong> provision is not deductible (s.16(1)(d)) — add back $60,000. The <strong>specific</strong> write-off of a debt of a wound-up debtor <em>is</em> deductible and was correctly charged — <strong>no adjustment</strong>.</td>
+            <td><span class="tag tag-taxable">Add back</span><br><span class="tag tag-nontaxable">no adj.</span></td><td class="num">60,000<br>—</td>
+          </tr>
+          <tr>
+            <td class="note-no">7</td>
+            <td>Add back the $250,000 charged, then relieve it under s.16D <strong>restricted to 35% of the profit after depreciation allowances</strong>. The bookkeeper simply deducted it a second time.</td>
+            <td><span class="tag tag-taxable">Add back</span><br><span class="tag tag-deductible">then relieve</span></td><td class="num">250,000<br>(250,000)</td>
+          </tr>
+          <tr>
+            <td class="note-no">8</td>
+            <td>Interest failing s.16(2) is not deductible. Missed.</td>
+            <td><span class="tag tag-taxable">Add back</span></td><td class="num">120,000</td>
+          </tr>
+          <tr>
+            <td class="note-no">9</td>
+            <td><strong>Two separate points.</strong> Property tax charged in the accounts is not deductible — add back $48,000. Separately, it is <strong>set off against the profits tax payable under s.25</strong>, below the tax line. Both were missed.</td>
+            <td><span class="tag tag-taxable">Add back</span><br><span class="tag tag-deductible">and set off</span></td><td class="num">48,000<br>(48,000)</td>
+          </tr>
+          <tr>
+            <td class="note-no">10</td>
+            <td>Loss brought forward is set off after the donation. The two-tiered rates apply, so <strong>8.25% on the first $2,000,000 and 16.5% on the remainder</strong> — not 8.25% on the whole.</td>
+            <td><span class="tag tag-deductible">Deduct</span> / rate</td><td class="num">(240,000)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout watch">
+        <span class="lbl">Note 6 is the distractor, and Note 9 is the double-barrelled one</span>
+        Note 6 gives you two figures where only one moves — say explicitly that the specific write-off needs no adjustment. Note 9 carries <strong>two</strong> marks in two different places: an add-back in the computation and a set-off under the tax. Answering only the add-back loses half of it.
+      </div>
+    </section>
+
+    <section class="block" id="a1-revised">
+      <h2>5. Illustration A — the revised computation</h2>
+      <div class="proforma">
+        <table class="right">
+          <caption>✓ Kingsway Trading Limited — Profits Tax Computation, YA 2026/27 (basis period: year ended 31 December 2026)</caption>
+          <tbody>
+            <tr><th>Profit per accounts</th><td class="num">3,200,000</td></tr>
+            <tr><td><strong>Add: non-allowable items</strong></td><td class="num"></td></tr>
+            <tr><td class="sub2">Depreciation <span class="note-no">(1)</span></td><td class="num">420,000</td></tr>
+            <tr><td class="sub2">Charitable donations <span class="note-no">(7)</span></td><td class="num">250,000</td></tr>
+            <tr><td class="sub2">Fine <span class="note-no">(5)</span></td><td class="num">35,000</td></tr>
+            <tr><td class="sub2">General provision for doubtful debts <span class="note-no">(6)</span></td><td class="num">60,000</td></tr>
+            <tr><td class="sub2">Interest failing s.16(2) <span class="note-no">(8)</span></td><td class="num">120,000</td></tr>
+            <tr><td class="sub2">Property tax charged <span class="note-no">(9)</span></td><td class="num">48,000</td></tr>
+            <tr class="rule"><td></td><td class="num">4,133,000</td></tr>
+            <tr><td><strong>Less: non-assessable income</strong></td><td class="num"></td></tr>
+            <tr><td class="sub2">Offshore profit <span class="note-no">(2)</span></td><td class="num">(680,000)</td></tr>
+            <tr><td class="sub2">Dividend income <span class="note-no">(3)</span></td><td class="num">(150,000)</td></tr>
+            <tr><td class="sub2">Exempt bank deposit interest <span class="note-no">(4)</span></td><td class="num">(90,000)</td></tr>
+            <tr class="rule"><td></td><td class="num">3,213,000</td></tr>
+            <tr><td class="sub">Less: depreciation allowances <span class="note-no">(1)</span></td><td class="num">(505,000)</td></tr>
+            <tr class="rule"><th>Profit before charitable donations (Y)</th><td class="num">2,708,000</td></tr>
+            <tr><td class="sub">Less: approved charitable donations <span class="note-no">(7)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">lower of $250,000 actual and 35% × $2,708,000 = $947,800</span></td><td class="num">(250,000)</td></tr>
+            <tr class="rule"><th>Assessable profit</th><td class="num">2,458,000</td></tr>
+            <tr><td class="sub">Less: loss brought forward <span class="note-no">(10)</span></td><td class="num">(240,000)</td></tr>
+            <tr class="dbl"><th>Net assessable profit</th><td class="num">2,218,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="proforma">
+        <table class="right">
+          <caption>Tax payable</caption>
+          <tbody>
+            <tr><td>First $2,000,000 at 8.25% <span class="note-no">(10)</span></td><td class="num">165,000</td></tr>
+            <tr><td>Remaining $218,000 at 16.5%</td><td class="num">35,970</td></tr>
+            <tr class="rule"><th>Profits tax</th><td class="num">200,970</td></tr>
+            <tr><td class="sub">Less: property tax set off under s.25 <span class="note-no">(9)</span></td><td class="num">(48,000)</td></tr>
+            <tr class="dbl"><th>Profits tax liability</th><td class="num">152,970</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted)">No one-off Budget reduction is assumed. If the year's Budget grants one, it comes off at the very end, after the s.25 set-off.</p>
+    </section>
+
+    <section class="block" id="a1-recon">
+      <h2>6. Illustration A — the reconciliation</h2>
+      <p class="lede">This is the part the question specifically asked for, and the part most candidates omit. It starts at the bookkeeper's figure and arrives at yours.</p>
+      <div class="proforma">
+        <table>
+          <caption>Reconciliation of net assessable profit</caption>
+          <tbody>
+            <tr><th>Net assessable profit per the bookkeeper's computation</th><td class="num">2,600,000</td></tr>
+            <tr><td class="sub">Offshore profit not excluded <span class="note-no">(2)</span></td><td class="num">(680,000)</td></tr>
+            <tr><td class="sub">Exempt bank deposit interest not excluded <span class="note-no">(4)</span></td><td class="num">(90,000)</td></tr>
+            <tr><td class="sub">Fine not added back <span class="note-no">(5)</span></td><td class="num">35,000</td></tr>
+            <tr><td class="sub">General provision not added back <span class="note-no">(6)</span></td><td class="num">60,000</td></tr>
+            <tr><td class="sub">Interest failing s.16(2) not added back <span class="note-no">(8)</span></td><td class="num">120,000</td></tr>
+            <tr><td class="sub">Property tax charged not added back <span class="note-no">(9)</span></td><td class="num">48,000</td></tr>
+            <tr><td class="sub">Donations deducted without being added back <span class="note-no">(7)</span></td><td class="num">250,000</td></tr>
+            <tr><td class="sub">Additional depreciation allowances ($505,000 − $380,000) <span class="note-no">(1)</span></td><td class="num">(125,000)</td></tr>
+            <tr class="dbl"><th>Revised net assessable profit</th><td class="num">2,218,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="proforma">
+        <table>
+          <caption>Reconciliation of tax</caption>
+          <tbody>
+            <tr><th>Profits tax per the bookkeeper's computation</th><td class="num">214,500</td></tr>
+            <tr><td class="sub">Effect of the reduction in net assessable profit, at the rates properly applicable</td><td class="num">(13,530)</td></tr>
+            <tr class="rule"><th>Revised profits tax</th><td class="num">200,970</td></tr>
+            <tr><td class="sub">Property tax set off under s.25, omitted <span class="note-no">(9)</span></td><td class="num">(48,000)</td></tr>
+            <tr class="dbl"><th>Revised profits tax liability</th><td class="num">152,970</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout watch">
+        <span class="lbl">The point of this illustration: two errors pulling in opposite directions</span>
+        The bookkeeper <strong>overstated the profit by $382,000</strong> ($2,600,000 against $2,218,000) — which pushes tax up. But they also applied <strong>8.25% to the whole profit</strong> instead of tiering at $2,000,000 — which pulls tax down. On the correct profit of $2,218,000, a flat 8.25% would have given $182,985 against the true $200,970, <strong>understating tax by $17,985</strong>.<br><br>
+        The two errors partly cancel. That is exactly why <strong>the bottom line tells you nothing</strong> about whether a computation is right, and why the note-by-note schedule is not optional.
+      </div>
+    </section>
+
+    <section class="block" id="q2">
+      <h2>7. Illustration B — Personal assessment</h2>
+      <div class="qbox">
+        <h4>Question</h4>
+        <p><strong>Mr and Mrs Lam</strong> have elected jointly for personal assessment for the year of assessment 2026/27. Mr Lam's net assessable income from employment is <strong>$600,000</strong>. Mrs Lam runs a sole proprietorship whose assessable profit is <strong>$180,000</strong>, and owns a Hong Kong flat let at <strong>$30,000 a month</strong> throughout the year. She paid <strong>rates of $12,000</strong> and <strong>mortgage interest of $200,000</strong> on that flat. Neither has any other income, deduction or dependant.</p>
+        <p>A friend prepared the computation below. <strong>REQUIRED:</strong> prepare the revised computation, show the apportionment between the spouses, and reconcile to the friend's figure.</p>
+      </div>
+      <div class="proforma">
+        <table class="wrong">
+          <caption>✗ As prepared by a friend — Mr &amp; Mrs Lam, YA 2026/27</caption>
+          <tbody>
+            <tr><td>Mr Lam — salary</td><td class="num">600,000</td></tr>
+            <tr><td>Mrs Lam — business profit</td><td class="num">180,000</td></tr>
+            <tr><td>Mrs Lam — rental income ($30,000 × 12)</td><td class="num">360,000</td></tr>
+            <tr class="rule"><th>Total income</th><td class="num">1,140,000</td></tr>
+            <tr><td class="sub">Less: mortgage interest</td><td class="num">(200,000)</td></tr>
+            <tr><td class="sub">Less: rates paid</td><td class="num">(12,000)</td></tr>
+            <tr class="rule"><th>Reduced total income</th><td class="num">928,000</td></tr>
+            <tr><td class="sub">Less: basic allowance</td><td class="num">(145,000)</td></tr>
+            <tr class="rule"><th>Net chargeable income</th><td class="num">783,000</td></tr>
+            <tr class="dbl"><th>Tax at progressive rates</th><td class="num">115,110</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <table>
+        <thead><tr><th style="width:52px">Error</th><th>What is wrong</th></tr></thead>
+        <tbody>
+          <tr><td class="note-no">1</td><td>Property brought in at <strong>gross rent</strong>. Personal assessment takes the <strong>net assessable value</strong>: rates are deducted inside the property computation, and the <strong>20% statutory allowance</strong> is then taken. Deducting rates as a separate line below total income skips the 20% entirely.</td></tr>
+          <tr><td class="note-no">2</td><td>A <strong>basic allowance</strong> claimed where a jointly electing married couple is entitled to the <strong>married person's allowance</strong> of $290,000.</td></tr>
+          <tr><td class="note-no">3</td><td>No <strong>standard-rate comparison</strong>. Tax under personal assessment is the lower of progressive rates on net chargeable income and the standard rate on <em>reduced total income</em>.</td></tr>
+          <tr><td class="note-no">4</td><td>No <strong>apportionment</strong> between the spouses. On a joint election each receives their own assessment for their share.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="proforma">
+        <table class="right">
+          <caption>✓ Mr &amp; Mrs Lam — Personal Assessment Computation, YA 2026/27</caption>
+          <tbody>
+            <tr><td>Mr Lam — net assessable income</td><td class="num">600,000</td></tr>
+            <tr><td>Mrs Lam — net assessable profit</td><td class="num">180,000</td></tr>
+            <tr><td>Mrs Lam — net assessable value:</td><td class="num"></td></tr>
+            <tr><td class="sub2">Rent ($30,000 × 12)</td><td class="num">360,000</td></tr>
+            <tr><td class="sub2">Less: rates paid by owner</td><td class="num">(12,000)</td></tr>
+            <tr><td class="sub2">Less: 20% statutory allowance ($348,000 × 20%)</td><td class="num">(69,600)</td></tr>
+            <tr><td class="sub2"><em>Net assessable value</em></td><td class="num">278,400</td></tr>
+            <tr class="rule"><th>Total income</th><td class="num">1,058,400</td></tr>
+            <tr><td class="sub">Less: interest to produce property income<br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">$200,000, within the $278,400 NAV cap, so allowed in full</span></td><td class="num">(200,000)</td></tr>
+            <tr class="rule"><th>Reduced total income</th><td class="num">858,400</td></tr>
+            <tr><td class="sub">Less: married person's allowance</td><td class="num">(290,000)</td></tr>
+            <tr class="dbl"><th>Net chargeable income</th><td class="num">568,400</td></tr>
+            <tr><td>(b) Progressive: 1,000 + 3,000 + 5,000 + 7,000 + ($368,400 × 17%)</td><td class="num">78,628</td></tr>
+            <tr><td>(c) Standard rate: $858,400 × 15%</td><td class="num">128,760</td></tr>
+            <tr class="dbl"><th>Tax payable — the lower</th><td class="num">78,628</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="proforma">
+        <table class="right">
+          <caption>Apportionment — in the ratio of each spouse's reduced total income</caption>
+          <tbody>
+            <tr><td>Mr Lam: $78,628 × 600,000 / 858,400</td><td class="num">54,959</td></tr>
+            <tr><td>Mrs Lam: $78,628 × 258,400 / 858,400<br><span style="font-size:12px;color:var(--text-muted)">her share is $180,000 + $278,400 − $200,000 = $258,400</span></td><td class="num">23,669</td></tr>
+            <tr class="dbl"><th>Total</th><td class="num">78,628</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="proforma">
+        <table>
+          <caption>Reconciliation</caption>
+          <tbody>
+            <tr><th>Net chargeable income per the friend's computation</th><td class="num">783,000</td></tr>
+            <tr><td class="sub">Property taken at gross rent instead of net assessable value <span class="note-no">(1)</span></td><td class="num">(81,600)</td></tr>
+            <tr><td class="sub">Rates wrongly deducted a second time, below total income <span class="note-no">(1)</span></td><td class="num">12,000</td></tr>
+            <tr><td class="sub">Married person's allowance in place of basic allowance <span class="note-no">(2)</span></td><td class="num">(145,000)</td></tr>
+            <tr class="dbl"><th>Revised net chargeable income</th><td class="num">568,400</td></tr>
+            <tr><td colspan="2" style="padding-top:10px"><strong>Tax:</strong> $115,110 per the friend, against $78,628 revised — <strong>overstated by $36,482</strong>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <span class="lbl">Note how the rates error works</span>
+        The friend deducted rates of $12,000 — and got a <em>worse</em> answer than ignoring them, because deducting them in the wrong place forfeited the 20% statutory allowance of $69,600. Doing something reasonable in the wrong line of a computation is not half right; it is wrong, and here it is wrong by $57,600.
+      </div>
+    </section>
+
+    <section class="block" id="planted">
+      <h2>8. The errors examiners plant, in rough order of frequency</h2>
+      <table>
+        <thead><tr><th style="width:34%">Planted error</th><th>How to catch it</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Offshore profit left in</strong></td><td>Any note mentioning a place outside Hong Kong is a source question. Decide it explicitly.</td></tr>
+          <tr><td><strong>Donation deducted without being added back</strong></td><td>If it was charged in the accounts it must go back in first, or the 35% cap cannot be computed.</td></tr>
+          <tr><td><strong>Donation cap on the wrong base</strong></td><td>35% of profit <em>after</em> depreciation allowances, not of profit per accounts.</td></tr>
+          <tr><td><strong>Accounting depreciation left in, or DA figure wrong</strong></td><td>Add back the accounts figure and deduct the Part 6 figure. They are never the same number.</td></tr>
+          <tr><td><strong>General vs specific provision</strong></td><td>General is added back, specific is not. The question will give you both.</td></tr>
+          <tr><td><strong>Flat rate instead of two-tiered</strong></td><td>Check the rate line every time, and check whether the entity is the nominated group member.</td></tr>
+          <tr><td><strong>Property tax: add-back or set-off missed</strong></td><td>It is two adjustments in two places, from one note.</td></tr>
+          <tr><td><strong>Interest failing s.16(2)</strong></td><td>Any interest paid to a director, shareholder or associate is a s.16(2) question.</td></tr>
+          <tr><td><strong>Exempt bank interest left in</strong></td><td>HKD deposit interest from a licensed bank is exempt.</td></tr>
+          <tr><td><strong>Loss brought forward in the wrong place</strong></td><td>After the donation, not before.</td></tr>
+          <tr><td><strong>Personal assessment: gross rent not NAV</strong></td><td>Property always enters at net assessable value.</td></tr>
+          <tr><td><strong>Personal assessment: standard-rate comparison omitted</strong></td><td>And when performed, on reduced total income — before allowances.</td></tr>
+          <tr><td><strong>Wrong allowance for a married couple</strong></td><td>Joint election takes the married person's allowance.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="block" id="technique">
+      <h2>9. Marking technique</h2>
+      <div class="secrow">
+        <div class="sec-en">
+          <h4>Earns marks</h4>
+          <div class="body">
+            <ul>
+              <li>A <strong>note number against every line</strong> of the revised computation — the marker can follow your reasoning without hunting.</li>
+              <li>Saying <strong>"no adjustment"</strong> for a distractor, with one clause of reason.</li>
+              <li>Showing the <strong>cap working</strong> even when the cap does not bite: "lower of $250,000 and 35% × $2,708,000 = $947,800".</li>
+              <li>The <strong>reconciliation</strong>, even a rough one.</li>
+              <li>Correct <strong>subtotal names</strong>: assessable profit, net assessable profit, reduced total income, net chargeable income.</li>
+              <li>A one-line <strong>heading</strong>: taxpayer, tax, year of assessment, basis period.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="sec-zh">
+          <h4>Loses marks</h4>
+          <div class="body">
+            <ul>
+              <li><strong>Editing the given computation</strong> instead of starting clean — you inherit its structure and its errors.</li>
+              <li><strong>Silence on a distractor note.</strong> Indistinguishable from missing it.</li>
+              <li>Netting several adjustments into <strong>one unexplained figure</strong>.</li>
+              <li>Stopping at net assessable profit when the question asked for the <strong>liability</strong> — rate, set-offs and reliefs are marks.</li>
+              <li>Checking your work against the <strong>bottom line</strong>. Offsetting errors make a wrong answer look right.</li>
+              <li>Correct treatment written in the <strong>wrong line</strong>, as with the rates in Illustration B.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="callout law">
+        <span class="lbl">If you run short of time</span>
+        Produce the <strong>note-by-note schedule</strong> and stop. It carries most of the technical marks, since it shows the decision on every item. A beautifully formatted computation with three treatments wrong scores less than a rough schedule that gets all ten notes right.
+      </div>
+      <p style="font-size:13px"><a href="computation-formats.html">The underlying formats →</a> &middot; <a href="profits-tax.html">Profits Tax rules →</a> &middot; <a href="personal-assessment.html">Personal Assessment rules →</a> &middot; <a href="module9-extra-practice.html">more practice questions →</a></p>
+    </section>
+
+    <section class="block" id="sources">
+      <h2>10. Source documents</h2>
+      <ul class="src-list">
+        <li><span class="file">Both illustrations are <strong>original</strong> — written for this Hub in the standard exam format, not reproduced from any paper or textbook</span><span class="date">24 Sep 2026</span></li>
+        <li><span class="file">Formats follow <em>Hong Kong Taxation and Tax Planning</em> (22nd ed.) Ch.20 and IRD's Personal Assessment guide — see <a href="computation-formats.html">Computation Formats</a></span><span class="date">—</span></li>
+        <li><span class="file">Rates and allowances: IRD <a href="https://www.ird.gov.hk/eng/pdf/pam61e.pdf" target="_blank" rel="noopener">Allowances, Deductions and Tax Rate Table</a> (pam61e), YA 2026/27</span><span class="date">read 24 Sep 2026</span></li>
+      </ul>
+      <div class="callout tip">
+        <span class="lbl">Every figure was computed, not estimated</span>
+        Both illustrations were built arithmetically so that the reconciliations close exactly: Illustration A's eight adjustments take $2,600,000 to $2,218,000, and Illustration B's three take $783,000 to $568,400. If you work them yourself and land elsewhere, the error is worth finding — that is the point of the exercise.
+      </div>
+    </section>
+
+    <div class="section-nav">
+      <a href="computation-formats.html">&larr; Computation Formats</a>
+      <a href="profits-tax-illustrations.html">Profits Tax Illustrations &rarr;</a>
+    </div>
+  </main>
+</div>
+
+<footer class="site-footer">HK Tax Study Hub — study aid, not professional advice. Verify against the Inland Revenue Ordinance (Cap. 112) and current IRD guidance before relying on any figure for a filing position.</footer>
+
+<script src="../assets/js/theme.js"></script>
+</body>
+</html>
