@@ -223,6 +223,31 @@ When adding a page, put it in `pages/`, add a row to `PAGES` in
 Chinese summary, search keywords), add its nav link to the other pages, and
 rebuild.
 
+## Two years of allowances, and the guard that keeps them straight
+
+Allowance figures appear on the Hub in **two bases**:
+
+- **YA 2026/27** — current law, and what you use for real work.
+- **YA 2025/26** — what ACCA TX-HKG examines from the June 2025 sitting
+  through **December 2026**. IRD publishes 2024/25 and 2025/26 as a single
+  column, so one set of figures covers the whole J25–D26 run.
+
+Only the allowances differ. **Every rate is identical on both bases** —
+progressive bands, the 15%/16% standard rate, 8.25%/16.5% and 7.5%/15% profits
+tax, property tax 15%, the 60% initial allowance, the 10/20/30% pools and the
+35% donations cap.
+
+wrote HK Tax Study Hub - Combined.html (599.6 KB)
+wrote combined.html and index.html (same content)
+panels: 22 + MAIN | page CSS blocks inlined: 5
+allowance guard: 6 allowance types checked against 2026/27 and 2025/26
+corruption check '??': 0
+corruption check '§': 0 holds the figures in one  table and
+**fails the build** if an allowance line states a figure belonging to neither
+year. Lines marked dual-stated, historical or proposed are exempt. When the
+next Budget moves an allowance, update that one table — the build will then
+point at every line still carrying the old number.
+
 ## Caveats — read before relying on a figure for a filing position
 
 - This is an **internal working document**, not a substitute for professional

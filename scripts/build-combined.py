@@ -167,6 +167,67 @@ GROUP_BLURB = {
 PAGE_IDS = {p["id"] for p in PAGES}
 
 
+# Personal allowances, per IRD pam61e. IRD publishes 2024/25 and 2025/26 as a
+# single column, so one set of exam-year figures covers ACCA TX-HKG from the
+# June 2025 sitting through December 2026.
+CURRENT_YA = "2026/27"
+EXAM_YA = "2025/26"           # what D26 examines
+ALLOWANCES = {
+    "basic":            {"2026/27": "145,000", "2025/26": "132,000"},
+    "married":          {"2026/27": "290,000", "2025/26": "264,000"},
+    "child":            {"2026/27": "140,000", "2025/26": "130,000"},
+    "single parent":    {"2026/27": "145,000", "2025/26": "132,000"},
+    "dep parent 60+":   {"2026/27": "55,000",  "2025/26": "50,000"},
+    "dep parent 55-59": {"2026/27": "27,500",  "2025/26": "25,000"},
+}
+# Figures that look like allowances but are not, so the check must ignore them.
+NOT_AN_ALLOWANCE = (
+    "160,000",   # the proposed 2026/27 child allowance, still only proposed
+    "120,000",   # historical textbook figures, flagged as stale in situ
+    "100,000",
+    "46,000",
+)
+
+
+def check_allowances(html):
+    """Fail the build if an allowance line states a figure from neither year.
+
+    The Hub is written on the current YA with the exam YA alongside. A figure
+    matching neither is almost always a stale allowance left behind by a rate
+    change, which is silent and costly in a tax reference.
+
+    A line may legitimately name several allowances at once ("a basic
+    allowance where the married person's allowance of $290,000 applies"), so
+    the accepted set is the union over every allowance mentioned on the line.
+    """
+    known = {v for years in ALLOWANCES.values() for v in years.values()}
+    figure = re.compile(r"(?<![\d,])\d{2,3},\d{3}(?![\d,])")
+    problems = []
+
+    for n, line in enumerate(html.split(chr(10)), 1):
+        low = line.lower()
+        if "allowance" not in low:
+            continue
+        if any(w in low for w in ("dual", "stale", "original book", "proposed")):
+            continue                      # dual-stated, historical, or not yet law
+
+        named = [k for k in ALLOWANCES if k.split()[0] in low]
+        if not named:
+            continue
+        ok = {ALLOWANCES[k][y] for k in named for y in (CURRENT_YA, EXAM_YA)}
+
+        stray = [f for f in figure.findall(line)
+                 if f in known and f not in ok and f not in NOT_AN_ALLOWANCE]
+        if stray:
+            problems.append("line %d: %s states %s; expected one of %s"
+                            % (n, "/".join(named), ", ".join(sorted(set(stray))),
+                               ", ".join(sorted(ok))))
+
+    if problems:
+        sys.exit("!! allowance figures from neither %s nor %s:" % (CURRENT_YA, EXAM_YA)
+                 + chr(10) + chr(10).join("   " + x for x in problems[:12]))
+    return len(ALLOWANCES)
+
 def read(path):
     with io.open(path, encoding="utf-8-sig") as fh:
         return fh.read()
@@ -744,6 +805,8 @@ def main():
     print("wrote %s (%.1f KB)" % (os.path.basename(OUT), len(html.encode("utf-8")) / 1024.0))
     print("wrote combined.html and index.html (same content)")
     print("panels: %d + MAIN | page CSS blocks inlined: %d" % (len(panels), len(page_css)))
+    print("allowance guard: %d allowance types checked against %s and %s"
+          % (check_allowances(html), CURRENT_YA, EXAM_YA))
     for bad in ("??", "禮"):
         n = html.count(bad)
         print("corruption check %r: %d" % (bad, n))
