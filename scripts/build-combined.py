@@ -1,0 +1,640 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Build "HK Tax Study Hub - Combined.html" as a single self-contained file.
+
+Frame follows HKICPA_Study_Platform.html: sticky topbar, a MAIN card index,
+one tab-panel per page, jump-search and a dark-mode toggle. Each panel keeps
+the page's own two-column shell (sidebar TOC + content).
+
+Everything is read from the clean sources under pages/ and assets/, so the
+em-dash corruption in earlier hand-built combined files cannot come back.
+Run from the project root:  python scripts/build-combined.py
+"""
+
+import io
+import os
+import re
+import sys
+from datetime import date
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(ROOT, "HK Tax Study Hub - Combined.html")
+OUT_WEB = os.path.join(ROOT, "combined.html")
+
+BUILD_DATE = "24 September 2026"
+IRD_READ_DATE = "24 September 2026"
+
+# id, source file, English label, Chinese label, group, Chinese summary, search keywords
+PAGES = [
+    ("ird-updates", "ird-updates.html", "IRD What's New", "稅務局最新消息", "Start here",
+     "整理稅務局「最新消息」所載事項，標明哪些已成為法例、哪些仍屬草案或政策建議，以及本平台已據此更新的頁面。",
+     "ird what's new news policy address updates bills"),
+    ("transaction-checker", "transaction-checker.html", "Transaction Checker", "交易稅務檢查器", "Start here",
+     "按交易或會計項目快速查看可能屬於應課稅、非應課稅、可扣稅、不可扣稅或須繳印花稅，並連回相關章節。",
+     "transaction checker taxable deductible dutiable search"),
+    ("dipn-index", "dipn-index.html", "DIPN Index", "DIPN 索引", "Start here",
+     "列出 IRD DIPN、SOIPN 及 EDOIPN 文件，方便按編號、主題或關鍵字搜尋，並區分核心學習頁與參考資料。",
+     "dipn soipn edoipn index practice notes"),
+
+    ("profits-tax", "profits-tax.html", "Profits Tax", "利得稅", "Tax types",
+     "涵蓋香港來源原則、兩級制稅率、應課稅收入、扣稅開支、虧損、FSIE、Patent Box 及基本計算格式。",
+     "profits tax source two-tiered fsie patent box"),
+    ("salaries-tax", "salaries-tax.html", "Salaries Tax", "薪俸稅", "Tax types",
+     "涵蓋香港受僱工作、入息、福利、可扣除支出、個人免稅額、標準稅率上限及個人入息課稅銜接。",
+     "salaries tax employment allowances personal assessment"),
+    ("property-tax", "property-tax.html", "Property Tax", "物業稅", "Tax types",
+     "說明物業稅的納稅人、租金收入、差餉、20% 法定修葺免稅額、不可收回租金及公司業主與利得稅的互動。",
+     "property tax net assessable value rates repairs"),
+    ("stamp-duty", "stamp-duty.html", "Stamp Duty", "印花稅", "Tax types",
+     "說明印花稅以文書為課稅對象，涵蓋物業、股票、租約、BSD/SSD、關聯公司寬免及上訴程序。",
+     "stamp duty avd bsd ssd shares lease"),
+    ("depreciation-allowances", "depreciation-allowances.html", "Depreciation & Allowances", "折舊及免稅額", "Tax types",
+     "整理工業/商業建築物免稅額、機械及設備、初期/每年免稅額、結餘課稅/免稅額及特定資產即時扣除。",
+     "depreciation allowances buildings plant machinery pooling"),
+    ("ird-administration", "ird-administration.html", "IRD Administration", "稅務局行政", "Tax types",
+     "涵蓋報稅、評稅、估計評稅、反對、上訴、暫繳稅緩繳、罰則、稅務調查，以及自動交換財務帳戶資料與加密資產申報。",
+     "ird administration returns assessment objection penalties aeoi carf"),
+
+    ("profits-tax-return-guide", "profits-tax-return-guide.html", "Profits Tax Return Guide", "利得稅報稅表指南", "Returns",
+     "把 BIR51/52/54 的欄位與稅務計算邏輯連接，說明哪些資料要填在報稅表，哪些屬於另附稅務計算。",
+     "profits tax return guide bir51 bir52 bir54"),
+    ("profits-tax-return-finder", "profits-tax-return-finder.html", "Profits Tax Return Box Finder", "利得稅報稅表欄位搜尋", "Returns",
+     "用關鍵字尋找 BIR51、BIR52、BIR54 欄位，適合在準備報稅表或溫習 supplementary forms 時使用。",
+     "bir box finder supplementary forms"),
+
+    ("profits-tax-illustrations", "profits-tax-illustrations.html", "Profits Tax — Illustrations", "利得稅例題", "Worked illustrations",
+     "以改寫例題展示來源地、資本/收益性質、壞帳、知識產權、虧損及兩級制計算等常見考點。",
+     "profits tax worked illustrations examples"),
+    ("salaries-tax-illustrations", "salaries-tax-illustrations.html", "Salaries Tax — Illustrations", "薪俸稅例題", "Worked illustrations",
+     "以服務地點、僱傭關係、福利、股份獎勵及個人入息課稅情境強化考試判斷。",
+     "salaries tax worked illustrations examples"),
+    ("property-tax-illustrations", "property-tax-illustrations.html", "Property Tax — Illustrations", "物業稅例題", "Worked illustrations",
+     "用租金、差餉、租客代付開支、不可收回租金及公司持有物業情境練習 NAV 計算。",
+     "property tax worked illustrations examples"),
+    ("stamp-duty-illustrations", "stamp-duty-illustrations.html", "Stamp Duty — Illustrations", "印花稅例題", "Worked illustrations",
+     "以物業買賣、公司買樓、香港股票轉讓及關聯公司重組練習印花稅分析。",
+     "stamp duty worked illustrations examples"),
+    ("depreciation-allowances-illustrations", "depreciation-allowances-illustrations.html",
+     "Depreciation & Allowances — Illustrations", "折舊及免稅額例題", "Worked illustrations",
+     "透過池制、出售資產、商業建築物、翻新及指定固定資產練習折舊免稅額。",
+     "depreciation allowances worked illustrations examples"),
+    ("module9-extra-practice", "module9-extra-practice.html", "Module 9 Extra Practice Q&A", "Module 9 額外練習問答", "Worked illustrations",
+     "改寫練習庫，按利得稅、薪俸稅、物業稅、個人入息課稅、印花稅及跨境預扣稅分類。",
+     "module 9 extra practice questions answers"),
+]
+
+GROUP_ORDER = ["Start here", "Tax types", "Returns", "Worked illustrations"]
+
+GROUP_ZH = {
+    "Start here": "由此開始",
+    "Tax types": "各稅種",
+    "Returns": "報稅表",
+    "Worked illustrations": "例題",
+}
+
+GROUP_BLURB = {
+    "Start here": "The three tools you open first — what IRD changed recently, then the searchable transaction and DIPN indexes.",
+    "Tax types": "One page per head of charge, each stating the current law with its statutory references.",
+    "Returns": "Mapping the computation onto the actual BIR forms.",
+    "Worked illustrations": "Paraphrased DIPN and Module 9 examples, recomputed against current rates.",
+}
+
+PAGE_IDS = {p[0] for p in PAGES}
+
+
+def read(path):
+    with io.open(path, encoding="utf-8-sig") as fh:
+        return fh.read()
+
+
+def extract(html, tag, attrs):
+    """Return inner HTML of the first <tag ...attrs...> element, matching nesting."""
+    m = re.search(r"<%s[^>]*%s[^>]*>" % (tag, re.escape(attrs)), html)
+    if not m:
+        return None
+    start = m.end()
+    depth = 1
+    pos = start
+    token = re.compile(r"</?%s\b" % tag)
+    while depth:
+        n = token.search(html, pos)
+        if not n:
+            return None
+        depth += -1 if n.group(0).startswith("</") else 1
+        pos = n.end()
+    return html[start:html.rfind("<", start, pos)]
+
+
+def localise(fragment, pid):
+    """Namespace a page fragment so 17 pages can share one document."""
+    # own anchors
+    fragment = re.sub(r'\bid="([A-Za-z][\w-]*)"', lambda m: 'id="%s__%s"' % (pid, m.group(1)), fragment)
+    fragment = re.sub(r'\bhref="#([\w-]+)"', lambda m: 'href="#%s__%s"' % (pid, m.group(1)), fragment)
+
+    # cross-page links -> tab anchors
+    def page_link(m):
+        target, anchor = m.group(1), m.group(2)
+        if target not in PAGE_IDS:
+            return m.group(0)
+        return 'href="#%s"' % (target + "__" + anchor if anchor else target)
+
+    fragment = re.sub(r'href="(?:\.\./pages/|pages/)?([a-z0-9-]+)\.html(?:#([\w-]+))?"', page_link, fragment)
+    fragment = re.sub(r'href="(?:\.\./)?index\.html(?:#[\w-]+)?"', 'href="#MAIN"', fragment)
+
+    # Repo-root files: pages/ reaches them via ../, the combined file sits at
+    # the root already, so the ../ has to go or the link escapes the site.
+    fragment = re.sub(r'href="\.\./(LICENSE|README\.md)"', r'href="\1"', fragment)
+
+    # freshness placeholders were driven by a script that no longer applies here
+    fragment = re.sub(r'<div id="[\w-]*freshness-banner"[^>]*>\s*</div>', "", fragment)
+    fragment = re.sub(r'<ul id="[\w-]*freshness-sources"[^>]*>\s*</ul>', "", fragment)
+    return fragment
+
+
+def zh_note(label_zh, summary_zh):
+    """Traditional Chinese orientation note shown at the head of every panel."""
+    return (
+        '<div class="zh-translation"><strong>%s</strong>%s</div>'
+        % (label_zh, summary_zh)
+    )
+
+
+def inject_zh(content, note):
+    """Place the Chinese note straight after the page title block."""
+    marker = "</div>\n\n    <"
+    idx = content.find('class="page-title"')
+    if idx < 0:
+        return note + content
+    close = content.find("</div>", content.find("</div>", idx) + 6)
+    if close < 0:
+        return note + content
+    close += len("</div>")
+    return content[:close] + "\n" + note + content[close:]
+
+
+def build_panel(pid, label, src, label_zh, summary_zh):
+    html = read(os.path.join(ROOT, "pages", src))
+    content = extract(html, "main", 'class="content"')
+    if content is None:
+        sys.exit("!! could not find <main class=\"content\"> in %s" % src)
+    toc = extract(html, "aside", 'class="toc"')
+
+    content = localise(content, pid)
+    content = inject_zh(content, zh_note(label_zh, summary_zh))
+    toc = localise(toc, pid) if toc else ""
+
+    shell_style = "" if toc else ' style="grid-template-columns:1fr"'
+    aside = '<aside class="toc">%s</aside>' % toc if toc else ""
+    return (
+        '<section class="tab-panel" id="%s" data-label="%s">\n'
+        '  <div class="shell"%s>%s<main class="content">%s</main></div>\n'
+        "</section>\n" % (pid, label, shell_style, aside, content)
+    )
+
+
+def build_cards():
+    out = []
+    for group in GROUP_ORDER:
+        out.append('<h2 class="family-heading">%s · %s</h2>' % (group, GROUP_ZH[group]))
+        out.append('<p class="group-blurb">%s</p>' % GROUP_BLURB[group])
+        out.append('<div class="card-grid">')
+        for pid, src, label, label_zh, grp, summary_zh, keywords in PAGES:
+            if grp != group:
+                continue
+            haystack = " ".join((keywords, label, label_zh, summary_zh)).lower().replace('"', "")
+            out.append(
+                '<button class="std-card" data-target="%s" data-search="%s">'
+                '<div class="card-code">%s</div>'
+                '<div class="card-title-zh">%s</div>'
+                '<div class="card-desc">%s</div>'
+                "</button>" % (pid, haystack, label, label_zh, summary_zh)
+            )
+        out.append("</div>")
+    return "\n".join(out)
+
+
+def build_nav():
+    return "\n".join(
+        '<button class="navlink" data-target="%s">%s</button>' % (pid, label)
+        for pid, src, label, label_zh, grp, summary_zh, kw in PAGES
+        if grp == "Start here"
+    )
+
+
+FRAME_CSS = """
+/* ---------- topbar palette ----------
+   Kept independent of --brand: in dark mode --brand lightens to a pink that
+   cannot carry white text, so the bar needs its own dark tokens. */
+:root{
+  --topbar-bg:#8b2635; --topbar-bg2:#6e1e2a;
+  --topbar-text:#ffffff; --topbar-dim:#fdeceb; --topbar-accent:#f5d9a8;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --topbar-bg:#5c1a23; --topbar-bg2:#3d1017;
+    --topbar-text:#fbeaec; --topbar-dim:#e7bcc1; --topbar-accent:#e0b978;
+  }
+}
+:root[data-theme="dark"]{
+  --topbar-bg:#5c1a23; --topbar-bg2:#3d1017;
+  --topbar-text:#fbeaec; --topbar-dim:#e7bcc1; --topbar-accent:#e0b978;
+}
+:root[data-theme="light"]{
+  --topbar-bg:#8b2635; --topbar-bg2:#6e1e2a;
+  --topbar-text:#ffffff; --topbar-dim:#fdeceb; --topbar-accent:#f5d9a8;
+}
+
+/* ---------- explicit theme overrides (must follow main.css) ---------- */
+:root[data-theme="dark"]{
+  --bg:#14171c; --surface:#1b1f26; --surface-alt:#20242c; --border:#2c313a;
+  --text:#e6e9ee; --text-muted:#9aa3af; --brand:#d97b86; --brand-dark:#e79ba3; --link:#6bb3e0;
+  --ok-bg:#123420; --ok-text:#7fd99a; --ok-border:#1f5c34;
+  --warn-bg:#3a2e0f; --warn-text:#e8c46b; --warn-border:#63501c;
+  --bad-bg:#3a1717; --bad-text:#f0a0a3; --bad-border:#5c2323;
+  --tax-bg:#182b3d; --tax-text:#7fc0ef;
+  --deduct-bg:#132a19; --deduct-text:#86d69c;
+  --nondeduct-bg:#2e1616; --nondeduct-text:#f0a0a3;
+  --code-bg:#20242c; --shadow:0 1px 3px rgba(0,0,0,.4);
+}
+:root[data-theme="light"]{
+  --bg:#f5f6f8; --surface:#ffffff; --surface-alt:#eef1f5; --border:#dde1e7;
+  --text:#1b2430; --text-muted:#5b6472; --brand:#8b2635; --brand-dark:#6e1e2a; --link:#1a5d8f;
+  --ok-bg:#e6f4ea; --ok-text:#1e7a34; --ok-border:#b7e0c3;
+  --warn-bg:#fdf3e0; --warn-text:#946200; --warn-border:#f1d79a;
+  --bad-bg:#fbe9e9; --bad-text:#a3282c; --bad-border:#f0c4c4;
+  --tax-bg:#e9f0f9; --tax-text:#1a5d8f;
+  --deduct-bg:#eef6ee; --deduct-text:#2c7a3d;
+  --nondeduct-bg:#f6eeee; --nondeduct-text:#a3282c;
+  --code-bg:#f1f2f4; --shadow:0 1px 3px rgba(20,24,30,.08), 0 1px 2px rgba(20,24,30,.06);
+}
+
+/* ---------- topbar ---------- */
+.topbar{
+  background:linear-gradient(180deg, var(--topbar-bg), var(--topbar-bg2));
+  color:var(--topbar-text); display:flex; align-items:center; flex-wrap:wrap;
+  padding:0 12px; gap:4px; position:sticky; top:0; z-index:100;
+  box-shadow:var(--shadow);
+}
+.topbar .brand{font-weight:700;padding:10px 14px 10px 6px;white-space:nowrap;letter-spacing:.2px;font-size:15px;color:var(--topbar-text)}
+.topbar .brand small{display:block;font-weight:400;font-size:11px;opacity:.85}
+.navlink,.toolbtn{
+  background:transparent;border:none;color:var(--topbar-dim);font-family:inherit;
+  padding:12px 13px;cursor:pointer;font-size:13.5px;font-weight:600;
+  border-bottom:3px solid transparent;
+}
+.navlink:hover,.toolbtn:hover{background:rgba(255,255,255,.14);color:var(--topbar-text)}
+.navlink.active{background:rgba(255,255,255,.18);border-bottom-color:var(--topbar-accent);color:var(--topbar-text)}
+.topbar .spacer{flex:1 1 auto}
+.topbar .searchwrap{margin:7px 6px}
+.topbar input[type="search"]{
+  padding:7px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.12);color:var(--topbar-text);width:230px;font-size:13.5px;font-family:inherit;
+}
+.topbar input[type="search"]::placeholder{color:var(--topbar-dim);opacity:.7}
+
+/* ---------- tab panels ---------- */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.tab-panel .shell{padding-top:20px}
+.tab-panel .toc{top:66px}
+.crumb{max-width:1280px;margin:0 auto;padding:12px 20px 0;font-size:12.5px;color:var(--text-muted)}
+.crumb a{cursor:pointer}
+
+/* ---------- MAIN index ---------- */
+#MAIN .hero{max-width:1280px;margin:0 auto;padding:30px 20px 4px}
+#MAIN .hero h1{font-size:29px;margin:0 0 6px}
+#MAIN .hero p{color:var(--text-muted);max-width:820px;font-size:14.5px}
+#MAIN .index-wrap{max-width:1280px;margin:0 auto;padding:0 20px 50px}
+.family-heading{margin:30px 0 2px;font-size:17px;color:var(--brand);border-bottom:2px solid var(--border);padding-bottom:6px}
+.group-blurb{color:var(--text-muted);font-size:13px;margin:6px 0 0}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:12px}
+.std-card{
+  text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;cursor:pointer;box-shadow:var(--shadow);color:var(--text);
+  font-family:inherit;transition:transform .12s ease,border-color .12s ease;
+}
+.std-card:hover{transform:translateY(-2px);border-color:var(--brand)}
+.std-card .card-code{font-weight:700;font-size:14.5px;color:var(--brand)}
+.std-card .card-title-zh{font-size:13px;color:var(--text);margin-top:3px}
+.std-card .card-desc{font-size:12px;color:var(--text-muted);margin-top:6px;line-height:1.5}
+.no-match{color:var(--text-muted);font-size:13.5px;padding:14px 0;display:none}
+
+/* ---------- bilingual notes carried from the previous edition ---------- */
+.zh-translation{
+  background:var(--surface-alt);border-left:3px solid var(--brand);
+  padding:8px 10px;margin:6px 0 16px;color:var(--text);font-size:14px;
+}
+.zh-translation strong{color:var(--brand);display:block;margin-bottom:3px}
+
+/* ---------- freshness banner ---------- */
+.hub-freshness{max-width:1280px;margin:16px auto 0;padding:0 20px}
+.hub-freshness .freshness{margin:0}
+
+footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;padding:22px 20px 40px;border-top:1px solid var(--border);max-width:1280px;margin:0 auto}
+
+@media (max-width:760px){
+  .topbar{position:static}
+  .tab-panel .toc{position:static;max-height:none}
+  .topbar input[type="search"]{width:170px}
+}
+"""
+
+FRAME_JS = r"""
+(function(){
+  var root = document.documentElement;
+
+  /* ---------- tabs ---------- */
+  function activate(id){
+    if(!document.getElementById(id)) id = 'MAIN';
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.toggle('active', p.id === id); });
+    document.querySelectorAll('.navlink').forEach(function(b){ b.classList.toggle('active', b.dataset.target === id); });
+    try{ history.replaceState(null, '', '#' + id); }catch(e){}
+    window.scrollTo(0, 0);
+  }
+  window.hubActivate = activate;
+
+  document.addEventListener('click', function(ev){
+    var tabBtn = ev.target.closest('[data-target]');
+    if(tabBtn){ activate(tabBtn.dataset.target); return; }
+
+    var a = ev.target.closest('a[href^="#"]');
+    if(!a) return;
+    var raw = a.getAttribute('href').slice(1);
+    if(!raw) return;
+    var panel = document.getElementById(raw);
+    if(panel && panel.classList.contains('tab-panel')){ ev.preventDefault(); activate(raw); return; }
+    var el = document.getElementById(raw);
+    if(!el) return;
+    var owner = el.closest('.tab-panel');
+    ev.preventDefault();
+    if(owner && !owner.classList.contains('active')) activate(owner.id);
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  /* ---------- MAIN card search ---------- */
+  var search = document.getElementById('jumpSearch');
+  var noMatch = document.getElementById('noMatch');
+  function filterCards(){
+    var q = (search.value || '').trim().toLowerCase();
+    var shown = 0;
+    document.querySelectorAll('.std-card').forEach(function(card){
+      var hit = !q || card.dataset.search.indexOf(q) !== -1
+                   || card.textContent.toLowerCase().indexOf(q) !== -1;
+      card.hidden = !hit;
+      if(hit) shown++;
+    });
+    document.querySelectorAll('#MAIN .family-heading, #MAIN .group-blurb, #MAIN .card-grid').forEach(function(el){
+      var grid = el.classList.contains('card-grid') ? el : el.nextElementSibling;
+      while(grid && !grid.classList.contains('card-grid')) grid = grid.nextElementSibling;
+      var any = grid && Array.prototype.some.call(grid.querySelectorAll('.std-card'), function(c){ return !c.hidden; });
+      el.hidden = !any;
+    });
+    noMatch.style.display = shown ? 'none' : 'block';
+  }
+  search.addEventListener('input', function(){ if(!document.getElementById('MAIN').classList.contains('active')) activate('MAIN'); filterCards(); });
+  search.addEventListener('keydown', function(ev){
+    if(ev.key !== 'Enter') return;
+    var first = Array.prototype.find.call(document.querySelectorAll('.std-card'), function(c){ return !c.hidden; });
+    if(first){ search.value = ''; filterCards(); activate(first.dataset.target); }
+  });
+
+  /* ---------- dark mode ---------- */
+  function applyTheme(t){
+    if(t === 'dark' || t === 'light') root.setAttribute('data-theme', t);
+    else root.removeAttribute('data-theme');
+  }
+  var saved = null;
+  try{ saved = localStorage.getItem('hktax_theme'); }catch(e){}
+  if(saved) applyTheme(saved);
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme');
+    var isDark = cur === 'dark' || (!cur && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = isDark ? 'light' : 'dark';
+    applyTheme(next);
+    try{ localStorage.setItem('hktax_theme', next); }catch(e){}
+  });
+
+  /* ---------- searchable data tables ---------- */
+  function linkToTab(href){
+    if(!href) return '';
+    var m = /^([a-z0-9-]+)\.html(?:#([\w-]+))?$/.exec(href);
+    if(!m) return href;
+    return '#' + (m[2] ? m[1] + '__' + m[2] : m[1]);
+  }
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  // Official IRD source URL, derived from the document number.
+  // Pattern verified against ird.gov.hk 2026-09-24: zero-padded 2 digits,
+  // lowercase suffix, e.g. DIPN 1 -> dipn01.pdf, DIPN 13A -> dipn13a.pdf.
+  function officialUrl(no){
+    var m = /^(DIPN|SOIPN|EDOIPN) (\d+)([A-Za-z]?)$/.exec(no || '');
+    if(!m) return null;
+    var n = m[2].length < 2 ? '0' + m[2] : m[2];
+    return 'https://www.ird.gov.hk/eng/pdf/' + m[1].toLowerCase() + n + m[3].toLowerCase() + '.pdf';
+  }
+  function mountTable(prefix, cfg){
+    var q = document.getElementById(prefix + '__q');
+    var tbody = document.getElementById(prefix + '__results-body');
+    if(!q || !tbody) return;
+    var countEl = document.getElementById(prefix + '__checker-count');
+    var emptyEl = document.getElementById(prefix + '__checker-empty');
+    var data = cfg.data() || [];
+
+    (cfg.filters || []).forEach(function(f){
+      var sel = document.getElementById(prefix + '__' + f.id);
+      if(!sel || !f.populate) return;
+      Array.from(new Set(data.map(function(r){ return r[f.key]; }))).forEach(function(v){
+        var o = document.createElement('option');
+        o.value = v; o.textContent = v;
+        sel.appendChild(o);
+      });
+    });
+
+    function render(){
+      var term = (q.value || '').trim().toLowerCase();
+      var rows = data.filter(function(row){
+        for(var i = 0; i < (cfg.filters || []).length; i++){
+          var f = cfg.filters[i];
+          var sel = document.getElementById(prefix + '__' + f.id);
+          if(sel && sel.value && row[f.key] !== sel.value) return false;
+        }
+        return !term || cfg.haystack(row).toLowerCase().indexOf(term) !== -1;
+      });
+      if(countEl) countEl.textContent = rows.length + ' of ' + data.length + ' ' + cfg.label + ' shown';
+      if(emptyEl) emptyEl.style.display = rows.length ? 'none' : 'block';
+      tbody.innerHTML = rows.map(cfg.row).join('');
+    }
+    q.addEventListener('input', render);
+    (cfg.filters || []).forEach(function(f){
+      var sel = document.getElementById(prefix + '__' + f.id);
+      if(sel) sel.addEventListener('change', render);
+    });
+    render();
+  }
+
+  var STATUS_LABEL = {
+    taxable:'Taxable', nontaxable:'Non-taxable', deductible:'Deductible',
+    nondeductible:'Non-deductible', dutiable:'Dutiable', dutyfree:'Duty-free (0%)',
+    allowance:'Allowance available'
+  };
+
+  mountTable('transaction-checker', {
+    data: function(){ return window.TRANSACTIONS; },
+    label: 'transactions',
+    filters: [{id:'filter-tax', key:'tax', populate:true}, {id:'filter-status', key:'status'}],
+    haystack: function(r){ return r.item + ' ' + r.note + ' ' + r.tax + ' ' + r.section; },
+    row: function(r){
+      return '<tr>'
+        + '<td><span class="tag tag-' + r.status + '">' + esc(STATUS_LABEL[r.status] || r.status) + '</span></td>'
+        + '<td>' + esc(r.tax) + '</td>'
+        + '<td class="item">' + esc(r.item) + '</td>'
+        + '<td>' + esc(r.section) + '</td>'
+        + '<td class="note">' + esc(r.note) + '</td>'
+        + '<td class="goto"><a href="' + linkToTab(r.page) + '">View section &rarr;</a></td>'
+        + '</tr>';
+    }
+  });
+
+  mountTable('dipn-index', {
+    data: function(){ return window.DIPN_INDEX; },
+    label: 'documents',
+    filters: [{id:'filter-group', key:'group', populate:true}, {id:'filter-status', key:'status'}],
+    haystack: function(r){ return r.no + ' ' + r.title + ' ' + r.summary + ' ' + r.group; },
+    row: function(r){
+      var badge = r.status === 'core'
+        ? '<a href="' + linkToTab(r.link) + '" class="tag tag-deductible">Core &rarr;</a>'
+        : '<span class="tag tag-nontaxable">Reference only</span>';
+      return '<tr>'
+        + '<td>' + esc(r.no) + '</td>'
+        + '<td>' + esc(r.title) + (r.example ? ' <span class="tag tag-taxable" style="margin-left:4px">example</span>' : '') + '</td>'
+        + '<td>' + esc(r.group) + '</td>'
+        + '<td>' + esc(r.date) + '</td>'
+        + '<td class="note">' + esc(r.summary) + '</td>'
+        + '<td><a href="' + officialUrl(r.no) + '" target="_blank" rel="noopener">IRD PDF &rarr;</a></td>'
+        + '<td>' + badge + '</td>'
+        + '</tr>';
+    }
+  });
+
+  mountTable('profits-tax-return-finder', {
+    data: function(){ return window.BIR_BOXES; },
+    label: 'boxes',
+    filters: [{id:'filter-form', key:'form'}],
+    haystack: function(r){ return r.form + ' ' + r.part + ' ' + r.box + ' ' + r.label + ' ' + (r.note || ''); },
+    row: function(r){
+      return '<tr>'
+        + '<td><span class="tag tag-dutiable">' + esc(r.form) + '</span></td>'
+        + '<td>' + esc(r.box) + '</td>'
+        + '<td>' + esc(r.part) + '</td>'
+        + '<td class="item">' + esc(r.label) + '</td>'
+        + '<td class="note">' + esc(r.note) + '</td>'
+        + '<td class="goto">' + (r.link ? '<a href="' + linkToTab(r.link) + '">View section &rarr;</a>' : '') + '</td>'
+        + '</tr>';
+    }
+  });
+
+  /* ---------- open the requested tab ---------- */
+  activate((location.hash || '#MAIN').slice(1));
+})();
+"""
+
+
+def main():
+    css = read(os.path.join(ROOT, "assets", "css", "main.css")) + FRAME_CSS
+
+    data_js = "\n".join(
+        read(os.path.join(ROOT, "assets", "js", f))
+        for f in ("transactions-data.js", "dipn-index-data.js", "bir-finder-data.js")
+    )
+
+    panels = []
+    for pid, src, label, label_zh, grp, summary_zh, kw in PAGES:
+        panels.append(build_panel(pid, label, src, label_zh, summary_zh))
+
+    html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HK Tax Study Hub</title>
+<style>
+%(css)s
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">HK Tax Study Hub<small>Combined single-file edition</small></div>
+  <button class="navlink active" data-target="MAIN">MAIN 主頁</button>
+%(nav)s
+  <div class="spacer"></div>
+  <div class="searchwrap">
+    <input type="search" id="jumpSearch" placeholder="Jump to a page... 跳至頁面" />
+  </div>
+  <button class="toolbtn" id="themeBtn">&#9789; Dark Mode</button>
+</div>
+
+<section class="tab-panel active" id="MAIN">
+  <div class="hero">
+    <h1>Hong Kong Tax Study Hub</h1>
+    <p>Consolidated internal reference for HK profits, property and salaries tax, stamp duty, and depreciation allowances — built for (1) tax computation and taxable/deductible analysis on Hong Kong incorporated companies' financial statements, and (2) team study with worked illustrations drawn from IRD's Departmental Interpretation &amp; Practice Notes (DIPNs).</p>
+    <p>雙語內部參考資料，涵蓋香港利得稅、物業稅、薪俸稅、印花稅及折舊免稅額，供稅務計算分析及團隊溫習之用。本平台僅供內部學習參考，不能取代《稅務條例》（第112章）及稅務局現行指引。</p>
+  </div>
+  <div class="hub-freshness">
+    <div class="freshness ok">
+      <span class="dot"></span>
+      <span class="msg">IRD <a href="https://www.ird.gov.hk/eng/new/index.htm" target="_blank" rel="noopener">What's New</a> read on <strong>%(ird_date)s</strong> — all 38 items from 1 Jun to 16 Sep 2026 reviewed. Two 2026 Policy Address measures are carried as <strong>proposed</strong>, not enacted. · 稅務局最新消息已於 %(ird_date)s 覆核。</span>
+      <button data-target="ird-updates">Open IRD What's New &rarr;</button>
+    </div>
+  </div>
+  <div class="index-wrap">
+%(cards)s
+    <p class="no-match" id="noMatch">No page matches that search. · 沒有符合的頁面。</p>
+  </div>
+</section>
+
+%(panels)s
+
+<footer class="appfoot">HK Tax Study Hub — combined single-file snapshot, built %(build_date)s. Internal working document: verify against the Inland Revenue Ordinance (Cap. 112) and current IRD guidance before relying on any figure for a filing position. · 內部工作文件，引用前請核對《稅務條例》及稅務局現行指引。</footer>
+
+<script>
+%(data)s
+</script>
+<script>
+%(frame)s
+</script>
+</body>
+</html>
+""" % {
+        "css": css,
+        "nav": build_nav(),
+        "cards": build_cards(),
+        "panels": "\n".join(panels),
+        "data": data_js,
+        "frame": FRAME_JS,
+        "build_date": BUILD_DATE,
+        "ird_date": IRD_READ_DATE,
+    }
+
+    with io.open(OUT, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(html)
+
+    # Clean-URL twin for the published site: the spaced filename is what people
+    # recognise as an email attachment, but it URL-encodes badly in a link.
+    with io.open(OUT_WEB, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(html)
+
+    print("wrote %s (%.1f KB)" % (os.path.basename(OUT), len(html.encode("utf-8")) / 1024.0))
+    print("wrote %s (same content, clean URL)" % os.path.basename(OUT_WEB))
+    print("panels: %d + MAIN" % len(panels))
+    for bad in ("??", "禮"):
+        n = html.count(bad)
+        print("corruption check %r: %d" % (bad, n))
+
+
+if __name__ == "__main__":
+    main()

@@ -6,6 +6,16 @@
     });
   }
 
+  // Official IRD source URL, derived from the document number.
+  // Pattern verified against ird.gov.hk 2026-09-24: zero-padded 2 digits,
+  // lowercase suffix, e.g. DIPN 1 -> dipn01.pdf, DIPN 13A -> dipn13a.pdf.
+  function officialUrl(no) {
+    var m = /^(DIPN|SOIPN|EDOIPN) (\d+)([A-Za-z]?)$/.exec(no || "");
+    if (!m) return null;
+    var n = m[2].length < 2 ? "0" + m[2] : m[2];
+    return "https://www.ird.gov.hk/eng/pdf/" + m[1].toLowerCase() + n + m[3].toLowerCase() + ".pdf";
+  }
+
   function render() {
     var data = window.DIPN_INDEX || [];
     var q = (document.getElementById("q").value || "").trim().toLowerCase();
@@ -41,6 +51,7 @@
         "<td>" + escapeHtml(row.group) + "</td>" +
         "<td>" + escapeHtml(row.date || "") + "</td>" +
         '<td class="note">' + escapeHtml(row.summary) + "</td>" +
+        '<td><a href="' + officialUrl(row.no) + '" target="_blank" rel="noopener">IRD PDF &rarr;</a></td>' +
         "<td>" + statusBadge + "</td>" +
         "</tr>"
       );

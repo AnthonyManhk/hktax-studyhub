@@ -1,8 +1,44 @@
 # HK Tax Study Hub
 
-Internal, team-only reference and study tool for Hong Kong tax — **not for
-external distribution or publication**. Static HTML, no server or build step:
-double-click `index.html` to open it in a browser.
+A study aid for Hong Kong tax — profits tax, property tax, salaries tax, stamp
+duty, depreciation allowances and IRD administration — built from the Inland
+Revenue Department's own published guidance and from the Inland Revenue
+Ordinance (Cap. 112) and Stamp Duty Ordinance (Cap. 117).
+
+**Live site:** <https://anthonymankaho.github.io/hktax-studyhub/>
+
+Static HTML, no server and no build step to read it: open `index.html` in a
+browser, or use the single-file [`combined.html`](combined.html).
+
+## ⚠️ Disclaimer — read this first
+
+**This is study material, not professional advice.** Nothing here is tax advice,
+no adviser–client relationship is created by reading it, and no one maintaining
+it will answer questions about your tax position.
+
+It is written to an internal working standard for one finance team's own
+learning and analysis. It is published openly because the underlying material is
+public, not because it has been reviewed for anyone else's use. It will contain
+mistakes, and it goes out of date whenever the law changes.
+
+**Before relying on any figure or section reference for a filing position,
+verify it against the Inland Revenue Ordinance (Cap. 112), the Stamp Duty
+Ordinance (Cap. 117), and current IRD guidance.** Every page carries the same
+warning for the same reason.
+
+## Licence
+
+Two different things, two different answers:
+
+- **Code** — `scripts/`, `assets/js/`, `assets/css/`: MIT. See [`LICENSE`](LICENSE).
+- **Study content** — the prose, tables and worked illustrations in
+  `index.html` and `pages/`: **not licensed for redistribution.** These are
+  study notes paraphrased from the sources cited inline. Read them, link to
+  them; please do not republish them as your own.
+- **Cited material** — IRD's DIPNs/SOIPNs, the ordinances, the BIR forms, and
+  the textbook the illustrations derive from remain the property of their
+  respective owners. This repository does **not** redistribute them; it links to
+  the publishers' own copies.
 
 ## What this is for
 
@@ -21,6 +57,7 @@ Open `index.html`. From the hub you can reach:
 
 | Page | Purpose |
 |---|---|
+| **IRD What's New** | Every item on IRD's What's New page, read against this Hub and marked **enacted** / **bill** / **proposed**, with the exact page each item changed. Open this first after any IRD refresh. |
 | **Transaction Checker** | Search any transaction by keyword → Taxable/Non-taxable/Deductible/Non-deductible/Dutiable, with the exact section and a link to the full explanation. |
 | **DIPN Index** | Searchable catalogue of all 73 currently-in-force DIPN/SOIPN/EDOIPN documents, with topic, summary, and whether it backs a full study page or is reference-only. |
 | **Profits Tax / Property Tax / Salaries Tax / Stamp Duty / Depreciation & Allowances** | The five core topic pages — charging basis, rates, taxable/deductible tables, computation templates, all tied to exact IRO (Cap. 112) / Stamp Duty Ordinance (Cap. 117) sections. |
@@ -43,6 +80,23 @@ ird.gov.hk from inside a browser-opened HTML file. The loop is:
 4. **Ask Claude** (in a Claude Code session) to re-read the updated source and
    refresh that page's content — step 2 only detects *that* something
    changed, not *what* changed.
+
+### Checking IRD's What's New
+
+Steps 1–3 watch the *saved PDFs*. They cannot see a new announcement on
+ird.gov.hk. For that, ask Claude to read
+<https://www.ird.gov.hk/eng/new/index.htm> and update the Hub. Claude should:
+
+- Add or update rows in **`pages/ird-updates.html` §2** so the page records
+  what was read, on what date, and which page changed.
+- Mark each item **enacted** / **bill** / **proposed**. A Policy Address
+  measure is *not* law on announcement day — keep the enacted figure as the
+  Hub's primary statement and carry the change as a marked note beside it.
+- Update the "read on" date in the banner at the top of `ird-updates.html`
+  **and** `IRD_READ_DATE` in `scripts/build-combined.py`.
+- Re-run the combined build (below).
+
+Last read: **24 September 2026** (38 items, 1 Jun – 16 Sep 2026).
 
 `elegislation.gov.hk` (for CAP112/CAP117) gates automated downloads behind a
 JS/cookie check — a normal browser download works fine, but re-fetching it
@@ -98,7 +152,10 @@ extract illustrations from it the same way.
 
 ```
 index.html                       Hub — links to everything below
+HK Tax Study Hub - Combined.html GENERATED single-file edition — do not hand-edit
 pages/
+  ird-updates.html               IRD What's New, marked enacted / bill / proposed
+  module9-extra-practice.html    Extra paraphrased Module 9 practice Q&A
   transaction-checker.html       Search tool: transaction → tax treatment
   dipn-index.html                Searchable catalogue of all 73 DIPN/SOIPN/EDOIPN docs
   profits-tax.html               + profits-tax-illustrations.html
@@ -112,6 +169,7 @@ assets/
   css/main.css                   Shared design system (light/dark aware)
   js/                            Freshness-check logic, search/filter logic, data files
 scripts/
+  build-combined.py              Rebuilds the single-file edition from pages/ + assets/
   Refresh-Data-Manifest.bat      Double-click after updating Data/ — rescans and re-stamps dates
   update-manifest.ps1            The PowerShell script the .bat wraps
 Data/
@@ -122,6 +180,36 @@ Data/
   README.md                      Refresh-workflow details and folder map
   DIPN-CHECKLIST.md              Document-by-document download status
 ```
+
+## The two editions, and how to rebuild
+
+There are two ways to read the Hub, from **one** set of sources:
+
+- **Multi-file** — open `index.html` and navigate between `pages/*.html`.
+  This is the editable version.
+- **Single-file** — `HK Tax Study Hub - Combined.html`, everything inlined
+  (CSS, JS, data), so it can be emailed as one attachment. It uses a tabbed
+  frame: a sticky topbar, a card index, and one panel per page, with
+  jump-search and a dark-mode toggle.
+
+**The combined file is generated. Never hand-edit it** — edit the page under
+`pages/` and rebuild:
+
+```
+python scripts\build-combined.py
+```
+
+The builder namespaces every `id`/anchor per page (`salaries-tax__allowances`),
+rewrites cross-page links into tab links, inlines the three searchable data
+tables, and prints a corruption check. A hand-built combined file previously
+lost 994 em-dashes and mangled two Chinese passages by concatenating with the
+wrong encoding; the builder reads the clean sources as UTF-8 and writes UTF-8,
+so that failure cannot recur.
+
+When adding a page, put it in `pages/`, add a row to `PAGES` in
+`scripts\build-combined.py` (id, file, English label, Chinese label, group,
+Chinese summary, search keywords), add its nav link to the other pages, and
+rebuild.
 
 ## Caveats — read before relying on a figure for a filing position
 
@@ -138,3 +226,8 @@ Data/
   Budget before treating those as final.
 - Every page shows a "last reviewed" date and a freshness banner — check both
   before relying on a page for a filing decision.
+- Items marked **proposed** on the IRD What's New page (currently the two 2026
+  Policy Address measures — the $160,000 child allowance for second and
+  subsequent children, and the $20,000 newborn-family stamp duty waiver) are
+  **not law**. Each needs an amendment ordinance. Quote the enacted figure in
+  any computation until the ordinance is gazetted.

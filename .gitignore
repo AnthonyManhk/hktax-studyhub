@@ -1,0 +1,15 @@
+# Source PDFs are NOT redistributed from this repo.
+#
+# The site links to IRD's and e-Legislation's own copies instead, which are
+# always current. These files stay on disk locally so the freshness workflow
+# (scripts/Refresh-Data-Manifest.bat) keeps working; they are simply not
+# committed. See docs/superpowers/specs/2026-09-24-hktax-github-pages-design.md §3.2
+Data/
+
+# ...but our own notes about that folder are ours, and worth keeping tracked.
+!Data/README.md
+!Data/DIPN-CHECKLIST.md
+
+# Local build scratch
+*.tmp
+~$*

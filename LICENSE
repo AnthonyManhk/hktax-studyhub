@@ -1,0 +1,68 @@
+HK Tax Study Hub — licensing
+
+This repository contains two kinds of material under two different terms.
+Please read both before reusing anything.
+
+────────────────────────────────────────────────────────────────────────
+1. CODE — MIT License
+────────────────────────────────────────────────────────────────────────
+
+Applies to: scripts/, assets/js/, assets/css/, and the build tooling.
+
+Copyright (c) 2026 Anthony Man
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+────────────────────────────────────────────────────────────────────────
+2. STUDY CONTENT — not licensed for redistribution
+────────────────────────────────────────────────────────────────────────
+
+Applies to: the prose, tables and worked illustrations in index.html and
+pages/*.html.
+
+These are study notes. They paraphrase and summarise the sources cited inline
+on each page — principally IRD's Departmental Interpretation & Practice Notes,
+the Inland Revenue Ordinance (Cap. 112), the Stamp Duty Ordinance (Cap. 117),
+and a professional taxation qualification manual. Because they are derived from
+those sources, they are not the author's to place under an open licence.
+
+You may read them and link to them. They are NOT licensed for republication,
+redistribution, or inclusion in another work, whether commercial or not.
+
+────────────────────────────────────────────────────────────────────────
+3. CITED MATERIAL — belongs to its publishers
+────────────────────────────────────────────────────────────────────────
+
+IRD's DIPNs, SOIPNs and EDOIPNs, the ordinances, the BIR return forms, and the
+textbook from which some illustrations are derived remain the property of their
+respective owners.
+
+This repository does not redistribute any of them. The DIPN Index links to
+IRD's own PDFs on ird.gov.hk, and legislation references point to
+e-Legislation. Those copies are authoritative; the ones described here are not.
+
+────────────────────────────────────────────────────────────────────────
+4. NO WARRANTY, NO ADVICE
+────────────────────────────────────────────────────────────────────────
+
+Nothing in this repository is tax, legal, accounting or professional advice,
+and no adviser-client relationship arises from reading it. The content is
+provided as-is, may contain errors, and goes out of date as the law changes.
+Verify against the primary legislation and current IRD guidance before relying
+on anything here for a filing position.

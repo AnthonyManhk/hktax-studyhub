@@ -1,0 +1,4 @@
+# HK Tax Study Hub — https://anthonymankaho.github.io/hktax-studyhub/
+# Open study resource. Indexing welcome.
+User-agent: *
+Allow: /
