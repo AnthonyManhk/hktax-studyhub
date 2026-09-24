@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A study aid for Hong Kong tax - profits, property and salaries tax, stamp duty, depreciation allowances and personal assessment - built from IRD guidance and the Inland Revenue Ordinance. Not professional advice.">
 <title>HK Tax Study Hub</title>
 <style>
 /* HK Tax Study Hub — shared design system */
@@ -222,6 +223,26 @@ footer.site-footer{max-width:1280px;margin:0 auto;padding:20px;color:var(--text-
 
 .section-nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:16px;border-top:1px solid var(--border);font-size:13.5px}
 
+
+/* ---------- RESPONSIVE: narrow screens ----------
+   Wide data tables were forcing the whole page wider than the viewport on a
+   phone - 14 of 23 panels overflowed, three by more than a screen width.
+   Making the table itself the scroll container keeps the page fixed and lets
+   the table pan horizontally instead. */
+@media (max-width: 760px) {
+  .content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .content th, .content td { padding: 7px 8px; }
+  .shell { padding-left: 14px; padding-right: 14px; gap: 16px; }
+  .checker-controls { position: static; }
+  .checker-controls input[type="search"] { min-width: 0; }
+  .checker-results td.item, .checker-results td.note { max-width: none; }
+}
+
 /* ---------- topbar palette ----------
    Kept independent of --brand: in dark mode --brand lightens to a pink that
    cannot carry white text, so the bar needs its own dark tokens. */
@@ -353,7 +374,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
 #acca-tx-hkg .ans{margin-top:10px;padding-top:9px;border-top:1px dotted var(--border);font-size:13px}
 #acca-tx-hkg .ans b{color:var(--ok-text)}
 #acca-tx-hkg .qbox{background:var(--surface-alt);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius);padding:16px 18px;margin:14px 0}
-#acca-tx-hkg .qbox h4{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
+#acca-tx-hkg .qbox h3{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
 #acca-tx-hkg .dual{font-size:12px;color:var(--text-muted);display:block}
 #acca-tx-hkg .marks{float:right;font-weight:600;color:var(--text-muted);font-size:12.5px}
 
@@ -379,7 +400,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
 #tax-reconciliation .right caption{color:var(--ok-text);font-weight:700}
 #tax-reconciliation .note-no{font-weight:700;color:var(--brand);white-space:nowrap}
 #tax-reconciliation .qbox{background:var(--surface-alt);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius);padding:16px 18px;margin:14px 0}
-#tax-reconciliation .qbox h4{margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
+#tax-reconciliation .qbox h3{margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
 
 /* ---- profits-tax-entities ---- */
 #profits-tax-entities .proforma table{font-size:13.5px}
@@ -390,7 +411,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
 #profits-tax-entities .dbl td, #profits-tax-entities .dbl th{border-top:1px solid var(--text-muted);border-bottom:3px double var(--text-muted);font-weight:600}
 #profits-tax-entities .dual{font-size:12px;color:var(--text-muted);display:block}
 #profits-tax-entities .qbox{background:var(--surface-alt);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius);padding:16px 18px;margin:14px 0}
-#profits-tax-entities .qbox h4{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
+#profits-tax-entities .qbox h3{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
 
 /* ---- ird-administration ---- */
 #ird-administration .proforma table{font-size:13.5px}
@@ -1004,7 +1025,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <h2>6. Practice — Section B: tax administration <span class="marks">10 marks</span></h2>
       <p class="lede">The topic the examining team called the weakest in June 2025. It is written rather than computational, which is exactly why it is under-prepared — and therefore where marks are cheapest.</p>
       <div class="qbox">
-        <h4>Question</h4>
+        <h3>Question</h3>
         <p><strong>Lantau Marine Limited</strong> prepares accounts to 31 March. The following events occurred during the year ended 31 March 2027:</p>
         <ol style="margin:6px 0 0 20px">
           <li>The company commenced a new business on <strong>1 June 2026</strong>. It has not yet received a profits tax return for the year.</li>
@@ -1049,7 +1070,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <h2>7. Practice — Section B: depreciation allowances <span class="marks">10 marks</span></h2>
       <p class="lede">"Far from satisfactory" in June 2025. Every trap the examiners named is planted below.</p>
       <div class="qbox">
-        <h4>Question</h4>
+        <h3>Question</h3>
         <p><strong>Reddane Engineering Limited</strong> prepares accounts to 31 March. Written down values brought forward at 1 April 2026 were: <strong>20% pool $180,000</strong>; <strong>30% pool $240,000</strong>.</p>
         <p>During the year ended 31 March 2027:</p>
         <ol style="margin:6px 0 0 20px">
@@ -1093,7 +1114,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
     <section class="block" id="acca-tx-hkg__secB3">
       <h2>8. Practice — Section B: profits tax computation <span class="marks">15 marks</span></h2>
       <div class="qbox">
-        <h4>Question</h4>
+        <h3>Question</h3>
         <p><strong>Reddane Engineering Limited</strong> (as above) reported a profit per the audited accounts of <strong>$4,000,000</strong> for the year ended 31 March 2027. The following were charged or credited in arriving at it:</p>
         <ol style="margin:6px 0 0 20px">
           <li>Depreciation, $600,000. Depreciation allowances are as computed in Question 7.</li>
@@ -1150,7 +1171,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <h2>9. Practice — Section B: partnership assessment <span class="marks">10 marks</span></h2>
       <p class="lede">Unsatisfactory in June 2025, and less frequently examined — so less well prepared, which makes it cheap marks. Every error the examining team named is planted here.</p>
       <div class="qbox">
-        <h4>Question</h4>
+        <h3>Question</h3>
         <p><strong>Harbour Spice</strong> is a partnership carrying on a restaurant business in Hong Kong. <strong>Amy</strong> and <strong>Ben</strong> share profits and losses <strong>60 : 40</strong>. The partnership accounts for the year ended 31 March 2027 show a <strong>loss of $200,000</strong>, after charging:</p>
         <ol style="margin:6px 0 0 20px">
           <li>Salary to Amy, a partner — $360,000</li>
@@ -1224,7 +1245,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <h2>10. Practice — Section B: property tax, original and revised <span class="marks">10 marks</span></h2>
       <p class="lede">June 2025 asked for <strong>both</strong> the original and the revised computation, and the report notes candidates who produced only the revised one lost marks. This is the same reconciliation shape as our <a href="#tax-reconciliation">Tax Reconciliation</a> page, at property tax scale.</p>
       <div class="qbox">
-        <h4>Question</h4>
+        <h3>Question</h3>
         <p><strong>Mr Ho</strong> owns a shop in Hong Kong. He granted a <strong>three-year lease from 1 July 2026</strong> at a monthly rent of <strong>$40,000</strong>, with a <strong>rent-free period for July and August 2026</strong>. A <strong>premium of $180,000</strong> was received on 1 July 2026 and a <strong>rental deposit of $80,000</strong> was taken.</p>
         <p>The tenant stopped paying from January 2027. Rent for <strong>January to March 2027 was not recovered</strong>, and Mr Ho <strong>forfeited and retained the $80,000 deposit</strong>. Mr Ho paid <strong>rates of $16,000</strong>. The tenant paid <strong>management fees of $24,000</strong> direct to the building manager.</p>
         <p>His accountant produced the computation below. <strong>REQUIRED:</strong> Prepare <strong>both</strong> the original and the revised property tax computations for YA 2026/27, and reconcile them. <span class="marks">(10 marks)</span></p>
@@ -1286,7 +1307,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
     <section class="block" id="acca-tx-hkg__secB6">
       <h2>11. Practice — Section B: salaries tax, husband and wife <span class="marks">15 marks</span></h2>
       <div class="qbox">
-        <h4>Question</h4>
+        <h3>Question</h3>
         <p><strong>Mr and Mrs Kwok</strong> are both employed in Hong Kong. For the year ended 31 March 2027:</p>
         <p><strong>Mr Kwok</strong> received a salary of <strong>$1,200,000</strong> and a bonus of <strong>$150,000</strong>. His employer <strong>reimbursed medical expenses of $30,000</strong>, and paid <strong>$50,000</strong> of shipping and air fares to relocate him and his family to Hong Kong. He is provided with a <strong>rent-free self-contained flat</strong>. He paid a professional subscription of <strong>$3,000</strong>, mandatory MPF of <strong>$18,000</strong>, and made <strong>approved charitable donations of $100,000</strong>.</p>
         <p><strong>Mrs Kwok</strong> received a salary of <strong>$280,000</strong> and paid mandatory MPF of <strong>$14,000</strong>. She made no donations.</p>
@@ -1635,7 +1656,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       </div>
       <div class="secrow">
         <div class="sec-zh">
-          <h4>✗ Wrong — the gross profits method</h4>
+          <h3>✗ Wrong — the gross profits method</h3>
           <div class="body">
             <table style="box-shadow:none;background:transparent">
               <tbody>
@@ -1651,7 +1672,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
           </div>
         </div>
         <div class="sec-en">
-          <h4>✓ Correct — adjust the accounting profit</h4>
+          <h3>✓ Correct — adjust the accounting profit</h3>
           <div class="body">
             <table style="box-shadow:none;background:transparent">
               <tbody>
@@ -1962,7 +1983,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
     <section class="block" id="tax-reconciliation__q1">
       <h2>3. Illustration A — Profits tax: the question</h2>
       <div class="qbox">
-        <h4>Question</h4>
+        <h3>Question</h3>
         <p><strong>Kingsway Trading Limited</strong> carries on a trading business in Hong Kong and prepares accounts to 31 December. The profit per the audited accounts for the year ended <strong>31 December 2026</strong> was <strong>$3,200,000</strong>.</p>
         <p>The company's bookkeeper prepared the following profits tax computation for the year of assessment 2026/27.</p>
         <p><strong>REQUIRED:</strong> Using the notes below, prepare a revised profits tax computation for the year of assessment 2026/27, and reconcile the revised net assessable profit to the figure computed by the bookkeeper.</p>
@@ -2154,7 +2175,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
     <section class="block" id="tax-reconciliation__q2">
       <h2>7. Illustration B — Personal assessment</h2>
       <div class="qbox">
-        <h4>Question</h4>
+        <h3>Question</h3>
         <p><strong>Mr and Mrs Lam</strong> have elected jointly for personal assessment for the year of assessment 2026/27. Mr Lam's net assessable income from employment is <strong>$600,000</strong>. Mrs Lam runs a sole proprietorship whose assessable profit is <strong>$180,000</strong>, and owns a Hong Kong flat let at <strong>$30,000 a month</strong> throughout the year. She paid <strong>rates of $12,000</strong> and <strong>mortgage interest of $200,000</strong> on that flat. Neither has any other income, deduction or dependant.</p>
         <p>A friend prepared the computation below. <strong>REQUIRED:</strong> prepare the revised computation, show the apportionment between the spouses, and reconcile to the friend's figure.</p>
       </div>
@@ -2262,7 +2283,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <h2>9. Marking technique</h2>
       <div class="secrow">
         <div class="sec-en">
-          <h4>Earns marks</h4>
+          <h3>Earns marks</h3>
           <div class="body">
             <ul>
               <li>A <strong>note number against every line</strong> of the revised computation — the marker can follow your reasoning without hunting.</li>
@@ -2275,7 +2296,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
           </div>
         </div>
         <div class="sec-zh">
-          <h4>Loses marks</h4>
+          <h3>Loses marks</h3>
           <div class="body">
             <ul>
               <li><strong>Editing the given computation</strong> instead of starting clean — you inherit its structure and its errors.</li>
@@ -2759,7 +2780,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <h2>3. Sole proprietorship</h2>
       <p class="lede">One computation, one taxpayer. The whole assessable profit belongs to the proprietor, and the only question after that is whether personal assessment improves on it.</p>
       <div class="qbox">
-        <h4>Illustration</h4>
+        <h3>Illustration</h3>
         <p><strong>Fiona</strong> carries on a design studio as a sole proprietor. The accounts for the year ended 31 March 2027 show a profit of <strong>$960,000</strong>, after charging a salary of <strong>$360,000</strong> to Fiona, a salary of <strong>$180,000</strong> to her husband (who works full time in the business at a commercial wage), and Fiona's own mandatory MPF contributions of <strong>$18,000</strong>. Depreciation allowances are <strong>$80,000</strong>.</p>
       </div>
       <div class="proforma">
@@ -2824,7 +2845,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
         Each partner's share of the assessable profits is taxed at <strong>that partner's own rate</strong> — 8.25%/16.5% for a corporate partner, 7.5%/15% for an individual. And the <strong>$2,000,000 first-tier band is itself apportioned</strong> between the partners in their profit-sharing ratio. The partnership does not get one $2,000,000 band at a single rate.
       </div>
       <div class="qbox">
-        <h4>Illustration</h4>
+        <h3>Illustration</h3>
         <p><strong>Novena Trading</strong> is a partnership with assessable profits of <strong>$3,000,000</strong> for YA 2026/27. The partners share profits equally: <strong>Carol</strong>, an individual, and <strong>Elm Holdings Limited</strong>, a company.</p>
       </div>
       <div class="proforma">
@@ -2894,7 +2915,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <h2>7. Corporation</h2>
       <p class="lede">The standard case, and the one the <a href="#computation-formats__profits">general profits tax format</a> is written for. The company is a separate person, so payments to its directors are real expenses.</p>
       <div class="qbox">
-        <h4>Illustration — the same business as §3, incorporated</h4>
+        <h3>Illustration — the same business as §3, incorporated</h3>
         <p><strong>Fiona Ltd</strong> carries on the same design studio. The accounts show the same profit of <strong>$960,000</strong> after the same salary of <strong>$360,000</strong> to Fiona, now a director, and <strong>$180,000</strong> to her husband, a genuine employee. Depreciation allowances are <strong>$80,000</strong>.</p>
       </div>
       <div class="proforma">
@@ -3514,7 +3535,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <h2>7. When it helps — and when it does not</h2>
       <div class="secrow">
         <div class="sec-en">
-          <h4>PA is likely to help where</h4>
+          <h3>PA is likely to help where</h3>
           <div class="body">
             <ul>
               <li>Property is <strong>mortgaged</strong> — Property Tax gives no relief at all for loan interest.</li>
@@ -3526,7 +3547,7 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
           </div>
         </div>
         <div class="sec-zh">
-          <h4>PA is unlikely to help where</h4>
+          <h3>PA is unlikely to help where</h3>
           <div class="body">
             <ul>
               <li>The only income is <strong>employment income</strong> — Salaries Tax already applies progressive rates and allowances, so there is nothing to gain.</li>

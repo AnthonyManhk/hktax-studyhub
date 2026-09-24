@@ -214,3 +214,23 @@ footer.site-footer{max-width:1280px;margin:0 auto;padding:20px;color:var(--text-
 .hub-card .badge{margin-bottom:2px}
 
 .section-nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:16px;border-top:1px solid var(--border);font-size:13.5px}
+
+
+/* ---------- RESPONSIVE: narrow screens ----------
+   Wide data tables were forcing the whole page wider than the viewport on a
+   phone - 14 of 23 panels overflowed, three by more than a screen width.
+   Making the table itself the scroll container keeps the page fixed and lets
+   the table pan horizontally instead. */
+@media (max-width: 760px) {
+  .content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .content th, .content td { padding: 7px 8px; }
+  .shell { padding-left: 14px; padding-right: 14px; gap: 16px; }
+  .checker-controls { position: static; }
+  .checker-controls input[type="search"] { min-width: 0; }
+  .checker-results td.item, .checker-results td.note { max-width: none; }
+}
