@@ -148,6 +148,16 @@ PAGES = [
          kw="module 9 extra practice questions answers"),
 ]
 
+# Sister platforms - separate sites, linked out rather than embedded.
+RELATED = [
+    dict(url="https://anthonymanhk.github.io/hkfrs-as-study-platform/",
+         label="HKFRS / HKAS Study Platform",
+         label_zh="財務報告準則學習平台",
+         short="HKFRS / HKAS",
+         en="The companion platform for financial reporting — every active HKFRS and HKAS, bilingual, with a question bank. Where this Hub covers the tax, that one covers the accounts the tax computation starts from.",
+         zh="財務報告的姊妹平台：涵蓋所有現行 HKFRS 及 HKAS，中英雙語並附題庫。本平台講稅務，那邊講稅務計算所依據的帳目。"),
+]
+
 GROUP_ORDER = ["Start here", "Tax types", "Returns", "Worked illustrations"]
 
 GROUP_ZH = {
@@ -373,15 +383,37 @@ def build_cards():
                 % (pg["id"], haystack, pg["label"], pg["label_zh"], pg["en"], pg["zh"])
             )
         out.append("</div>")
+
+    if RELATED:
+        out.append('<h2 class="family-heading">Related platforms \u00b7 \u76f8\u95dc\u5e73\u53f0</h2>')
+        out.append('<p class="group-blurb">A separate site. Opens in a new tab.</p>')
+        out.append('<div class="card-grid">')
+        for r in RELATED:
+            hay = " ".join((r["label"], r["label_zh"], r["en"], r["zh"])).lower().replace('"', "")
+            out.append(
+                '<a class="std-card" href="%s" target="_blank" rel="noopener" data-search="%s">'
+                '<div class="card-code">%s &rarr;</div>'
+                '<div class="card-title-zh">%s</div>'
+                '<div class="card-desc">%s</div>'
+                '<div class="card-desc card-desc-zh">%s</div>'
+                "</a>" % (r["url"], hay, r["label"], r["label_zh"], r["en"], r["zh"])
+            )
+        out.append("</div>")
     return "\n".join(out)
 
 
 def build_nav():
-    return "\n".join(
+    items = [
         '<button class="navlink" data-target="%s">%s</button>' % (pg["id"], pg["label"])
         for pg in PAGES
         if pg["group"] == "Start here"
-    )
+    ]
+    items += [
+        '<a class="navlink" href="%s" target="_blank" rel="noopener">%s &rarr;</a>'
+        % (r["url"], r["short"])
+        for r in RELATED
+    ]
+    return "\n".join(items)
 
 
 FRAME_CSS = """
