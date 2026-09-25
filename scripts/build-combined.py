@@ -13,6 +13,7 @@ Run from the project root:  python scripts/build-combined.py
 """
 
 import io
+import json
 import os
 import re
 import sys
@@ -361,6 +362,52 @@ def build_panel(pid, label, src, label_zh, summary_zh):
     return panel, page_style(html, pid)
 
 
+
+def build_revision_notice():
+    """Markup for the 'what changed' notice, from data/revision.json.
+
+    Returns "" when the file is absent, so the build never depends on it.
+    """
+    # assets/, not data/ - this filesystem is case-insensitive, so a lowercase
+    # data/ folder resolves into the gitignored Data/ archive and the file
+    # would never be committed.
+    path = os.path.join(ROOT, "assets", "revision.json")
+    if not os.path.exists(path):
+        return ""
+    with io.open(path, encoding="utf-8") as fh:
+        d = json.load(fh)
+
+    def item(x, body_key):
+        link = x.get("link")
+        name = ('<a href="%s">%s</a>' % (link, x["name"])) if link else x["name"]
+        date = ' <span class="rev-date">%s</span>' % x["date"] if x.get("date") else ""
+        return "<li><strong>%s</strong>%s<br>%s</li>" % (name, date, x[body_key])
+
+    revised = "".join(item(x, "note") for x in d.get("sections_revised", []))
+    gaps = "".join(item(x, "reason") for x in d.get("sections_need_increase", []))
+
+    return """
+  <div class="rev-notice-wrap">
+    <details class="rev-notice">
+      <summary>
+        <strong>What has changed in this Hub</strong>
+        <span class="rev-meta">%d revised &middot; %d still missing &middot; updated %s</span>
+      </summary>
+      <div class="rev-body">
+        <p class="rev-summary">%s</p>
+        <h3 class="rev-h">Revised</h3>
+        <ul class="rev-list">%s</ul>
+        <h3 class="rev-h rev-h-gap">Still missing, and why</h3>
+        <ul class="rev-list rev-list-gap">%s</ul>
+        <p class="rev-foot">%s</p>
+      </div>
+    </details>
+  </div>
+""" % (len(d.get("sections_revised", [])), len(d.get("sections_need_increase", [])),
+       d.get("last_updated", "unknown"), d.get("summary", ""), revised, gaps,
+       d.get("notes", ""))
+
+
 def build_cards():
     out = []
     for group in GROUP_ORDER:
@@ -525,6 +572,30 @@ FRAME_CSS = """
 /* ---------- freshness banner ---------- */
 .hub-freshness{max-width:1280px;margin:16px auto 0;padding:0 20px}
 .hub-freshness .freshness{margin:0}
+
+
+/* ---------- revision notice ----------
+   Uses --warn-* from main.css so it follows the manual data-theme toggle,
+   not just the OS preference. */
+.rev-notice-wrap{max-width:1280px;margin:14px auto 0;padding:0 20px}
+.rev-notice{background:var(--warn-bg);border:1px solid var(--warn-border);
+  border-radius:var(--radius);color:var(--warn-text);font-size:13.5px}
+.rev-notice > summary{cursor:pointer;padding:11px 14px;list-style:none;
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.rev-notice > summary::-webkit-details-marker{display:none}
+.rev-notice > summary::before{content:"\25b8";display:inline-block;transition:transform .15s}
+.rev-notice[open] > summary::before{transform:rotate(90deg)}
+.rev-meta{font-size:12px;opacity:.85;margin-left:auto}
+.rev-body{padding:0 14px 14px;border-top:1px solid var(--warn-border)}
+.rev-summary{margin:10px 0 0}
+.rev-h{font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin:14px 0 4px}
+.rev-h-gap{color:var(--bad-text)}
+.rev-list{margin:0;padding-left:20px}
+.rev-list li{margin:7px 0;line-height:1.5}
+.rev-list-gap li{color:var(--text)}
+.rev-date{font-size:11.5px;opacity:.75;font-variant-numeric:tabular-nums}
+.rev-foot{margin:12px 0 0;font-size:12.5px;opacity:.85}
+@media (max-width:760px){.rev-notice-wrap{padding:0 14px}.rev-meta{margin-left:0;width:100%}}
 
 footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;padding:22px 20px 40px;border-top:1px solid var(--border);max-width:1280px;margin:0 auto}
 
@@ -797,6 +868,7 @@ def main():
       <button data-target="ird-updates">Open IRD What's New &rarr;</button>
     </div>
   </div>
+%(revision_notice)s
   <div class="index-wrap">
 %(cards)s
     <p class="no-match" id="noMatch">No page matches that search. · 沒有符合的頁面。</p>
@@ -822,6 +894,7 @@ def main():
         "panels": "\n".join(panels),
         "data": data_js,
         "frame": FRAME_JS,
+        "revision_notice": build_revision_notice(),
         "build_date": BUILD_DATE,
         "ird_date": IRD_READ_DATE,
     }

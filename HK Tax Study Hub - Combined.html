@@ -352,6 +352,30 @@ footer.site-footer{max-width:1280px;margin:0 auto;padding:20px;color:var(--text-
 .hub-freshness{max-width:1280px;margin:16px auto 0;padding:0 20px}
 .hub-freshness .freshness{margin:0}
 
+
+/* ---------- revision notice ----------
+   Uses --warn-* from main.css so it follows the manual data-theme toggle,
+   not just the OS preference. */
+.rev-notice-wrap{max-width:1280px;margin:14px auto 0;padding:0 20px}
+.rev-notice{background:var(--warn-bg);border:1px solid var(--warn-border);
+  border-radius:var(--radius);color:var(--warn-text);font-size:13.5px}
+.rev-notice > summary{cursor:pointer;padding:11px 14px;list-style:none;
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.rev-notice > summary::-webkit-details-marker{display:none}
+.rev-notice > summary::before{content:"b8";display:inline-block;transition:transform .15s}
+.rev-notice[open] > summary::before{transform:rotate(90deg)}
+.rev-meta{font-size:12px;opacity:.85;margin-left:auto}
+.rev-body{padding:0 14px 14px;border-top:1px solid var(--warn-border)}
+.rev-summary{margin:10px 0 0}
+.rev-h{font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin:14px 0 4px}
+.rev-h-gap{color:var(--bad-text)}
+.rev-list{margin:0;padding-left:20px}
+.rev-list li{margin:7px 0;line-height:1.5}
+.rev-list-gap li{color:var(--text)}
+.rev-date{font-size:11.5px;opacity:.75;font-variant-numeric:tabular-nums}
+.rev-foot{margin:12px 0 0;font-size:12.5px;opacity:.85}
+@media (max-width:760px){.rev-notice-wrap{padding:0 14px}.rev-meta{margin-left:0;width:100%}}
+
 footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;padding:22px 20px 40px;border-top:1px solid var(--border);max-width:1280px;margin:0 auto}
 
 @media (max-width:760px){
@@ -457,6 +481,24 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
       <button data-target="ird-updates">Open IRD What's New &rarr;</button>
     </div>
   </div>
+
+  <div class="rev-notice-wrap">
+    <details class="rev-notice">
+      <summary>
+        <strong>What has changed in this Hub</strong>
+        <span class="rev-meta">11 revised &middot; 4 still missing &middot; updated 2026-09-25</span>
+      </summary>
+      <div class="rev-body">
+        <p class="rev-summary">What has changed in this Hub, and what is still missing. Tax content is primary; this is a pointer to it.</p>
+        <h3 class="rev-h">Revised</h3>
+        <ul class="rev-list"><li><strong><a href="#computation-formats">Computation Formats</a></strong> <span class="rev-date">2026-09-24</span><br>New page. Pro-forma layout for property, salaries and profits tax, the plant and machinery schedule and personal assessment, each with per-line notes and a worked example.</li><li><strong><a href="#tax-reconciliation">Tax Reconciliation</a></strong> <span class="rev-date">2026-09-24</span><br>New page. The 'here is a wrong computation plus ten notes' question type, with two full illustrations whose reconciliations close exactly.</li><li><strong><a href="#acca-tx-hkg">ACCA TX-HKG</a></strong> <span class="rev-date">2026-09-24</span><br>New page. Syllabus mapped to the Hub, the June 2026 examiner findings, and a complete 100-mark mock paper: 15 MCQs plus four 10-mark and two 15-mark questions.</li><li><strong><a href="#profits-tax-entities">Profits Tax by Entity</a></strong> <span class="rev-date">2026-09-24</span><br>New page. Sole proprietorship, partnership and corporation compared, with partnership allocation, corporate partners and the apportioned two-tier band.</li><li><strong><a href="#personal-assessment">Personal Assessment</a></strong> <span class="rev-date">2026-09-24</span><br>New page. Previously one paragraph inside Salaries Tax. Eligibility, the 2018/19 separate election, time limits, the standard-rate cap and four illustrations.</li><li><strong><a href="#ird-updates">IRD What's New</a></strong> <span class="rev-date">2026-09-24</span><br>New page. All 38 IRD items from 1 Jun to 16 Sep 2026, each marked enacted, bill or proposed, each linked to the page it changed.</li><li><strong><a href="#ird-administration__latepayment">Late payment surcharge and recovery</a></strong> <span class="rev-date">2026-09-24</span><br>IRD Administration gained s.71: the 5% surcharge, the further 10% on tax plus surcharge, the instalment acceleration trap, and Part 12 recovery.</li><li><strong><a href="#profits-tax__rnd">R&D enhanced deduction</a></strong> <span class="rev-date">2026-09-24</span><br>Profits Tax gained the Type A 100% / Type B 300%-then-200% mechanics. Previously a single table row with no rates, and the MCQ fewest candidates answered correctly in June 2026.</li><li><strong><a href="#salaries-tax__allowances">Year-on-year allowances</a></strong> <span class="rev-date">2026-09-24</span><br>Every allowance line now dual-stated: YA 2026/27 for current work, YA 2025/26 for the December 2026 exam. A build-time guard fails the build on a figure from neither year.</li><li><strong>Mobile and accessibility</strong> <span class="rev-date">2026-09-24</span><br>Fixed horizontal overflow on 14 of 23 panels at phone width, added meta descriptions, and corrected heading-level jumps. Contrast passes WCAG AA in both themes.</li><li><strong>HKFRS / HKAS Study Platform linked</strong> <span class="rev-date">2026-09-25</span><br>Companion platform for financial reporting added to the index and topbar.</li></ul>
+        <h3 class="rev-h rev-h-gap">Still missing, and why</h3>
+        <ul class="rev-list rev-list-gap"><li><strong>Syllabus F — CBE skills</strong><br>This is operating ACCA's exam software — the spreadsheet and word-processing response areas. It cannot be practised anywhere but ACCA's own CBE platform, which the ACCA page links to. A written walkthrough could be added, but it is no substitute for sitting the real interface.</li><li><strong>Past paper integration</strong><br>ACCA past papers and model answers are free to download but carry '© ACCA — All rights reserved'. This site is public, so they are linked, never reproduced. The mock paper on the ACCA page is original work in the same format.</li><li><strong>Module 9 Chapter 46 cross-check</strong><br>The textbook has its own Personal Assessment chapter. That page was built from IRD's guide before the book was found to be readable by page rendering, so it has not been checked against Ch.46.</li><li><strong>HKICPA Module 9 licence terms</strong><br>The illustrations pages paraphrase Module 9 with attribution and independently recomputed figures. HKICPA's own terms for derived study notes have not been read, so this remains an assumption rather than a verified position.</li></ul>
+        <p class="rev-foot">Dated, per-item IRD changes live on the IRD What's New page. This notice covers changes to the Hub itself.</p>
+      </div>
+    </details>
+  </div>
+
   <div class="index-wrap">
 <h2 class="family-heading">Start here · 由此開始</h2>
 <p class="group-blurb">The three tools you open first — what IRD changed recently, then the searchable transaction and DIPN indexes.</p>

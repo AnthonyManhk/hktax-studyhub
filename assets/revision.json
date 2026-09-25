@@ -1,0 +1,95 @@
+{
+  "last_updated": "2026-09-25",
+  "summary": "What has changed in this Hub, and what is still missing. Tax content is primary; this is a pointer to it.",
+  "sections_revised": [
+    {
+      "name": "Computation Formats",
+      "date": "2026-09-24",
+      "note": "New page. Pro-forma layout for property, salaries and profits tax, the plant and machinery schedule and personal assessment, each with per-line notes and a worked example.",
+      "link": "#computation-formats"
+    },
+    {
+      "name": "Tax Reconciliation",
+      "date": "2026-09-24",
+      "note": "New page. The 'here is a wrong computation plus ten notes' question type, with two full illustrations whose reconciliations close exactly.",
+      "link": "#tax-reconciliation"
+    },
+    {
+      "name": "ACCA TX-HKG",
+      "date": "2026-09-24",
+      "note": "New page. Syllabus mapped to the Hub, the June 2026 examiner findings, and a complete 100-mark mock paper: 15 MCQs plus four 10-mark and two 15-mark questions.",
+      "link": "#acca-tx-hkg"
+    },
+    {
+      "name": "Profits Tax by Entity",
+      "date": "2026-09-24",
+      "note": "New page. Sole proprietorship, partnership and corporation compared, with partnership allocation, corporate partners and the apportioned two-tier band.",
+      "link": "#profits-tax-entities"
+    },
+    {
+      "name": "Personal Assessment",
+      "date": "2026-09-24",
+      "note": "New page. Previously one paragraph inside Salaries Tax. Eligibility, the 2018/19 separate election, time limits, the standard-rate cap and four illustrations.",
+      "link": "#personal-assessment"
+    },
+    {
+      "name": "IRD What's New",
+      "date": "2026-09-24",
+      "note": "New page. All 38 IRD items from 1 Jun to 16 Sep 2026, each marked enacted, bill or proposed, each linked to the page it changed.",
+      "link": "#ird-updates"
+    },
+    {
+      "name": "Late payment surcharge and recovery",
+      "date": "2026-09-24",
+      "note": "IRD Administration gained s.71: the 5% surcharge, the further 10% on tax plus surcharge, the instalment acceleration trap, and Part 12 recovery.",
+      "link": "#ird-administration__latepayment"
+    },
+    {
+      "name": "R&D enhanced deduction",
+      "date": "2026-09-24",
+      "note": "Profits Tax gained the Type A 100% / Type B 300%-then-200% mechanics. Previously a single table row with no rates, and the MCQ fewest candidates answered correctly in June 2026.",
+      "link": "#profits-tax__rnd"
+    },
+    {
+      "name": "Year-on-year allowances",
+      "date": "2026-09-24",
+      "note": "Every allowance line now dual-stated: YA 2026/27 for current work, YA 2025/26 for the December 2026 exam. A build-time guard fails the build on a figure from neither year.",
+      "link": "#salaries-tax__allowances"
+    },
+    {
+      "name": "Mobile and accessibility",
+      "date": "2026-09-24",
+      "note": "Fixed horizontal overflow on 14 of 23 panels at phone width, added meta descriptions, and corrected heading-level jumps. Contrast passes WCAG AA in both themes.",
+      "link": null
+    },
+    {
+      "name": "HKFRS / HKAS Study Platform linked",
+      "date": "2026-09-25",
+      "note": "Companion platform for financial reporting added to the index and topbar.",
+      "link": null
+    }
+  ],
+  "sections_need_increase": [
+    {
+      "name": "Syllabus F — CBE skills",
+      "reason": "This is operating ACCA's exam software — the spreadsheet and word-processing response areas. It cannot be practised anywhere but ACCA's own CBE platform, which the ACCA page links to. A written walkthrough could be added, but it is no substitute for sitting the real interface.",
+      "blocked_by": "external"
+    },
+    {
+      "name": "Past paper integration",
+      "reason": "ACCA past papers and model answers are free to download but carry '© ACCA — All rights reserved'. This site is public, so they are linked, never reproduced. The mock paper on the ACCA page is original work in the same format.",
+      "blocked_by": "copyright"
+    },
+    {
+      "name": "Module 9 Chapter 46 cross-check",
+      "reason": "The textbook has its own Personal Assessment chapter. That page was built from IRD's guide before the book was found to be readable by page rendering, so it has not been checked against Ch.46.",
+      "blocked_by": "not yet done"
+    },
+    {
+      "name": "HKICPA Module 9 licence terms",
+      "reason": "The illustrations pages paraphrase Module 9 with attribution and independently recomputed figures. HKICPA's own terms for derived study notes have not been read, so this remains an assumption rather than a verified position.",
+      "blocked_by": "unverified"
+    }
+  ],
+  "notes": "Dated, per-item IRD changes live on the IRD What's New page. This notice covers changes to the Hub itself."
+}

@@ -223,6 +223,22 @@ When adding a page, put it in `pages/`, add a row to `PAGES` in
 Chinese summary, search keywords), add its nav link to the other pages, and
 rebuild.
 
+## The revision notice
+
+`assets/revision.json` records what has changed in the Hub and what is still
+missing, with a reason for each gap. `scripts/build-combined.py` renders it
+into a collapsible notice on the landing page **at build time** - there is no
+runtime fetch, so it works offline in the single-file edition and the data
+lives in exactly one place.
+
+To update it, edit the JSON and rebuild. Keep the two lists honest: an item
+belongs in `sections_need_increase` only if it is genuinely absent, with
+`blocked_by` saying whether that is external, copyright, not-yet-done or
+unverified.
+
+Dated IRD changes belong on the **IRD What's New** page instead. This notice
+covers changes to the Hub itself.
+
 ## Two years of allowances, and the guard that keeps them straight
 
 Allowance figures appear on the Hub in **two bases**:
