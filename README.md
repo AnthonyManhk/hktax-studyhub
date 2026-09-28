@@ -66,6 +66,8 @@ Open `index.html` (or the live site). From the card index you can reach:
 | **Profits Tax Return Guide** / **Box Finder** | Box-by-box walkthrough of the actual BIR51/52/54 return forms (linked from the Profits Tax page) — bridges "what the law says" to "what you type into the form," plus a keyword search over every box. |
 | **IRD Administration** | Returns, assessment, objections/appeals, provisional tax, penalties — the process layer common to all taxes. |
 
+Every page's header also carries an **AI Prompts** button — see below.
+
 ## How it stays current
 
 This is a **manual-refresh** tool by design — it does not, and cannot, live-fetch
@@ -305,6 +307,39 @@ in `pages/question-bank.html` and is scoped to a `.qbank-app` wrapper by
 `id="..."` per panel but cannot see into a `<script>`, so any interactive page
 must hook its own JS by class/data-attribute, and the script must sit inside
 `<main>` or the builder (which extracts only that element) drops it silently.
+
+## The "AI Prompts" button
+
+Every page's header carries an **AI Prompts** button (`assets/js/ai-prompt.js`).
+Clicking it copies a hardened Hong Kong tax prompt template to the clipboard —
+with a fallback modal showing the text pre-selected if the browser blocks the
+clipboard API (as Chrome does on a `file://` page) — so it can be pasted into
+whatever AI the user already has open (Edge Copilot, Chrome Gemini, or any
+chat AI) to ask about a transaction not covered by the Transaction Checker.
+
+There is **no API for a webpage to push a prompt directly into another
+browser feature's own chat box** — this is a copy-to-clipboard helper, not a
+live integration, and the modal is explicit about that.
+
+The template itself is deliberately stricter than a naive "act as a tax
+specialist" prompt, because a general-purpose AI asked to cite a specific
+IRO section or DIPN number is exactly where it will confidently invent a
+plausible-looking but wrong one:
+
+- It instructs the AI to **say so explicitly rather than guess** when it is
+  not certain a section or DIPN reference is correct.
+- It states the **year of assessment basis to default to** (2026/27; 2025/26
+  for the ACCA TX-HKG exam basis), rather than leaving that to the model's
+  own guess — this Hub is built around exactly that dual-year distinction.
+- The modal always carries a warning that the AI's answer is **not checked
+  by this Hub**, unlike the Transaction Checker's, and needs the same
+  independent verification as everything else here.
+
+`ai-prompt.js` is loaded two ways from **one file**: as an external
+`<script src="../assets/js/ai-prompt.js">` on every `pages/*.html`, and
+inlined by `build-combined.py` (which reads the same file and writes its
+content into its own `<script>` block) for the combined single-file editions
+— so the prompt text and the copy/fallback logic live in exactly one place.
 
 ## Caveats — read before relying on a figure for a filing position
 

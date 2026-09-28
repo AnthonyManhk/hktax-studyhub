@@ -235,4 +235,38 @@ footer.site-footer{max-width:1280px;margin:0 auto;padding:20px;color:var(--text-
   .checker-results td.item, .checker-results td.note { max-width: none; }
   .qbank-toolbar { position: static; }
   .qbank-count { margin-left: 0; width: 100%; }
+  .ai-prompt-box { width: calc(100% - 32px); max-height: calc(100% - 32px); }
+}
+
+/* ---------- AI Prompts header button + copy modal ----------
+   The button itself is styled per header (inline style in pages/*.html to
+   match #theme-toggle there; .toolbtn in the combined app's topbar) - only
+   the popup that shows/copies the prompt is shared here. */
+.ai-prompt-modal {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(10, 12, 16, .5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.ai-prompt-box {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 18px 20px; width: 560px; max-width: 100%;
+  max-height: 80vh; overflow: auto;
+}
+.ai-prompt-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ai-prompt-head strong { font-size: 15px; color: var(--ok-text); }
+.ai-prompt-close {
+  border: none; background: none; color: var(--text-muted); font-size: 22px; line-height: 1;
+  cursor: pointer; padding: 2px 6px;
+}
+.ai-prompt-close:hover { color: var(--text); }
+.ai-prompt-note { font-size: 13px; color: var(--text-muted); margin: 8px 0 10px; }
+.ai-prompt-text {
+  width: 100%; min-height: 220px; resize: vertical; font-family: inherit; font-size: 13px;
+  padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface-alt); color: var(--text); box-sizing: border-box;
+}
+.ai-prompt-warn {
+  font-size: 12px; color: var(--warn-text); background: var(--warn-bg);
+  border: 1px solid var(--warn-border); border-radius: 6px; padding: 8px 10px; margin: 10px 0 0;
 }

@@ -852,6 +852,7 @@ def main():
   <div class="searchwrap">
     <input type="search" id="jumpSearch" placeholder="Jump to a page... 跳至頁面" />
   </div>
+  <button class="toolbtn ai-prompt-btn" title="Copy a hardened HK-tax prompt to paste into your browser AI">AI Prompts</button>
   <button class="toolbtn" id="themeBtn">&#9789; Dark Mode</button>
 </div>
 
@@ -890,6 +891,9 @@ def main():
 <script>
 %(frame)s
 </script>
+<script>
+%(ai_prompt)s
+</script>
 </body>
 </html>
 """ % {
@@ -899,6 +903,7 @@ def main():
         "panels": "\n".join(panels),
         "data": data_js,
         "frame": FRAME_JS,
+        "ai_prompt": read(os.path.join(ROOT, "assets", "js", "ai-prompt.js")),
         "revision_notice": build_revision_notice(),
         "build_date": BUILD_DATE,
         "ird_date": IRD_READ_DATE,
