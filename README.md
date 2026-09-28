@@ -58,6 +58,7 @@ Open `index.html` (or the live site). From the card index you can reach:
 | Page | Purpose |
 |---|---|
 | **IRD What's New** | Every item on IRD's What's New page, read against this Hub and marked **enacted** / **bill** / **proposed**, with the exact page each item changed. Open this first after any IRD refresh. |
+| **ACCA TX-HKG Question Bank** | Filterable Section A practice bank — original MCQs across all five syllabus areas, computational answers generated and checked against `scripts/qbank_tax.py`, keyword search, Random 15 practice mode. |
 | **Transaction Checker** | Search any transaction by keyword → Taxable/Non-taxable/Deductible/Non-deductible/Dutiable, with the exact section and a link to the full explanation. |
 | **DIPN Index** | Searchable catalogue of all 73 currently-in-force DIPN/SOIPN/EDOIPN documents, with topic, summary, and whether it backs a full study page or is reference-only. |
 | **Profits Tax / Property Tax / Salaries Tax / Stamp Duty / Depreciation & Allowances** | The five core topic pages — charging basis, rates, taxable/deductible tables, computation templates, all tied to exact IRO (Cap. 112) / Stamp Duty Ordinance (Cap. 117) sections. |
@@ -163,21 +164,33 @@ HK Tax Study Hub - Combined.html GENERATED — identical, the name people recogn
                                  as an email attachment
 pages/                           THE SOURCES. Edit these, then rebuild.
   ird-updates.html               IRD What's New, marked enacted / bill / proposed
+  acca-tx-hkg.html                Exam syllabus mapping + examiner-report digest + sample Qs
+  question-bank.html              ACCA TX-HKG Section A practice bank — GENERATED, see below
   module9-extra-practice.html    Extra paraphrased Module 9 practice Q&A
   transaction-checker.html       Search tool: transaction → tax treatment
   dipn-index.html                Searchable catalogue of all 73 DIPN/SOIPN/EDOIPN docs
   profits-tax.html               + profits-tax-illustrations.html
+  profits-tax-entities.html       Sole trader / partnership / corporation computations
   profits-tax-return-guide.html  + profits-tax-return-finder.html (BIR51/52/54 box guide + search)
   property-tax.html              + property-tax-illustrations.html
-  salaries-tax.html              + salaries-tax-illustrations.html (incl. Personal Assessment)
+  salaries-tax.html              + salaries-tax-illustrations.html
+  personal-assessment.html        Election mechanics, eligibility, computation
+  computation-formats.html        Pro-forma layout per tax, one worked example each
+  tax-reconciliation.html         Wrong computation + notes → revised computation illustrations
   stamp-duty.html                + stamp-duty-illustrations.html
   depreciation-allowances.html   + depreciation-allowances-illustrations.html
   ird-administration.html        Returns, assessment, objections/appeals, penalties
 assets/
   css/main.css                   Shared design system (light/dark aware)
   js/                            Freshness-check logic, search/filter logic, data files
+  qbank.json                     GENERATED — the 282-question bank, source for question-bank.html
+  revision.json                  What's changed in the Hub, rendered into the landing-page notice
 scripts/
   build-combined.py              Rebuilds the single-file edition from pages/ + assets/
+  qbank_tax.py                   HK tax computation module backing every computational MCQ
+  build-qbank.py                 Generates the question bank -> assets/qbank.json
+  build-question-bank-page.py    Renders assets/qbank.json -> pages/question-bank.html
+  audit-layout.js                Playwright: every panel, desktop + phone, overflow/console-error gate
   Refresh-Data-Manifest.bat      Double-click after updating Data/ — rescans and re-stamps dates
   update-manifest.ps1            The PowerShell script the .bat wraps
 Data/
@@ -253,16 +266,45 @@ progressive bands, the 15%/16% standard rate, 8.25%/16.5% and 7.5%/15% profits
 tax, property tax 15%, the 60% initial allowance, the 10/20/30% pools and the
 35% donations cap.
 
-wrote HK Tax Study Hub - Combined.html (599.6 KB)
-wrote combined.html and index.html (same content)
-panels: 22 + MAIN | page CSS blocks inlined: 5
-allowance guard: 6 allowance types checked against 2026/27 and 2025/26
-corruption check '??': 0
-corruption check '§': 0 holds the figures in one  table and
+`ALLOWANCES` in `scripts/build-combined.py` holds the figures in one table and
 **fails the build** if an allowance line states a figure belonging to neither
 year. Lines marked dual-stated, historical or proposed are exempt. When the
 next Budget moves an allowance, update that one table — the build will then
 point at every line still carrying the old number.
+
+## ACCA TX-HKG Question Bank
+
+`pages/question-bank.html` — subtitled **ACCA TX-HKG** — is a filterable
+Section A practice bank of original multiple-choice questions spanning all
+five syllabus areas (tax administration, salaries tax, profits tax, property
+tax, personal assessment). Filter by area or difficulty, search by keyword or
+section reference, pull a shuffled **Random 15** for a timed practice run, or
+reveal any question's answer and explanation individually.
+
+Every computational question's correct answer **and** its wrong-option
+distractors are generated from `scripts/qbank_tax.py` — the same small tax-
+computation module the Hub's worked illustrations use — so the arithmetic
+cannot drift from the explanation. Distractors are not arbitrary wrong
+numbers; each reproduces a specific error the examining team has reported
+(e.g. omitting the treble-tax element of a s.80(2) penalty, applying the
+standard rate to net chargeable income instead of net income before
+allowances, spreading a lease premium over the full term instead of the
+36-month cap).
+
+To regenerate the bank after editing a question or adding new ones:
+
+```
+python scripts\build-qbank.py                 # writes assets/qbank.json
+python scripts\build-question-bank-page.py    # writes pages/question-bank.html
+python scripts\build-combined.py              # folds it into the three combined outputs
+```
+
+The filter/search/random-practice script lives **inside** `<main class="content">`
+in `pages/question-bank.html` and is scoped to a `.qbank-app` wrapper by
+**class**, never by `id` — `build-combined.py`'s namespacing rewrites every
+`id="..."` per panel but cannot see into a `<script>`, so any interactive page
+must hook its own JS by class/data-attribute, and the script must sit inside
+`<main>` or the builder (which extracts only that element) drops it silently.
 
 ## Caveats — read before relying on a figure for a filing position
 

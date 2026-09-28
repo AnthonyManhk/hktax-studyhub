@@ -13,3 +13,11 @@ Data/
 # Local build scratch
 *.tmp
 ~$*
+
+# Playwright (scripts/audit-layout.js) is installed on demand, not vendored
+node_modules/
+package-lock.json
+
+# Python build artifacts
+__pycache__/
+*.pyc
