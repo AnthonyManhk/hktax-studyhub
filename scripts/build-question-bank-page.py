@@ -58,11 +58,13 @@ NAV = """    <nav class="site-nav">
 def render_item(q):
     letters = "ABCD"
     opts = "\n".join(
-        '        <li>%s</li>' % esc(o) for o in q["options"]
+        '        <li><label><input type="radio" name="opt-%s" value="%d"> %s</label></li>'
+        % (q["id"], i, esc(o))
+        for i, o in enumerate(q["options"])
     )
     ref = ('<span class="qbank-ref">%s</span>' % esc(q["ref"])) if q.get("ref") else ""
     return (
-        '      <div class="qbank-item" data-area="%s" data-diff="%s" data-kind="%s">\n'
+        '      <div class="qbank-item" data-area="%s" data-diff="%s" data-kind="%s" data-answer="%d">\n'
         '        <div class="qbank-meta">'
         '<span class="qbank-tag qbank-tag-%s">%s &middot; %s</span> '
         '<span class="qbank-topic">%s</span> '
@@ -71,12 +73,13 @@ def render_item(q):
         '        <ol type="A" class="qbank-opts">\n%s\n        </ol>\n'
         '        <button type="button" class="qbank-reveal">Show answer</button>\n'
         '        <div class="qbank-ans" hidden>\n'
-        '          <p><strong>Correct: %s &mdash; %s.</strong></p>\n'
+        '          <p class="qbank-verdict"></p>\n'
+        '          <p class="qbank-answer-line"><strong>Correct: %s &mdash; %s.</strong></p>\n'
         '          <p>%s</p>\n'
         '          %s\n'
         '        </div>\n'
         '      </div>\n'
-        % (q["area"], q["difficulty"], q["kind"],
+        % (q["area"], q["difficulty"], q["kind"], q["answer"],
            q["area"], q["area"], esc(q["area_name"]),
            esc(q["topic"]),
            q["difficulty"], q["difficulty"].capitalize(),
@@ -128,7 +131,7 @@ def main():
   .qbank-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
   .qbank-btn{border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:inherit}
   .qbank-btn.secondary{background:var(--surface);color:var(--brand)}
-  .qbank-count{font-size:12.5px;color:var(--text-muted);margin-left:auto}
+  .qbank-count{font-size:12.5px;color:var(--text-muted)}
   .qbank-item{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius);padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
   .qbank-meta{font-size:11px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px}
   .qbank-tag{font-weight:700;color:var(--brand);margin-right:6px}
@@ -140,8 +143,17 @@ def main():
   .qbank-opts li{margin:3px 0}
   .qbank-reveal{border:1px solid var(--border);background:var(--surface-alt);color:var(--text);border-radius:6px;padding:5px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
   .qbank-ans{margin-top:10px;padding-top:9px;border-top:1px dotted var(--border);font-size:13.5px}
-  .qbank-ans p:first-child strong{color:var(--ok-text)}
+  .qbank-answer-line strong{color:var(--ok-text)}
   .qbank-ref{display:inline-block;margin-top:4px;font-size:11.5px;color:var(--text-muted);border:1px solid var(--border);border-radius:4px;padding:1px 7px}
+  .qbank-opts label{display:flex;align-items:flex-start;gap:8px;cursor:pointer;padding:2px 4px;border-radius:4px}
+  .qbank-opts label:hover{background:var(--surface-alt)}
+  .qbank-opts input[type="radio"]{margin-top:3px;flex-shrink:0}
+  .qbank-verdict{font-weight:700;padding:6px 10px;border-radius:6px;margin:0 0 8px;font-size:13.5px}
+  .qbank-verdict:empty{display:none;margin:0;padding:0}
+  .qbank-verdict-ok{background:var(--ok-bg);color:var(--ok-text);border:1px solid var(--ok-border)}
+  .qbank-verdict-bad{background:var(--bad-bg);color:var(--bad-text);border:1px solid var(--bad-border)}
+  .qbank-verdict-warn{background:var(--warn-bg);color:var(--warn-text);border:1px solid var(--warn-border)}
+  .qbank-score{font-size:12.5px;font-weight:700;color:var(--brand);background:var(--surface-alt);border:1px solid var(--border);border-radius:20px;padding:4px 12px;margin-left:auto}
 </style>
 </head>
 <body>
@@ -198,9 +210,9 @@ def main():
       <h2>How to use it</h2>
       <ul>
         <li>Filter by <strong>syllabus area</strong> or <strong>difficulty</strong>, or type a keyword or section reference (e.g. <code>s.16B</code>, "premium", "two-tier") into the search box — the filters combine.</li>
-        <li><strong>Random 15</strong> pulls a fresh, shuffled set of 15 questions from whatever the current filters allow — close to a real Section A sitting's length and a reasonable practice pace of under two minutes each.</li>
-        <li>Click <strong>Show answer</strong> on any question to reveal the correct option, a full explanation, and the section reference — try the question honestly first.</li>
-        <li><strong>Show all</strong> clears the Random 15 selection and returns to the ordinary filtered view.</li>
+        <li><strong>Random 15</strong> pulls a fresh, shuffled set of 15 questions from whatever the current filters allow — close to a real Section A sitting's length and a reasonable practice pace of under two minutes each. It also resets the score and clears every answer, so each draw is a clean attempt.</li>
+        <li><strong>Select an option</strong>, then click <strong>Show answer</strong> — it marks your choice Correct or Incorrect, then reveals the full explanation and section reference. 1 correct answer = 1 mark; the <strong>Score</strong> counter at the top right of the toolbar counts marks scored out of questions checked so far.</li>
+        <li><strong>Show all</strong> clears the Random 15 selection and returns to the ordinary filtered view — it does not affect the score.</li>
       </ul>
     </section>
 
@@ -220,6 +232,7 @@ def main():
         <div class="qbank-actions">
           <button type="button" class="qbank-btn">Random 15</button>
           <button type="button" class="qbank-btn secondary">Show all</button>
+          <span class="qbank-score" title="Correct answers out of questions you've checked so far &mdash; resets when you draw a new Random 15">Score: 0 / 0</span>
           <span class="qbank-count">Showing %d of %d</span>
         </div>
       </div>
@@ -246,7 +259,59 @@ def main():
       var items = Array.prototype.slice.call(root.querySelectorAll('.qbank-item'));
       var state = { area: 'all', diff: 'all', q: '', mode: 'filter' };
       var countEl = root.querySelector('.qbank-count');
+      var scoreEl = root.querySelector('.qbank-score');
       var randomPool = [];
+      var letters = ['A', 'B', 'C', 'D'];
+      // Maps a .qbank-item element to true (correct), false (incorrect), or
+      // 'unanswered' (revealed with no option picked) once it has been
+      // graded. Re-showing an already-graded item recomputes its entry from
+      // whatever is currently selected rather than adding a second entry, so
+      // clicking "Show answer" repeatedly can never inflate the score.
+      var grades = new Map();
+
+      function updateScore(){
+        if (!scoreEl) return;
+        var correct = 0, answered = 0;
+        grades.forEach(function(v){
+          if (v === true || v === false) { answered++; if (v === true) correct++; }
+        });
+        scoreEl.textContent = 'Score: ' + correct + ' / ' + answered;
+      }
+
+      function gradeItem(it){
+        var verdict = it.querySelector('.qbank-verdict');
+        if (!verdict) return;
+        var picked = it.querySelector('input[type="radio"]:checked');
+        if (!picked) {
+          grades.set(it, 'unanswered');
+          verdict.className = 'qbank-verdict qbank-verdict-warn';
+          verdict.textContent = "You didn't select an answer — pick one before checking, next time.";
+        } else {
+          var chosen = parseInt(picked.value, 10);
+          var correctIdx = parseInt(it.getAttribute('data-answer'), 10);
+          var isCorrect = chosen === correctIdx;
+          grades.set(it, isCorrect);
+          verdict.className = 'qbank-verdict ' + (isCorrect ? 'qbank-verdict-ok' : 'qbank-verdict-bad');
+          verdict.textContent = isCorrect
+            ? 'Correct ✓'
+            : ('Incorrect ✗ — you selected ' + letters[chosen] + '.');
+        }
+        updateScore();
+      }
+
+      function resetAllGrades(){
+        grades = new Map();
+        items.forEach(function(it){
+          var verdict = it.querySelector('.qbank-verdict');
+          if (verdict) { verdict.className = 'qbank-verdict'; verdict.textContent = ''; }
+          it.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+          var ans = it.querySelector('.qbank-ans');
+          if (ans) ans.setAttribute('hidden', '');
+          var revealBtn = it.querySelector('.qbank-reveal');
+          if (revealBtn) revealBtn.textContent = 'Show answer';
+        });
+        updateScore();
+      }
 
       function matches(it){
         var okArea = state.area === 'all' || it.getAttribute('data-area') === state.area;
@@ -304,6 +369,7 @@ def main():
         }
         randomPool = pool.slice(0, 15);
         state.mode = 'random';
+        resetAllGrades();
         apply();
       });
       if (buttons[1]) buttons[1].addEventListener('click', function(){
@@ -315,11 +381,18 @@ def main():
         btn.addEventListener('click', function(){
           var ans = btn.nextElementSibling;
           var isHidden = ans.hasAttribute('hidden');
-          if (isHidden) { ans.removeAttribute('hidden'); btn.textContent = 'Hide answer'; }
-          else { ans.setAttribute('hidden', ''); btn.textContent = 'Show answer'; }
+          if (isHidden) {
+            ans.removeAttribute('hidden');
+            btn.textContent = 'Hide answer';
+            gradeItem(btn.closest('.qbank-item'));
+          } else {
+            ans.setAttribute('hidden', '');
+            btn.textContent = 'Show answer';
+          }
         });
       });
 
+      updateScore();
       apply();
     })();
     </script>

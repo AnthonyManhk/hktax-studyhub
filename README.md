@@ -58,7 +58,7 @@ Open `index.html` (or the live site). From the card index you can reach:
 | Page | Purpose |
 |---|---|
 | **IRD What's New** | Every item on IRD's What's New page, read against this Hub and marked **enacted** / **bill** / **proposed**, with the exact page each item changed. Open this first after any IRD refresh. |
-| **ACCA TX-HKG Question Bank** | Filterable Section A practice bank — original MCQs across all five syllabus areas, computational answers generated and checked against `scripts/qbank_tax.py`, keyword search, Random 15 practice mode. |
+| **ACCA TX-HKG Question Bank** | Filterable Section A practice bank — select an answer, check it, and get marked Correct/Incorrect with a live score; original MCQs across all five syllabus areas, computational answers generated and checked against `scripts/qbank_tax.py`, keyword search, Random 15 practice mode. |
 | **Transaction Checker** | Search any transaction by keyword → Taxable/Non-taxable/Deductible/Non-deductible/Dutiable, with the exact section and a link to the full explanation. |
 | **DIPN Index** | Searchable catalogue of all 73 currently-in-force DIPN/SOIPN/EDOIPN documents, with topic, summary, and whether it backs a full study page or is reference-only. |
 | **Profits Tax / Property Tax / Salaries Tax / Stamp Duty / Depreciation & Allowances** | The five core topic pages — charging basis, rates, taxable/deductible tables, computation templates, all tied to exact IRO (Cap. 112) / Stamp Duty Ordinance (Cap. 117) sections. |
@@ -280,8 +280,18 @@ point at every line still carrying the old number.
 Section A practice bank of original multiple-choice questions spanning all
 five syllabus areas (tax administration, salaries tax, profits tax, property
 tax, personal assessment). Filter by area or difficulty, search by keyword or
-section reference, pull a shuffled **Random 15** for a timed practice run, or
-reveal any question's answer and explanation individually.
+section reference, or pull a shuffled **Random 15** for a timed practice run.
+
+Each question's four options are real radio buttons. Select one and click
+**Show answer** and it marks your choice **Correct**/**Incorrect** (or, if you
+didn't pick anything, says so rather than silently grading a blank) before
+revealing the explanation and section reference — 1 correct answer = 1 mark,
+tallied live in the **Score** counter at the top right of the toolbar.
+Re-showing an already-checked question re-grades it from whatever is
+currently selected rather than adding a second mark, so changing your mind
+and checking again can't inflate the score. **Random 15** resets the score
+and clears every answer for a clean attempt; filtering and **Show all** never
+touch it.
 
 Every computational question's correct answer **and** its wrong-option
 distractors are generated from `scripts/qbank_tax.py` — the same small tax-
