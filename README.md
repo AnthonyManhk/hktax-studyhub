@@ -5,7 +5,7 @@ duty, depreciation allowances and IRD administration — built from the Inland
 Revenue Department's own published guidance and from the Inland Revenue
 Ordinance (Cap. 112) and Stamp Duty Ordinance (Cap. 117).
 
-**Live site:** <https://anthonymankaho.github.io/hktax-studyhub/>
+**Live site:** <https://anthonymanhk.github.io/hktax-studyhub/>
 
 Static HTML, no server and nothing to install: open `index.html` in a browser.
 It is a single self-contained file — the whole Hub, every page, one download.
@@ -58,7 +58,7 @@ Open `index.html` (or the live site). From the card index you can reach:
 | Page | Purpose |
 |---|---|
 | **IRD What's New** | Every item on IRD's What's New page, read against this Hub and marked **enacted** / **bill** / **proposed**, with the exact page each item changed. Open this first after any IRD refresh. |
-| **ACCA TX-HKG Question Bank** | Filterable Section A practice bank — select an answer, check it, and get marked Correct/Incorrect with a live score; original MCQs across all five syllabus areas, computational answers generated and checked against `scripts/qbank_tax.py`, keyword search, Random 15 practice mode. |
+| **ACCA TX-HKG Question Bank (A / B / C)** | Three pages matching the exam's own three sections — A: 282 filterable standalone MCQs with select-and-check scoring; B: 3 OT case scenarios (15 linked MCQs); C: 2 constructed-response questions with a full model answer. All computation-checked against `scripts/qbank_tax.py`. |
 | **Transaction Checker** | Search any transaction by keyword → Taxable/Non-taxable/Deductible/Non-deductible/Dutiable, with the exact section and a link to the full explanation. |
 | **DIPN Index** | Searchable catalogue of all 73 currently-in-force DIPN/SOIPN/EDOIPN documents, with topic, summary, and whether it backs a full study page or is reference-only. |
 | **Profits Tax / Property Tax / Salaries Tax / Stamp Duty / Depreciation & Allowances** | The five core topic pages — charging basis, rates, taxable/deductible tables, computation templates, all tied to exact IRO (Cap. 112) / Stamp Duty Ordinance (Cap. 117) sections. |
@@ -168,6 +168,8 @@ pages/                           THE SOURCES. Edit these, then rebuild.
   ird-updates.html               IRD What's New, marked enacted / bill / proposed
   acca-tx-hkg.html                Exam syllabus mapping + examiner-report digest + sample Qs
   question-bank.html              ACCA TX-HKG Section A practice bank — GENERATED, see below
+  question-bank-b.html            ACCA TX-HKG Section B, OT case questions — GENERATED, see below
+  question-bank-c.html            ACCA TX-HKG Section C, constructed response — hand-written, see below
   module9-extra-practice.html    Extra paraphrased Module 9 practice Q&A
   transaction-checker.html       Search tool: transaction → tax treatment
   dipn-index.html                Searchable catalogue of all 73 DIPN/SOIPN/EDOIPN docs
@@ -185,13 +187,16 @@ pages/                           THE SOURCES. Edit these, then rebuild.
 assets/
   css/main.css                   Shared design system (light/dark aware)
   js/                            Freshness-check logic, search/filter logic, data files
-  qbank.json                     GENERATED — the 282-question bank, source for question-bank.html
+  qbank.json                     GENERATED — the 282-question Section A bank, source for question-bank.html
+  qbank-b.json                   GENERATED — Section B's 3 cases / 15 questions, source for question-bank-b.html
   revision.json                  What's changed in the Hub, rendered into the landing-page notice
 scripts/
   build-combined.py              Rebuilds the single-file edition from pages/ + assets/
   qbank_tax.py                   HK tax computation module backing every computational MCQ
-  build-qbank.py                 Generates the question bank -> assets/qbank.json
+  build-qbank.py                 Generates Section A -> assets/qbank.json
   build-question-bank-page.py    Renders assets/qbank.json -> pages/question-bank.html
+  build-qbank-b.py               Generates Section B's 3 cases -> assets/qbank-b.json
+  build-question-bank-b-page.py  Renders assets/qbank-b.json -> pages/question-bank-b.html
   audit-layout.js                Playwright: every panel, desktop + phone, overflow/console-error gate
   Refresh-Data-Manifest.bat      Double-click after updating Data/ — rescans and re-stamps dates
   update-manifest.ps1            The PowerShell script the .bat wraps
@@ -274,36 +279,62 @@ year. Lines marked dual-stated, historical or proposed are exempt. When the
 next Budget moves an allowance, update that one table — the build will then
 point at every line still carrying the old number.
 
-## ACCA TX-HKG Question Bank
+## ACCA TX-HKG Question Bank — Sections A, B and C
 
-`pages/question-bank.html` — subtitled **ACCA TX-HKG** — is a filterable
-Section A practice bank of original multiple-choice questions spanning all
-five syllabus areas (tax administration, salaries tax, profits tax, property
-tax, personal assessment). Filter by area or difficulty, search by keyword or
-section reference, or pull a shuffled **Random 15** for a timed practice run.
+Three pages, one for each real exam section, cross-linked by a Section A ⇄ B
+⇄ C switch strip at the top of each:
 
-Each question's four options are real radio buttons. Select one and click
-**Show answer** and it marks your choice **Correct**/**Incorrect** (or, if you
-didn't pick anything, says so rather than silently grading a blank) before
-revealing the explanation and section reference — 1 correct answer = 1 mark,
-tallied live in the **Score** counter at the top right of the toolbar.
-Re-showing an already-checked question re-grades it from whatever is
-currently selected rather than adding a second mark, so changing your mind
-and checking again can't inflate the score. **Random 15** resets the score
-and clears every answer for a clean attempt; filtering and **Show all** never
-touch it.
+- **`pages/question-bank.html` (Section A)** — a filterable bank of 282
+  original standalone multiple-choice questions spanning all five syllabus
+  areas (tax administration, salaries tax, profits tax, property tax,
+  personal assessment). Filter by area or difficulty, search by keyword or
+  section reference, or pull a shuffled **Random 15** for a timed practice
+  run.
+- **`pages/question-bank-b.html` (Section B)** — 3 original OT case
+  scenarios (15 linked questions, 30 marks), matching the exam's own
+  case-question format: one set of facts, five questions against it,
+  spanning more than one syllabus area at once — e.g. a case integrating an
+  employee's rental-value benefit, her own let property's NAV, her salaries
+  tax computation, *and* whether she should elect personal assessment, all
+  from the same figures. No filters here; the three cases are fixed and
+  always shown in full, with a **Reset all three cases** button for a clean
+  second attempt.
+- **`pages/question-bank-c.html` (Section C)** — 2 original constructed-
+  response questions (15 marks + 25 marks) in the exam's own long-form
+  format: no multiple choice, just a full scenario and a `<details>`-
+  revealed model answer laid out as a real computation with marks
+  allocated line by line, the same proforma/`.rule`/`.dbl` table style as
+  the Tax Reconciliation page.
 
-Every computational question's correct answer **and** its wrong-option
-distractors are generated from `scripts/qbank_tax.py` — the same small tax-
+Sections A and B share the same grading mechanic: each question's four
+options are real radio buttons. Select one and click **Show answer** and it
+marks your choice **Correct**/**Incorrect** (or, if you didn't pick anything,
+says so rather than silently grading a blank) before revealing the
+explanation and section reference — 1 correct answer = 1 mark, tallied live
+in the **Score** counter. Re-showing an already-checked question re-grades it
+from whatever is currently selected rather than adding a second mark, so
+changing your mind and checking again can't inflate the score. On Section A,
+**Random 15** resets the score and clears every answer for a clean attempt,
+and filtering/**Show all** never touch it; on Section B, the dedicated
+**Reset** button does the same for all three cases at once. Section C has no
+scoring — it's marked by comparing your own working to the model answer.
+
+Every computational question's correct answer **and** (on Sections A and B)
+its wrong-option distractors, and every figure in Section C's two model
+answers, are generated from `scripts/qbank_tax.py` — the same small tax-
 computation module the Hub's worked illustrations use — so the arithmetic
 cannot drift from the explanation. Distractors are not arbitrary wrong
 numbers; each reproduces a specific error the examining team has reported
 (e.g. omitting the treble-tax element of a s.80(2) penalty, applying the
 standard rate to net chargeable income instead of net income before
 allowances, spreading a lease premium over the full term instead of the
-36-month cap).
+36-month cap, stating a R&D deduction's total instead of the additional
+amount still to be deducted). A case's five questions (Section B) or a long
+question's two parts (Section C) are also checked for **internal
+consistency** — a figure question 3 relies on is the same figure question 1
+established, not a fresh unrelated number.
 
-To regenerate the bank after editing a question or adding new ones:
+To regenerate Section A after editing a question or adding new ones:
 
 ```
 python scripts\build-qbank.py                 # writes assets/qbank.json
@@ -311,12 +342,32 @@ python scripts\build-question-bank-page.py    # writes pages/question-bank.html
 python scripts\build-combined.py              # folds it into the three combined outputs
 ```
 
-The filter/search/random-practice script lives **inside** `<main class="content">`
-in `pages/question-bank.html` and is scoped to a `.qbank-app` wrapper by
-**class**, never by `id` — `build-combined.py`'s namespacing rewrites every
-`id="..."` per panel but cannot see into a `<script>`, so any interactive page
-must hook its own JS by class/data-attribute, and the script must sit inside
-`<main>` or the builder (which extracts only that element) drops it silently.
+Section B is generated the same way, from its own smaller pair of scripts:
+
+```
+python scripts\build-qbank-b.py               # writes assets/qbank-b.json
+python scripts\build-question-bank-b-page.py  # writes pages/question-bank-b.html
+python scripts\build-combined.py
+```
+
+Section C (`pages/question-bank-c.html`) is hand-written prose and proforma
+tables, like the Tax Reconciliation page, rather than JSON-driven — with only
+2 questions there is more value in writing them directly than building a
+generator for two items. Its figures are still verified by running the same
+`qbank_tax.py` functions in a scratch calculation first (see the build log
+for the exact commands), before being transcribed into the page.
+
+The filter/search/random-practice/grading scripts live **inside**
+`<main class="content">` on all three pages and are scoped by **class**, never
+by `id` — `build-combined.py`'s namespacing rewrites every `id="..."` per
+panel but cannot see into a `<script>`, so any interactive page must hook its
+own JS by class/data-attribute, and the script must sit inside `<main>` or
+the builder (which extracts only that element) drops it silently. Section
+B's own **Reset** button was first built with `id="qbank-reset"` and
+`document.querySelector('#qbank-reset')`, which worked standalone but
+silently did nothing once combined — exactly the failure this rule exists to
+prevent, caught by testing the combined build specifically rather than only
+the standalone page. Fixed by switching to `class="qbank-reset-btn"`.
 
 ## The "AI Prompts" button
 

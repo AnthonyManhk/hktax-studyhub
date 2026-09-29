@@ -7,6 +7,9 @@
 <title>Question Bank — HK Tax Study Hub</title>
 <link rel="stylesheet" href="../assets/css/main.css">
 <style>
+  .qbank-section-switch{display:flex;gap:8px;margin:10px 0 4px}
+  .qbank-section-switch a{border:1px solid var(--border);background:var(--surface-alt);color:var(--text);border-radius:20px;padding:5px 14px;font-size:12.5px;text-decoration:none}
+  .qbank-section-switch a.active{background:var(--brand);color:#fff;border-color:var(--brand)}
   .qbank-toolbar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin:14px 0;position:sticky;top:60px;z-index:10;box-shadow:var(--shadow)}
   .qbank-filter-group{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
   .qbank-chip{border:1px solid var(--border);background:var(--surface-alt);color:var(--text);border-radius:20px;padding:5px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
@@ -48,7 +51,9 @@
       <a href="../index.html">Hub</a>
       <a href="ird-updates.html">IRD What's New</a>
       <a href="acca-tx-hkg.html">ACCA TX-HKG</a>
-      <a href="question-bank.html" class="active">Question Bank</a>
+      <a href="question-bank.html" class="active">Question Bank A</a>
+      <a href="question-bank-b.html">Question Bank B</a>
+      <a href="question-bank-c.html">Question Bank C</a>
       <a href="computation-formats.html">Computation Formats</a>
       <a href="tax-reconciliation.html">Tax Reconciliation</a>
       <a href="transaction-checker.html">Transaction Checker</a>
@@ -85,6 +90,12 @@
         <h1>Practice Question Bank</h1>
         <p class="subtitle">ACCA TX-HKG &mdash; Section A &middot; 282 original multiple-choice questions across all five syllabus areas, every computational answer generated and checked against the Hub's own tax-computation engine so the arithmetic cannot drift from the explanation.</p>
       </div>
+    </div>
+
+    <div class="qbank-section-switch">
+      <a href="question-bank.html" class="active">Section A</a>
+      <a href="question-bank-b.html">Section B</a>
+      <a href="question-bank-c.html">Section C</a>
     </div>
 
     <section class="block" id="overview">
@@ -5235,7 +5246,7 @@
 
     <div class="section-nav">
       <a href="acca-tx-hkg.html">&larr; ACCA TX-HKG</a>
-      <a href="computation-formats.html">Computation Formats &rarr;</a>
+      <a href="question-bank-b.html">Question Bank B &rarr;</a>
     </div>
 
     <script>

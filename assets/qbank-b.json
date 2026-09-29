@@ -1,0 +1,239 @@
+{
+ "title": "ACCA TX-HKG",
+ "subtitle": "Section B — OT Case Questions",
+ "generated": "2026-09-28",
+ "count": 15,
+ "cases": [
+  {
+   "id": "case1",
+   "label": "Ms Fiona Ng",
+   "scenario": "Fiona Ng is employed as marketing manager by Silverline Retail Ltd, a company centrally managed and controlled in Hong Kong. Her annual salary for the year of assessment 2026/27 is $960,000. Silverline provides her with a self-contained flat, rent free, for the whole year; Fiona has no outgoings deductible under s.12(1)(a) against her salary.<br><br>Separately, Fiona wholly owns a second residential flat, which she lets out (unconnected with her employer) for the whole year at $18,000 a month. She personally paid rates of $6,500 for the year on that flat. She is single and claims only the basic allowance ($145,000 for 2026/27); she has no mortgage on either property and no other income, deductions or losses.",
+   "questions": [
+    {
+     "id": "B001",
+     "topic": "Rental value",
+     "q": "What rental value must be included in Fiona's assessable income for the flat Silverline provides rent free?",
+     "options": [
+      "$96,000",
+      "$76,800",
+      "$38,400",
+      "$960,000"
+     ],
+     "answer": 0,
+     "explain": "The flat is self-contained accommodation, so the rate is 10% of income after s.12(1)(a) outgoings. With no outgoings to deduct, that base is her full salary: $960,000 &times; 10% = $96,000.",
+     "ref": "s.9(2)"
+    },
+    {
+     "id": "B002",
+     "topic": "Assessable income",
+     "q": "What is Fiona's total assessable income from her employment for the year (salary plus the rental value of the flat)?",
+     "options": [
+      "$960,000",
+      "$1,056,000",
+      "$1,152,000",
+      "$1,036,800"
+     ],
+     "answer": 1,
+     "explain": "$960,000 salary + $96,000 rental value = $1,056,000. Omitting the rental value entirely, or computing it at the wrong percentage (8% applies to two hotel rooms, not a self-contained flat), are the two errors this question is designed to catch.",
+     "ref": "s.9(1)(a), s.9(2)"
+    },
+    {
+     "id": "B003",
+     "topic": "Property tax",
+     "q": "What is the property tax payable on Fiona's own let flat for the year?",
+     "options": [
+      "$25,920",
+      "$31,425",
+      "$25,140",
+      "$32,400"
+     ],
+     "answer": 2,
+     "explain": "Assessable value $216,000 ($18,000 &times; 12); less rates paid <strong>by the owner</strong> $6,500 = $209,500; less the 20% statutory allowance $41,900 = net assessable value $167,600; &times; 15% = $25,140. Forgetting the rates deduction, forgetting the 20% allowance, or forgetting both and taxing the gross rent, each give one of the other three options.",
+     "ref": "ss.5, 5(1A)"
+    },
+    {
+     "id": "B004",
+     "topic": "Salaries tax computation",
+     "q": "Ignoring any election for personal assessment, what is Fiona's salaries tax payable for the year?",
+     "options": [
+      "$158,400",
+      "$161,520",
+      "$136,650",
+      "$136,870"
+     ],
+     "answer": 3,
+     "explain": "Progressive rates on net chargeable income ($1,056,000 &minus; $145,000 allowance = $911,000) give $136,870; the standard rate on net income <strong>before</strong> allowances ($1,056,000) gives $158,400. Salaries tax payable is the lower of the two: $136,870. Applying the standard rate to income <em>after</em> allowances instead of before (giving $136,650) is a close-looking but wrong alternative route to this figure.",
+     "ref": "s.13"
+    },
+    {
+     "id": "B005",
+     "topic": "Personal assessment",
+     "q": "Should Fiona elect personal assessment for the year?",
+     "options": [
+      "No — total tax without electing ($162,010) is lower than with personal assessment ($165,362): there is no mortgage interest or loss for the election to unlock, and her income already sits in the 17% marginal band",
+      "Yes — personal assessment always reduces tax for a taxpayer with property income",
+      "Yes — electing lets her claim both the basic allowance and a separate property allowance",
+      "It makes no difference either way"
+     ],
+     "answer": 0,
+     "explain": "Without electing: salaries tax $136,870 + property tax $25,140 = $162,010. Electing aggregates both incomes ($1,223,600) less the same one basic allowance, computed at progressive rates capped by the standard rate on reduced total income: $165,362. Aggregating drags the property income into her 17% marginal band, above the flat 15% property tax rate, and there is nothing else (no mortgage interest, no loss) for the election to unlock — so electing costs her $3,352 more, not less. Compute both ways; never assume personal assessment helps.",
+     "ref": "s.41-43"
+    }
+   ]
+  },
+  {
+   "id": "case2",
+   "label": "Golden Horizon Ltd",
+   "scenario": "Golden Horizon Ltd, a Hong Kong trading company, reports an accounting profit before tax of $5,000,000 for the year ended 31 March 2027. Its accounts include depreciation of $300,000 and a fine of $20,000 for a pollution control breach, and it paid $150,000 in approved charitable donations, all charged as expenses.<br><br>During the year Golden Horizon bought qualifying plant for $500,000 (the 20% pool's written-down value brought forward was $200,000, and there were no disposals), and incurred $1,000,000 of qualifying Type B R&amp;D expenditure, which is included in the $1,000,000 already charged as an expense in arriving at the accounting profit above. The company has no connected entities for the two-tier regime.",
+   "questions": [
+    {
+     "id": "B006",
+     "topic": "Depreciation allowances",
+     "q": "What is the total depreciation allowance available on the plant pool for the year?",
+     "options": [
+      "$300,000",
+      "$380,000",
+      "$80,000",
+      "$440,000"
+     ],
+     "answer": 1,
+     "explain": "Initial allowance: $500,000 additions &times; 60% = $300,000. Reduced pool: $200,000 + $500,000 &minus; $300,000 = $400,000. Annual allowance at 20%: $80,000. Total = IA $300,000 + AA $80,000 = $380,000. Taking the IA alone, the AA alone, or computing the AA on the pool <strong>before</strong> deducting the IA, each give one of the other three options.",
+     "ref": "s.39B; Sch. 3"
+    },
+    {
+     "id": "B007",
+     "topic": "R&D deduction",
+     "q": "Beyond the $1,000,000 already charged as an expense in the accounts, what additional deduction is available for the qualifying Type B R&amp;D expenditure?",
+     "options": [
+      "$3,000,000",
+      "$1,000,000",
+      "$2,000,000",
+      "$1,500,000"
+     ],
+     "answer": 2,
+     "explain": "Type B R&amp;D is enhanced at 300% on the first $2,000,000: $1,000,000 &times; 3 = $3,000,000 total allowable deduction. $1,000,000 of that is already in the accounting profit, so the <strong>additional</strong> deduction still to be made in the computation is $3,000,000 &minus; $1,000,000 = $2,000,000. Stating the total enhanced deduction ($3,000,000) as if it were the additional amount is the commonest error - it double-counts the $1,000,000 already expensed.",
+     "ref": "s.16B"
+    },
+    {
+     "id": "B008",
+     "topic": "Donations",
+     "q": "What is the maximum charitable donation deduction Golden Horizon may claim?",
+     "options": [
+      "$1,081,500",
+      "$52,500",
+      "$0",
+      "$150,000"
+     ],
+     "answer": 3,
+     "explain": "The allowable deduction is the <strong>lower</strong> of the amount paid ($150,000) and 35% of assessable profits before donations ($1,081,500), so the full $150,000 paid is deductible — well within the $1,081,500 cap. Stating the cap itself, rather than the lower of the two, is a common error.",
+     "ref": "s.16D"
+    },
+    {
+     "id": "B009",
+     "topic": "Assessable profit",
+     "q": "What is Golden Horizon's assessable profit for the year?",
+     "options": [
+      "$2,940,000",
+      "$3,090,000",
+      "$3,470,000",
+      "$5,470,000"
+     ],
+     "answer": 0,
+     "explain": "$5,000,000 accounting profit + $300,000 depreciation + $150,000 donations + $20,000 fine = $5,470,000. Less the additional R&amp;D deduction $2,000,000 = $3,470,000. Less depreciation allowances $380,000 = $3,090,000 (the base for the donation cap). Less the donation deduction $150,000 = assessable profit $2,940,000. Stopping before deducting the donation, or before deducting the depreciation allowances, gives one of the other two wrong figures.",
+     "ref": "s.14, s.16, s.17"
+    },
+    {
+     "id": "B010",
+     "topic": "Two-tier profits tax",
+     "q": "What is Golden Horizon's profits tax payable for the year?",
+     "options": [
+      "$485,100",
+      "$320,100",
+      "$242,550",
+      "$344,850"
+     ],
+     "answer": 1,
+     "explain": "The two-tier rates apply to the final assessable profit of $2,940,000: ($2,000,000 &times; 8.25%) + ($940,000 &times; 16.5%) = $320,100. Applying a flat 16.5% or flat 8.25% to the whole profit, or applying the two-tier rates to the wrong (pre-donation) profit figure of $3,090,000, each give one of the other three options.",
+     "ref": "s.14AA"
+    }
+   ]
+  },
+  {
+   "id": "case3",
+   "label": "Harbour Partners",
+   "scenario": "Harbour Partners is a Hong Kong partnership with two partners: Mr Tam, an individual, holding a 60% profit share, and Silver Bay Ltd, a corporate partner, holding the remaining 40%. The partnership's assessable profit for the year is $4,000,000, allocated in that profit-sharing ratio, with each partner's two-tier $2,000,000 band apportioned in the same ratio.<br><br>Mr Tam's own tax on his share remained unpaid more than six months after the due date - specifically 7 months overdue when he finally settled it.",
+   "questions": [
+    {
+     "id": "B011",
+     "topic": "Partnership allocation",
+     "q": "What is Mr Tam's share of the partnership's assessable profit?",
+     "options": [
+      "$1,600,000",
+      "$4,000,000",
+      "$2,400,000",
+      "$2,000,000"
+     ],
+     "answer": 2,
+     "explain": "$4,000,000 &times; 60% = $2,400,000. Using Silver Bay's 40% share instead, using the whole partnership profit unallocated, or misapplying a 50:50 split, each give one of the other three options.",
+     "ref": "s.22"
+    },
+    {
+     "id": "B012",
+     "topic": "Corporate partner's tax",
+     "q": "What is Silver Bay Ltd's own profits tax payable on its 40% share, applying the two-tier rates to its apportioned band?",
+     "options": [
+      "$264,000",
+      "$132,000",
+      "$270,000",
+      "$198,000"
+     ],
+     "answer": 3,
+     "explain": "Silver Bay's share is $1,600,000, with an apportioned first-tier band of $800,000 ($2,000,000 &times; 40%) at the corporate rates: ($800,000 &times; 8.25%) + ($800,000 &times; 16.5%) = $198,000. Applying a flat 16.5% or flat 8.25% to the whole share, ignoring the apportioned band, or stating Mr Tam's figure instead, each give one of the other three options.",
+     "ref": "s.14AA; DIPN 28"
+    },
+    {
+     "id": "B013",
+     "topic": "Individual partner's tax",
+     "q": "What is Mr Tam's own profits tax payable on his 60% share, applying the two-tier rates to his apportioned band?",
+     "options": [
+      "$270,000",
+      "$198,000",
+      "$360,000",
+      "$180,000"
+     ],
+     "answer": 0,
+     "explain": "Mr Tam's share is $2,400,000, with an apportioned first-tier band of $1,200,000 ($2,000,000 &times; 60%) at the unincorporated rates: ($1,200,000 &times; 7.5%) + ($1,200,000 &times; 15%) = $270,000. Applying a flat 15% or flat 7.5% to the whole share, or stating Silver Bay's figure instead, each give one of the other three options.",
+     "ref": "s.14AA; DIPN 28"
+    },
+    {
+     "id": "B014",
+     "topic": "Total partnership tax",
+     "q": "What is the total profits tax payable in respect of Harbour Partners' profit for the year?",
+     "options": [
+      "$660,000",
+      "$468,000",
+      "$495,000",
+      "$450,000"
+     ],
+     "answer": 1,
+     "explain": "The partnership is not itself taxed; the total is simply the sum of what each partner pays on their own apportioned share: $270,000 + $198,000 = $468,000. Applying one flat rate to the whole $4,000,000 as if it were a single corporate taxpayer (16.5%), a single unincorporated taxpayer at the flat rate, or the two-tier corporate rates without regard to Mr Tam's individual rate, each give one of the other three - and each ignores that a mixed partnership has more than one type of partner.",
+     "ref": "s.14AA; DIPN 28"
+    },
+    {
+     "id": "B015",
+     "topic": "Late payment surcharge",
+     "q": "Mr Tam's own tax of $270,000 on his share was paid 7 months after the due date. What is the total amount he actually had to pay, including surcharges?",
+     "options": [
+      "$283,500",
+      "$297,000",
+      "$311,850",
+      "$310,500"
+     ],
+     "answer": 2,
+     "explain": "A 5% surcharge arises on the due date: $270,000 &times; 1.05 = $283,500. Because it remained unpaid beyond 6 months, a further 10% is charged on the tax <strong>plus</strong> that first surcharge: $283,500 &times; 1.10 = $311,850. Stopping at the first 5% surcharge, applying a flat 10% instead of the compounding two-step charge, or applying the second 10% to the original tax rather than to tax-plus-first-surcharge, each give one of the other three options.",
+     "ref": "s.71(5), s.71(5A)"
+    }
+   ]
+  }
+ ]
+}

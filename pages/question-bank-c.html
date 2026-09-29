@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A study aid for Hong Kong tax - profits, property and salaries tax, stamp duty, depreciation allowances and personal assessment - built from IRD guidance and the Inland Revenue Ordinance. Not professional advice.">
+<title>Question Bank — Section C — HK Tax Study Hub</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+  .qbank-section-switch{display:flex;gap:8px;margin:10px 0 4px}
+  .qbank-section-switch a{border:1px solid var(--border);background:var(--surface-alt);color:var(--text);border-radius:20px;padding:5px 14px;font-size:12.5px;text-decoration:none}
+  .qbank-section-switch a.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .qbox{background:var(--surface-alt);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius);padding:16px 18px;margin:14px 0}
+  .qbox h3{margin:0 0 4px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
+  .qbox .marks{float:right;font-weight:600;color:var(--text-muted);font-size:12.5px;text-transform:none;letter-spacing:0}
+  .qbox .part{font-weight:700;margin:12px 0 4px}
+  .proforma table{font-size:13.5px}
+  .proforma td:first-child{width:56%}
+  .sub{padding-left:26px}
+  .sub2{padding-left:46px}
+  .rule td,.rule th{border-top:2px solid var(--text-muted)}
+  .dbl td,.dbl th{border-top:1px solid var(--text-muted);border-bottom:3px double var(--text-muted);font-weight:600}
+  .note-no{font-weight:700;color:var(--brand);white-space:nowrap}
+  details.model-answer{margin-top:12px;border-top:1px dotted var(--border);padding-top:10px}
+  details.model-answer summary{cursor:pointer;font-weight:600;color:var(--brand);list-style:none;padding:6px 12px;background:var(--surface-alt);border:1px solid var(--border);border-radius:6px;display:inline-block;font-size:13px}
+  details.model-answer summary::-webkit-details-marker{display:none}
+  details.model-answer[open] summary{margin-bottom:10px}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <div class="brand">HK Tax Study Hub<small>Study aid — not professional advice</small></div>
+    <nav class="site-nav">
+      <a href="../index.html">Hub</a>
+      <a href="ird-updates.html">IRD What's New</a>
+      <a href="acca-tx-hkg.html">ACCA TX-HKG</a>
+      <a href="question-bank.html">Question Bank A</a>
+      <a href="question-bank-b.html">Question Bank B</a>
+      <a href="question-bank-c.html" class="active">Question Bank C</a>
+      <a href="computation-formats.html">Computation Formats</a>
+      <a href="tax-reconciliation.html">Tax Reconciliation</a>
+      <a href="transaction-checker.html">Transaction Checker</a>
+      <a href="dipn-index.html">DIPN Index</a>
+      <a href="profits-tax.html">Profits Tax</a>
+      <a href="profits-tax-entities.html">Profits Tax by Entity</a>
+      <a href="property-tax.html">Property Tax</a>
+      <a href="salaries-tax.html">Salaries Tax</a>
+      <a href="personal-assessment.html">Personal Assessment</a>
+      <a href="stamp-duty.html">Stamp Duty</a>
+      <a href="depreciation-allowances.html">Depreciation &amp; Allowances</a>
+      <a href="ird-administration.html">IRD Administration</a>
+      <a href="https://anthonymanhk.github.io/hkfrs-as-study-platform/" target="_blank" rel="noopener" title="Sister platform: HKFRS and HKAS">HKFRS / HKAS &#8599;</a>
+    </nav>
+    <button id="ai-prompt-btn" class="ai-prompt-btn" title="Copy a hardened HK-tax prompt to paste into your browser AI" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;margin-right:8px">AI Prompts</button>
+    <button id="theme-toggle" title="Toggle light/dark" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px">Theme</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#overview">What this is</a>
+    <a href="#q1">Question 1 — Mr Ivan Ho (15 marks)</a>
+    <a href="#q2">Question 2 — XYZ Trading Ltd (25 marks)</a>
+    <a href="#copyright">Originality</a>
+  </aside>
+
+  <main class="content">
+    <div class="page-title">
+      <div>
+        <span class="badge badge-common">ACCA TX-HKG</span>
+        <h1>Question Bank — Section C</h1>
+        <p class="subtitle">ACCA TX-HKG — Section C, Constructed Response Questions · 2 original long-form questions (15 marks + 25 marks), matching the exam's own format — full scenario, a graded model answer laid out as a real computation, and marks allocated line by line.</p>
+      </div>
+    </div>
+
+    <div class="qbank-section-switch">
+      <a href="question-bank.html">Section A</a>
+      <a href="question-bank-b.html">Section B</a>
+      <a href="question-bank-c.html" class="active">Section C</a>
+    </div>
+
+    <section class="block" id="overview">
+      <h2>What this is</h2>
+      <p class="lede">Section C mirrors the exam's constructed-response questions: no multiple choice here — each question gives a scenario and asks you to prepare an actual computation or a written explanation, the same way you would in the exam itself. Attempt each part on paper first, then open the model answer to mark your own work.</p>
+      <div class="callout tip">
+        <span class="lbl">Same computation engine as Sections A and B</span>
+        Every figure in both model answers was generated from and checked against <code>scripts/qbank_tax.py</code>, the same module behind Section A's and Section B's answers — nothing here was worked out by hand and left unchecked.
+      </div>
+    </section>
+
+    <section class="block" id="q1">
+      <h2>Question 1 — Mr Ivan Ho (15 marks)</h2>
+      <div class="qbox">
+        <h3>Scenario<span class="marks">15 marks</span></h3>
+        <p>Ivan Ho is employed on an annual salary of $1,020,000 for the year of assessment 2026/27. During the year he incurred $60,000 on a job-related course, qualifying as a deductible self-education expense, and made the mandatory MPF contribution of $18,000. He is married; his wife has no income of her own.</p>
+        <p>Ivan also wholly owns a separate residential flat, which he lets out unconnected with his employment. Its net assessable value for the year (after rates and the 20% statutory allowance) is $200,000. He pays mortgage interest of $150,000 a year on the loan used to acquire that flat.</p>
+        <p class="part">(a) Compute Ivan's salaries tax liability for the year, ignoring any election for personal assessment. (10 marks)</p>
+        <p class="part">(b) Advise, with supporting calculations, whether Ivan should elect personal assessment for the year. (5 marks)</p>
+      </div>
+
+      <details class="model-answer">
+        <summary>Show model answer</summary>
+
+        <div class="proforma">
+          <table class="right">
+            <caption>(a) Ivan Ho — Salaries Tax Computation, YA 2026/27</caption>
+            <tbody>
+              <tr><th>Salary</th><td class="num">1,020,000</td></tr>
+              <tr><td class="sub">Less: self-education expenses <span class="note-no">(1 mark)</span></td><td class="num">(60,000)</td></tr>
+              <tr><td class="sub">Less: mandatory MPF contribution <span class="note-no">(1 mark)</span></td><td class="num">(18,000)</td></tr>
+              <tr class="rule"><th>Net income</th><td class="num">942,000</td></tr>
+              <tr><td class="sub">Less: married person's allowance <span class="note-no">(1 mark)</span></td><td class="num">(290,000)</td></tr>
+              <tr class="dbl"><th>Net chargeable income</th><td class="num">652,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="proforma">
+          <table class="right">
+            <caption>Tax payable — lower of two methods</caption>
+            <tbody>
+              <tr><td>Progressive rates on $652,000 <span class="note-no">(3 marks)</span><br><span style="font-size:12px;color:var(--text-muted)">2%/6%/10%/14% on four $50,000 bands ($16,000) + 17% on the $452,000 remainder ($76,840)</span></td><td class="num">92,840</td></tr>
+              <tr><td>Standard rate on net income before allowances: $942,000 &times; 15% <span class="note-no">(2 marks)</span></td><td class="num">141,300</td></tr>
+              <tr class="dbl"><th>Salaries tax payable (the lower of the two) <span class="note-no">(2 marks)</span></th><td class="num">92,840</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Total for part (a): 10 marks. Using the standard rate on net income <em>after</em> allowances ($652,000 × 15% = $97,800) instead of before them, is the single commonest way to lose the 2 marks on the comparison.</p>
+
+        <div class="proforma">
+          <table class="right">
+            <caption>(b) Without electing personal assessment</caption>
+            <tbody>
+              <tr><td>Salaries tax (from part (a))</td><td class="num">92,840</td></tr>
+              <tr><td>Property tax: $200,000 &times; 15% <span class="note-no">(1 mark)</span></td><td class="num">30,000</td></tr>
+              <tr class="dbl"><th>Total tax</th><td class="num">122,840</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="proforma">
+          <table class="right">
+            <caption>Electing personal assessment</caption>
+            <tbody>
+              <tr><th>Total income (net income $942,000 + property NAV $200,000)</th><td class="num">1,142,000</td></tr>
+              <tr><td class="sub">Less: mortgage interest, capped at that property's own NAV of $200,000 <span class="note-no">(2 marks)</span></td><td class="num">(150,000)</td></tr>
+              <tr class="rule"><th>Reduced total income</th><td class="num">992,000</td></tr>
+              <tr><td class="sub">Less: married person's allowance</td><td class="num">(290,000)</td></tr>
+              <tr class="rule"><th>Net chargeable income</th><td class="num">702,000</td></tr>
+              <tr><td>Progressive rates: $16,000 + ($502,000 &times; 17%)</td><td class="num">101,340</td></tr>
+              <tr><td>Standard rate on reduced total income: $992,000 &times; 15%</td><td class="num">148,800</td></tr>
+              <tr class="dbl"><th>Tax payable under personal assessment (the lower) <span class="note-no">(1 mark)</span></th><td class="num">101,340</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)"><strong>Advice (1 mark):</strong> Ivan should elect personal assessment. It saves $122,840 &minus; $101,340 = <strong>$21,500</strong>, because the election lets his mortgage interest on the let property (which property tax alone cannot deduct) shelter his aggregated income. Total for part (b): 5 marks.</p>
+      </details>
+    </section>
+
+    <section class="block" id="q2">
+      <h2>Question 2 — XYZ Trading Ltd (25 marks)</h2>
+      <div class="qbox">
+        <h3>Scenario<span class="marks">25 marks</span></h3>
+        <p>XYZ Trading Ltd, a Hong Kong company with no connected entities, reports a net profit per accounts of $8,000,000 for the year ended 31 March 2027. The accounts include depreciation of $450,000, approved charitable donations of $200,000, and legal fees of $60,000 for acquiring a new five-year retail lease.</p>
+        <p>The company's plant and machinery pool (20% pool) had a written-down value brought forward of $600,000; during the year it bought qualifying plant for $800,000 and sold plant for $100,000. Separately, it incurred $1,500,000 of qualifying Type B R&amp;D expenditure, already charged as an expense (and so already included) in the $8,000,000 net profit above. The company also has an unrelieved trading loss of $500,000 brought forward from an earlier year.</p>
+        <p class="part">(a) Compute XYZ Trading Ltd's profits tax payable for the year. (20 marks)</p>
+        <p class="part">(b) XYZ Trading Ltd is considering whether the $500,000 loss could instead be surrendered to a profitable fellow group company. Advise, with reasons. (5 marks)</p>
+      </div>
+
+      <details class="model-answer">
+        <summary>Show model answer</summary>
+
+        <div class="proforma">
+          <table class="right">
+            <caption>(a) XYZ Trading Ltd — Profits Tax Computation, YA 2026/27</caption>
+            <tbody>
+              <tr><th>Net profit per accounts</th><td class="num">8,000,000</td></tr>
+              <tr><td><strong>Add: non-allowable items</strong></td><td class="num"></td></tr>
+              <tr><td class="sub2">Depreciation <span class="note-no">(1 mark)</span></td><td class="num">450,000</td></tr>
+              <tr><td class="sub2">Charitable donations <span class="note-no">(1 mark)</span></td><td class="num">200,000</td></tr>
+              <tr><td class="sub2">Legal fees — capital, acquiring a new lease <span class="note-no">(2 marks)</span></td><td class="num">60,000</td></tr>
+              <tr class="rule"><td></td><td class="num">8,710,000</td></tr>
+              <tr><td class="sub">Less: additional R&amp;D deduction <span class="note-no">(4 marks)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">Type B enhanced deduction: min($1,500,000, $2,000,000) &times; 300% = $4,500,000 total, less the $1,500,000 already expensed = $3,000,000 additional</span></td><td class="num">(3,000,000)</td></tr>
+              <tr><td class="sub">Less: depreciation allowances <span class="note-no">(4 marks)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">IA: $800,000 &times; 60% = $480,000. Pool: $600,000 + $800,000 &minus; $480,000 &minus; $100,000 disposal = $820,000. AA: $820,000 &times; 20% = $164,000. Total $480,000 + $164,000</span></td><td class="num">(644,000)</td></tr>
+              <tr class="rule"><th>Profit before loss brought forward</th><td class="num">5,066,000</td></tr>
+              <tr><td class="sub">Less: loss brought forward <span class="note-no">(1 mark)</span></td><td class="num">(500,000)</td></tr>
+              <tr class="rule"><th>Profit before donations (Z)</th><td class="num">4,566,000</td></tr>
+              <tr><td class="sub">Less: approved charitable donations <span class="note-no">(2 marks)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">lower of $200,000 actual and 35% &times; $4,566,000 = $1,598,100 — fully allowable</span></td><td class="num">(200,000)</td></tr>
+              <tr class="dbl"><th>Assessable profit</th><td class="num">4,366,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="proforma">
+          <table class="right">
+            <caption>Tax payable</caption>
+            <tbody>
+              <tr><td>First $2,000,000 at 8.25% <span class="note-no">(2 marks)</span></td><td class="num">165,000</td></tr>
+              <tr><td>Remaining $2,366,000 at 16.5% <span class="note-no">(2 marks)</span></td><td class="num">390,390</td></tr>
+              <tr class="dbl"><th>Profits tax payable</th><td class="num">555,390</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Total for part (a): 20 marks. Stating the total enhanced R&amp;D deduction ($4,500,000) instead of the additional amount still to be deducted ($3,000,000), and computing the annual allowance on the pool before deducting the initial allowance, are the two errors this question is designed to catch.</p>
+
+        <p style="margin-top:14px"><strong>(b) (5 marks):</strong> Hong Kong has <strong>no group loss relief</strong> of any kind. Each company, including XYZ Trading Ltd and any fellow group company, is a separate person chargeable to profits tax in its own right (2 marks). The $500,000 loss cannot be surrendered to, or set off against, a fellow group company's profits, however profitable that company is or however closely the two are connected (2 marks). The loss simply remains within XYZ Trading Ltd itself, carried forward indefinitely with no time limit, to be set off only against XYZ's own future assessable profits from the same trade (1 mark).</p>
+      </details>
+    </section>
+
+    <section class="block" id="copyright">
+      <h2>Originality</h2>
+      <p>Both questions and both model answers on this page are original, written for this Hub in the exam's own constructed-response format. See the <a href="acca-tx-hkg.html#copyright">ACCA TX-HKG page</a> for the fuller statement of what is and is not reproduced anywhere on this Hub.</p>
+    </section>
+
+    <div class="section-nav">
+      <a href="question-bank-b.html">&larr; Question Bank B</a>
+      <a href="computation-formats.html">Computation Formats &rarr;</a>
+    </div>
+  </main>
+</div>
+
+<footer class="site-footer">HK Tax Study Hub — study aid, not professional advice. Not affiliated with or endorsed by ACCA. Verify against the Inland Revenue Ordinance (Cap. 112) and current IRD guidance before relying on any figure.</footer>
+
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/ai-prompt.js"></script>
+</body>
+</html>

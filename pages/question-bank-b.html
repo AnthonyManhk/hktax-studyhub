@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A study aid for Hong Kong tax - profits, property and salaries tax, stamp duty, depreciation allowances and personal assessment - built from IRD guidance and the Inland Revenue Ordinance. Not professional advice.">
+<title>Question Bank — Section B — HK Tax Study Hub</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+  .qbank-section-switch{display:flex;gap:8px;margin:10px 0 4px}
+  .qbank-section-switch a{border:1px solid var(--border);background:var(--surface-alt);color:var(--text);border-radius:20px;padding:5px 14px;font-size:12.5px;text-decoration:none}
+  .qbank-section-switch a.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .qbank-toolbar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin:14px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;box-shadow:var(--shadow)}
+  .qbank-btn{border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+  .qbank-score{font-size:12.5px;font-weight:700;color:var(--brand);background:var(--surface-alt);border:1px solid var(--border);border-radius:20px;padding:4px 12px;margin-left:auto}
+  .qbank-case{margin:26px 0}
+  .qbank-case h3{font-size:16px;margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid var(--border)}
+  .qbank-marks{font-size:12px;font-weight:500;color:var(--text-muted)}
+  .qbank-scenario{background:var(--surface-alt);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius);padding:14px 16px;margin:0 0 14px;font-size:14px}
+  .qbank-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+  .qbank-meta{font-size:11px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;color:var(--brand);font-weight:700}
+  .qbank-q{margin:6px 0 8px;font-size:14.5px}
+  .qbank-opts{margin:0 0 10px 22px;padding:0;font-size:14px}
+  .qbank-opts li{margin:3px 0}
+  .qbank-opts label{display:flex;align-items:flex-start;gap:8px;cursor:pointer;padding:2px 4px;border-radius:4px}
+  .qbank-opts label:hover{background:var(--surface-alt)}
+  .qbank-opts input[type="radio"]{margin-top:3px;flex-shrink:0}
+  .qbank-reveal{border:1px solid var(--border);background:var(--surface-alt);color:var(--text);border-radius:6px;padding:5px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
+  .qbank-ans{margin-top:10px;padding-top:9px;border-top:1px dotted var(--border);font-size:13.5px}
+  .qbank-answer-line strong{color:var(--ok-text)}
+  .qbank-ref{display:inline-block;margin-top:4px;font-size:11.5px;color:var(--text-muted);border:1px solid var(--border);border-radius:4px;padding:1px 7px}
+  .qbank-verdict{font-weight:700;padding:6px 10px;border-radius:6px;margin:0 0 8px;font-size:13.5px}
+  .qbank-verdict:empty{display:none;margin:0;padding:0}
+  .qbank-verdict-ok{background:var(--ok-bg);color:var(--ok-text);border:1px solid var(--ok-border)}
+  .qbank-verdict-bad{background:var(--bad-bg);color:var(--bad-text);border:1px solid var(--bad-border)}
+  .qbank-verdict-warn{background:var(--warn-bg);color:var(--warn-text);border:1px solid var(--warn-border)}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <div class="brand">HK Tax Study Hub<small>Study aid — not professional advice</small></div>
+    <nav class="site-nav">
+      <a href="../index.html">Hub</a>
+      <a href="ird-updates.html">IRD What's New</a>
+      <a href="acca-tx-hkg.html">ACCA TX-HKG</a>
+      <a href="question-bank.html">Question Bank A</a>
+      <a href="question-bank-b.html" class="active">Question Bank B</a>
+      <a href="question-bank-c.html">Question Bank C</a>
+      <a href="computation-formats.html">Computation Formats</a>
+      <a href="tax-reconciliation.html">Tax Reconciliation</a>
+      <a href="transaction-checker.html">Transaction Checker</a>
+      <a href="dipn-index.html">DIPN Index</a>
+      <a href="profits-tax.html">Profits Tax</a>
+      <a href="profits-tax-entities.html">Profits Tax by Entity</a>
+      <a href="property-tax.html">Property Tax</a>
+      <a href="salaries-tax.html">Salaries Tax</a>
+      <a href="personal-assessment.html">Personal Assessment</a>
+      <a href="stamp-duty.html">Stamp Duty</a>
+      <a href="depreciation-allowances.html">Depreciation &amp; Allowances</a>
+      <a href="ird-administration.html">IRD Administration</a>
+      <a href="https://anthonymanhk.github.io/hkfrs-as-study-platform/" target="_blank" rel="noopener" title="Sister platform: HKFRS and HKAS">HKFRS / HKAS &#8599;</a>
+    </nav>
+    <button id="ai-prompt-btn" class="ai-prompt-btn" title="Copy a hardened HK-tax prompt to paste into your browser AI" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;margin-right:8px">AI Prompts</button>
+    <button id="theme-toggle" title="Toggle light/dark" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px">Theme</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="toc">
+    <h4>On this page</h4>
+    <a href="#overview">What this is</a>
+    <a href="#case1">Case 1 — Ms Fiona Ng</a>
+    <a href="#case2">Case 2 — Golden Horizon Ltd</a>
+    <a href="#case3">Case 3 — Harbour Partners</a>
+    <a href="#copyright">Originality</a>
+  </aside>
+
+  <main class="content">
+   <div class="qbank-app">
+    <div class="page-title">
+      <div>
+        <span class="badge badge-common">ACCA TX-HKG</span>
+        <h1>Question Bank — Section B</h1>
+        <p class="subtitle">ACCA TX-HKG &mdash; Section B, OT Case Questions &middot; 15 original questions across 3 integrated scenarios (30 marks), matching the exam's own case-question format: one set of facts, five linked questions, spanning more than one syllabus area at once.</p>
+      </div>
+    </div>
+      <div class="qbank-section-switch">
+        <a href="question-bank.html">Section A</a>
+        <a href="question-bank-b.html" class="active">Section B</a>
+        <a href="question-bank-c.html">Section C</a>
+      </div>
+
+    <section class="block" id="overview">
+      <h2>What this is</h2>
+      <p class="lede">Section B mirrors the exam's real OT case format: unlike Section A's single-fact questions, each case gives one connected scenario and asks five questions against it — so an early answer (a rental value, a share of profit) often feeds directly into a later one, exactly as it would in a real case.</p>
+      <div class="callout tip">
+        <span class="lbl">Same computation engine as Section A</span>
+        Every figure in every case was generated from and checked against <code>scripts/qbank_tax.py</code>, and each case's five questions were verified for internal consistency — an answer used in question 3 is the same figure question 1 or 2 established, not a fresh unrelated number.
+      </div>
+    </section>
+
+    <div class="qbank-toolbar">
+      <button type="button" class="qbank-btn qbank-reset-btn">Reset all three cases</button>
+      <span class="qbank-score" title="Correct answers out of questions you've checked so far">Score: 0 / 15</span>
+    </div>
+
+      <div class="qbank-case" id="case1">
+        <h3>Case 1 — Ms Fiona Ng <span class="qbank-marks">(10 marks)</span></h3>
+        <div class="qbank-scenario">Fiona Ng is employed as marketing manager by Silverline Retail Ltd, a company centrally managed and controlled in Hong Kong. Her annual salary for the year of assessment 2026/27 is $960,000. Silverline provides her with a self-contained flat, rent free, for the whole year; Fiona has no outgoings deductible under s.12(1)(a) against her salary.<br><br>Separately, Fiona wholly owns a second residential flat, which she lets out (unconnected with her employer) for the whole year at $18,000 a month. She personally paid rates of $6,500 for the year on that flat. She is single and claims only the basic allowance ($145,000 for 2026/27); she has no mortgage on either property and no other income, deductions or losses.</div>
+        <div class="qbank-item" data-case="case1" data-answer="0">
+          <div class="qbank-meta"><span class="qbank-topic">Rental value</span></div>
+          <p class="qbank-q"><strong>B001.</strong> What rental value must be included in Fiona's assessable income for the flat Silverline provides rent free?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B001" value="0"> $96,000</label></li>
+        <li><label><input type="radio" name="opt-B001" value="1"> $76,800</label></li>
+        <li><label><input type="radio" name="opt-B001" value="2"> $38,400</label></li>
+        <li><label><input type="radio" name="opt-B001" value="3"> $960,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: A &mdash; $96,000.</strong></p>
+            <p>The flat is self-contained accommodation, so the rate is 10% of income after s.12(1)(a) outgoings. With no outgoings to deduct, that base is her full salary: $960,000 &times; 10% = $96,000.</p>
+            <span class="qbank-ref">s.9(2)</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case1" data-answer="1">
+          <div class="qbank-meta"><span class="qbank-topic">Assessable income</span></div>
+          <p class="qbank-q"><strong>B002.</strong> What is Fiona's total assessable income from her employment for the year (salary plus the rental value of the flat)?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B002" value="0"> $960,000</label></li>
+        <li><label><input type="radio" name="opt-B002" value="1"> $1,056,000</label></li>
+        <li><label><input type="radio" name="opt-B002" value="2"> $1,152,000</label></li>
+        <li><label><input type="radio" name="opt-B002" value="3"> $1,036,800</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: B &mdash; $1,056,000.</strong></p>
+            <p>$960,000 salary + $96,000 rental value = $1,056,000. Omitting the rental value entirely, or computing it at the wrong percentage (8% applies to two hotel rooms, not a self-contained flat), are the two errors this question is designed to catch.</p>
+            <span class="qbank-ref">s.9(1)(a), s.9(2)</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case1" data-answer="2">
+          <div class="qbank-meta"><span class="qbank-topic">Property tax</span></div>
+          <p class="qbank-q"><strong>B003.</strong> What is the property tax payable on Fiona's own let flat for the year?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B003" value="0"> $25,920</label></li>
+        <li><label><input type="radio" name="opt-B003" value="1"> $31,425</label></li>
+        <li><label><input type="radio" name="opt-B003" value="2"> $25,140</label></li>
+        <li><label><input type="radio" name="opt-B003" value="3"> $32,400</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: C &mdash; $25,140.</strong></p>
+            <p>Assessable value $216,000 ($18,000 &times; 12); less rates paid <strong>by the owner</strong> $6,500 = $209,500; less the 20% statutory allowance $41,900 = net assessable value $167,600; &times; 15% = $25,140. Forgetting the rates deduction, forgetting the 20% allowance, or forgetting both and taxing the gross rent, each give one of the other three options.</p>
+            <span class="qbank-ref">ss.5, 5(1A)</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case1" data-answer="3">
+          <div class="qbank-meta"><span class="qbank-topic">Salaries tax computation</span></div>
+          <p class="qbank-q"><strong>B004.</strong> Ignoring any election for personal assessment, what is Fiona's salaries tax payable for the year?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B004" value="0"> $158,400</label></li>
+        <li><label><input type="radio" name="opt-B004" value="1"> $161,520</label></li>
+        <li><label><input type="radio" name="opt-B004" value="2"> $136,650</label></li>
+        <li><label><input type="radio" name="opt-B004" value="3"> $136,870</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: D &mdash; $136,870.</strong></p>
+            <p>Progressive rates on net chargeable income ($1,056,000 &minus; $145,000 allowance = $911,000) give $136,870; the standard rate on net income <strong>before</strong> allowances ($1,056,000) gives $158,400. Salaries tax payable is the lower of the two: $136,870. Applying the standard rate to income <em>after</em> allowances instead of before (giving $136,650) is a close-looking but wrong alternative route to this figure.</p>
+            <span class="qbank-ref">s.13</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case1" data-answer="0">
+          <div class="qbank-meta"><span class="qbank-topic">Personal assessment</span></div>
+          <p class="qbank-q"><strong>B005.</strong> Should Fiona elect personal assessment for the year?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B005" value="0"> No — total tax without electing ($162,010) is lower than with personal assessment ($165,362): there is no mortgage interest or loss for the election to unlock, and her income already sits in the 17% marginal band</label></li>
+        <li><label><input type="radio" name="opt-B005" value="1"> Yes — personal assessment always reduces tax for a taxpayer with property income</label></li>
+        <li><label><input type="radio" name="opt-B005" value="2"> Yes — electing lets her claim both the basic allowance and a separate property allowance</label></li>
+        <li><label><input type="radio" name="opt-B005" value="3"> It makes no difference either way</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: A &mdash; No — total tax without electing ($162,010) is lower than with personal assessment ($165,362): there is no mortgage interest or loss for the election to unlock, and her income already sits in the 17% marginal band.</strong></p>
+            <p>Without electing: salaries tax $136,870 + property tax $25,140 = $162,010. Electing aggregates both incomes ($1,223,600) less the same one basic allowance, computed at progressive rates capped by the standard rate on reduced total income: $165,362. Aggregating drags the property income into her 17% marginal band, above the flat 15% property tax rate, and there is nothing else (no mortgage interest, no loss) for the election to unlock — so electing costs her $3,352 more, not less. Compute both ways; never assume personal assessment helps.</p>
+            <span class="qbank-ref">s.41-43</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="qbank-case" id="case2">
+        <h3>Case 2 — Golden Horizon Ltd <span class="qbank-marks">(10 marks)</span></h3>
+        <div class="qbank-scenario">Golden Horizon Ltd, a Hong Kong trading company, reports an accounting profit before tax of $5,000,000 for the year ended 31 March 2027. Its accounts include depreciation of $300,000 and a fine of $20,000 for a pollution control breach, and it paid $150,000 in approved charitable donations, all charged as expenses.<br><br>During the year Golden Horizon bought qualifying plant for $500,000 (the 20% pool's written-down value brought forward was $200,000, and there were no disposals), and incurred $1,000,000 of qualifying Type B R&amp;D expenditure, which is included in the $1,000,000 already charged as an expense in arriving at the accounting profit above. The company has no connected entities for the two-tier regime.</div>
+        <div class="qbank-item" data-case="case2" data-answer="1">
+          <div class="qbank-meta"><span class="qbank-topic">Depreciation allowances</span></div>
+          <p class="qbank-q"><strong>B006.</strong> What is the total depreciation allowance available on the plant pool for the year?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B006" value="0"> $300,000</label></li>
+        <li><label><input type="radio" name="opt-B006" value="1"> $380,000</label></li>
+        <li><label><input type="radio" name="opt-B006" value="2"> $80,000</label></li>
+        <li><label><input type="radio" name="opt-B006" value="3"> $440,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: B &mdash; $380,000.</strong></p>
+            <p>Initial allowance: $500,000 additions &times; 60% = $300,000. Reduced pool: $200,000 + $500,000 &minus; $300,000 = $400,000. Annual allowance at 20%: $80,000. Total = IA $300,000 + AA $80,000 = $380,000. Taking the IA alone, the AA alone, or computing the AA on the pool <strong>before</strong> deducting the IA, each give one of the other three options.</p>
+            <span class="qbank-ref">s.39B; Sch. 3</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case2" data-answer="2">
+          <div class="qbank-meta"><span class="qbank-topic">R&amp;D deduction</span></div>
+          <p class="qbank-q"><strong>B007.</strong> Beyond the $1,000,000 already charged as an expense in the accounts, what additional deduction is available for the qualifying Type B R&amp;D expenditure?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B007" value="0"> $3,000,000</label></li>
+        <li><label><input type="radio" name="opt-B007" value="1"> $1,000,000</label></li>
+        <li><label><input type="radio" name="opt-B007" value="2"> $2,000,000</label></li>
+        <li><label><input type="radio" name="opt-B007" value="3"> $1,500,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: C &mdash; $2,000,000.</strong></p>
+            <p>Type B R&amp;D is enhanced at 300% on the first $2,000,000: $1,000,000 &times; 3 = $3,000,000 total allowable deduction. $1,000,000 of that is already in the accounting profit, so the <strong>additional</strong> deduction still to be made in the computation is $3,000,000 &minus; $1,000,000 = $2,000,000. Stating the total enhanced deduction ($3,000,000) as if it were the additional amount is the commonest error - it double-counts the $1,000,000 already expensed.</p>
+            <span class="qbank-ref">s.16B</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case2" data-answer="3">
+          <div class="qbank-meta"><span class="qbank-topic">Donations</span></div>
+          <p class="qbank-q"><strong>B008.</strong> What is the maximum charitable donation deduction Golden Horizon may claim?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B008" value="0"> $1,081,500</label></li>
+        <li><label><input type="radio" name="opt-B008" value="1"> $52,500</label></li>
+        <li><label><input type="radio" name="opt-B008" value="2"> $0</label></li>
+        <li><label><input type="radio" name="opt-B008" value="3"> $150,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: D &mdash; $150,000.</strong></p>
+            <p>The allowable deduction is the <strong>lower</strong> of the amount paid ($150,000) and 35% of assessable profits before donations ($1,081,500), so the full $150,000 paid is deductible — well within the $1,081,500 cap. Stating the cap itself, rather than the lower of the two, is a common error.</p>
+            <span class="qbank-ref">s.16D</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case2" data-answer="0">
+          <div class="qbank-meta"><span class="qbank-topic">Assessable profit</span></div>
+          <p class="qbank-q"><strong>B009.</strong> What is Golden Horizon's assessable profit for the year?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B009" value="0"> $2,940,000</label></li>
+        <li><label><input type="radio" name="opt-B009" value="1"> $3,090,000</label></li>
+        <li><label><input type="radio" name="opt-B009" value="2"> $3,470,000</label></li>
+        <li><label><input type="radio" name="opt-B009" value="3"> $5,470,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: A &mdash; $2,940,000.</strong></p>
+            <p>$5,000,000 accounting profit + $300,000 depreciation + $150,000 donations + $20,000 fine = $5,470,000. Less the additional R&amp;D deduction $2,000,000 = $3,470,000. Less depreciation allowances $380,000 = $3,090,000 (the base for the donation cap). Less the donation deduction $150,000 = assessable profit $2,940,000. Stopping before deducting the donation, or before deducting the depreciation allowances, gives one of the other two wrong figures.</p>
+            <span class="qbank-ref">s.14, s.16, s.17</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case2" data-answer="1">
+          <div class="qbank-meta"><span class="qbank-topic">Two-tier profits tax</span></div>
+          <p class="qbank-q"><strong>B010.</strong> What is Golden Horizon's profits tax payable for the year?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B010" value="0"> $485,100</label></li>
+        <li><label><input type="radio" name="opt-B010" value="1"> $320,100</label></li>
+        <li><label><input type="radio" name="opt-B010" value="2"> $242,550</label></li>
+        <li><label><input type="radio" name="opt-B010" value="3"> $344,850</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: B &mdash; $320,100.</strong></p>
+            <p>The two-tier rates apply to the final assessable profit of $2,940,000: ($2,000,000 &times; 8.25%) + ($940,000 &times; 16.5%) = $320,100. Applying a flat 16.5% or flat 8.25% to the whole profit, or applying the two-tier rates to the wrong (pre-donation) profit figure of $3,090,000, each give one of the other three options.</p>
+            <span class="qbank-ref">s.14AA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="qbank-case" id="case3">
+        <h3>Case 3 — Harbour Partners <span class="qbank-marks">(10 marks)</span></h3>
+        <div class="qbank-scenario">Harbour Partners is a Hong Kong partnership with two partners: Mr Tam, an individual, holding a 60% profit share, and Silver Bay Ltd, a corporate partner, holding the remaining 40%. The partnership's assessable profit for the year is $4,000,000, allocated in that profit-sharing ratio, with each partner's two-tier $2,000,000 band apportioned in the same ratio.<br><br>Mr Tam's own tax on his share remained unpaid more than six months after the due date - specifically 7 months overdue when he finally settled it.</div>
+        <div class="qbank-item" data-case="case3" data-answer="2">
+          <div class="qbank-meta"><span class="qbank-topic">Partnership allocation</span></div>
+          <p class="qbank-q"><strong>B011.</strong> What is Mr Tam's share of the partnership's assessable profit?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B011" value="0"> $1,600,000</label></li>
+        <li><label><input type="radio" name="opt-B011" value="1"> $4,000,000</label></li>
+        <li><label><input type="radio" name="opt-B011" value="2"> $2,400,000</label></li>
+        <li><label><input type="radio" name="opt-B011" value="3"> $2,000,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: C &mdash; $2,400,000.</strong></p>
+            <p>$4,000,000 &times; 60% = $2,400,000. Using Silver Bay's 40% share instead, using the whole partnership profit unallocated, or misapplying a 50:50 split, each give one of the other three options.</p>
+            <span class="qbank-ref">s.22</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case3" data-answer="3">
+          <div class="qbank-meta"><span class="qbank-topic">Corporate partner's tax</span></div>
+          <p class="qbank-q"><strong>B012.</strong> What is Silver Bay Ltd's own profits tax payable on its 40% share, applying the two-tier rates to its apportioned band?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B012" value="0"> $264,000</label></li>
+        <li><label><input type="radio" name="opt-B012" value="1"> $132,000</label></li>
+        <li><label><input type="radio" name="opt-B012" value="2"> $270,000</label></li>
+        <li><label><input type="radio" name="opt-B012" value="3"> $198,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: D &mdash; $198,000.</strong></p>
+            <p>Silver Bay's share is $1,600,000, with an apportioned first-tier band of $800,000 ($2,000,000 &times; 40%) at the corporate rates: ($800,000 &times; 8.25%) + ($800,000 &times; 16.5%) = $198,000. Applying a flat 16.5% or flat 8.25% to the whole share, ignoring the apportioned band, or stating Mr Tam's figure instead, each give one of the other three options.</p>
+            <span class="qbank-ref">s.14AA; DIPN 28</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case3" data-answer="0">
+          <div class="qbank-meta"><span class="qbank-topic">Individual partner's tax</span></div>
+          <p class="qbank-q"><strong>B013.</strong> What is Mr Tam's own profits tax payable on his 60% share, applying the two-tier rates to his apportioned band?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B013" value="0"> $270,000</label></li>
+        <li><label><input type="radio" name="opt-B013" value="1"> $198,000</label></li>
+        <li><label><input type="radio" name="opt-B013" value="2"> $360,000</label></li>
+        <li><label><input type="radio" name="opt-B013" value="3"> $180,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: A &mdash; $270,000.</strong></p>
+            <p>Mr Tam's share is $2,400,000, with an apportioned first-tier band of $1,200,000 ($2,000,000 &times; 60%) at the unincorporated rates: ($1,200,000 &times; 7.5%) + ($1,200,000 &times; 15%) = $270,000. Applying a flat 15% or flat 7.5% to the whole share, or stating Silver Bay's figure instead, each give one of the other three options.</p>
+            <span class="qbank-ref">s.14AA; DIPN 28</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case3" data-answer="1">
+          <div class="qbank-meta"><span class="qbank-topic">Total partnership tax</span></div>
+          <p class="qbank-q"><strong>B014.</strong> What is the total profits tax payable in respect of Harbour Partners' profit for the year?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B014" value="0"> $660,000</label></li>
+        <li><label><input type="radio" name="opt-B014" value="1"> $468,000</label></li>
+        <li><label><input type="radio" name="opt-B014" value="2"> $495,000</label></li>
+        <li><label><input type="radio" name="opt-B014" value="3"> $450,000</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: B &mdash; $468,000.</strong></p>
+            <p>The partnership is not itself taxed; the total is simply the sum of what each partner pays on their own apportioned share: $270,000 + $198,000 = $468,000. Applying one flat rate to the whole $4,000,000 as if it were a single corporate taxpayer (16.5%), a single unincorporated taxpayer at the flat rate, or the two-tier corporate rates without regard to Mr Tam's individual rate, each give one of the other three - and each ignores that a mixed partnership has more than one type of partner.</p>
+            <span class="qbank-ref">s.14AA; DIPN 28</span>
+          </div>
+        </div>
+
+        <div class="qbank-item" data-case="case3" data-answer="2">
+          <div class="qbank-meta"><span class="qbank-topic">Late payment surcharge</span></div>
+          <p class="qbank-q"><strong>B015.</strong> Mr Tam's own tax of $270,000 on his share was paid 7 months after the due date. What is the total amount he actually had to pay, including surcharges?</p>
+          <ol type="A" class="qbank-opts">
+        <li><label><input type="radio" name="opt-B015" value="0"> $283,500</label></li>
+        <li><label><input type="radio" name="opt-B015" value="1"> $297,000</label></li>
+        <li><label><input type="radio" name="opt-B015" value="2"> $311,850</label></li>
+        <li><label><input type="radio" name="opt-B015" value="3"> $310,500</label></li>
+          </ol>
+          <button type="button" class="qbank-reveal">Show answer</button>
+          <div class="qbank-ans" hidden>
+            <p class="qbank-verdict"></p>
+            <p class="qbank-answer-line"><strong>Correct: C &mdash; $311,850.</strong></p>
+            <p>A 5% surcharge arises on the due date: $270,000 &times; 1.05 = $283,500. Because it remained unpaid beyond 6 months, a further 10% is charged on the tax <strong>plus</strong> that first surcharge: $283,500 &times; 1.10 = $311,850. Stopping at the first 5% surcharge, applying a flat 10% instead of the compounding two-step charge, or applying the second 10% to the original tax rather than to tax-plus-first-surcharge, each give one of the other three options.</p>
+            <span class="qbank-ref">s.71(5), s.71(5A)</span>
+          </div>
+        </div>
+      </div>
+
+
+    <section class="block" id="copyright">
+      <h2>Originality</h2>
+      <p>Every case and question on this page is original, written for this Hub in the exam's own case-question format. See the <a href="acca-tx-hkg.html#copyright">ACCA TX-HKG page</a> for the fuller statement of what is and is not reproduced anywhere on this Hub.</p>
+    </section>
+
+    <div class="section-nav">
+      <a href="question-bank.html">&larr; Question Bank A</a>
+      <a href="question-bank-c.html">Question Bank C &rarr;</a>
+    </div>
+
+    <script>
+    (function(){
+      var root = document.currentScript.closest('.qbank-app');
+      if (!root) return;
+      var items = Array.prototype.slice.call(root.querySelectorAll('.qbank-item'));
+      var scoreEl = root.querySelector('.qbank-score');
+      var letters = ['A', 'B', 'C', 'D'];
+      var grades = new Map();
+
+      function updateScore(){
+        if (!scoreEl) return;
+        var correct = 0, answered = 0;
+        grades.forEach(function(v){
+          if (v === true || v === false) { answered++; if (v === true) correct++; }
+        });
+        scoreEl.textContent = 'Score: ' + correct + ' / ' + answered;
+      }
+
+      function gradeItem(it){
+        var verdict = it.querySelector('.qbank-verdict');
+        if (!verdict) return;
+        var picked = it.querySelector('input[type="radio"]:checked');
+        if (!picked) {
+          grades.set(it, 'unanswered');
+          verdict.className = 'qbank-verdict qbank-verdict-warn';
+          verdict.textContent = "You didn't select an answer \u2014 pick one before checking, next time.";
+        } else {
+          var chosen = parseInt(picked.value, 10);
+          var correctIdx = parseInt(it.getAttribute('data-answer'), 10);
+          var isCorrect = chosen === correctIdx;
+          grades.set(it, isCorrect);
+          verdict.className = 'qbank-verdict ' + (isCorrect ? 'qbank-verdict-ok' : 'qbank-verdict-bad');
+          verdict.textContent = isCorrect
+            ? 'Correct \u2713'
+            : ('Incorrect \u2717 \u2014 you selected ' + letters[chosen] + '.');
+        }
+        updateScore();
+      }
+
+      root.querySelectorAll('.qbank-reveal').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var ans = btn.nextElementSibling;
+          var isHidden = ans.hasAttribute('hidden');
+          if (isHidden) {
+            ans.removeAttribute('hidden');
+            btn.textContent = 'Hide answer';
+            gradeItem(btn.closest('.qbank-item'));
+          } else {
+            ans.setAttribute('hidden', '');
+            btn.textContent = 'Show answer';
+          }
+        });
+      });
+
+      var resetBtn = root.querySelector('.qbank-reset-btn');
+      if (resetBtn) resetBtn.addEventListener('click', function(){
+        grades = new Map();
+        items.forEach(function(it){
+          var verdict = it.querySelector('.qbank-verdict');
+          if (verdict) { verdict.className = 'qbank-verdict'; verdict.textContent = ''; }
+          it.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+          var ans = it.querySelector('.qbank-ans');
+          if (ans) ans.setAttribute('hidden', '');
+          var revealBtn = it.querySelector('.qbank-reveal');
+          if (revealBtn) revealBtn.textContent = 'Show answer';
+        });
+        updateScore();
+      });
+
+      updateScore();
+    })();
+    </script>
+   </div>
+  </main>
+</div>
+
+<footer class="site-footer">HK Tax Study Hub — study aid, not professional advice. Not affiliated with or endorsed by ACCA. Verify against the Inland Revenue Ordinance (Cap. 112) and current IRD guidance before relying on any figure.</footer>
+
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/ai-prompt.js"></script>
+</body>
+</html>
