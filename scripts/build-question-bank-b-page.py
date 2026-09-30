@@ -107,7 +107,7 @@ def main():
         data = json.load(f)
     cases = data["cases"]
     total = sum(len(c["questions"]) for c in cases)
-    marks = total * 2
+    sittings = len(cases) // 3
 
     cases_html = "\n".join(render_case(c, i + 1) for i, c in enumerate(cases))
 
@@ -175,7 +175,7 @@ def main():
       <div>
         <span class="badge badge-common">ACCA TX-HKG</span>
         <h1>Question Bank — Section B</h1>
-        <p class="subtitle">ACCA TX-HKG &mdash; Section B, OT Case Questions &middot; %d original questions across 3 integrated scenarios (%d marks), matching the exam's own case-question format: one set of facts, five linked questions, spanning more than one syllabus area at once.</p>
+        <p class="subtitle">ACCA TX-HKG &mdash; Section B, OT Case Questions &middot; %d original questions across %d integrated scenarios, matching the exam's own case-question format: one set of facts, five linked questions, spanning more than one syllabus area at once. A real Section B is 3 cases / 15 questions / 30 marks, so this is %d full sittings' worth.</p>
       </div>
     </div>
 %s
@@ -288,7 +288,7 @@ def main():
 <script src="../assets/js/ai-prompt.js"></script>
 </body>
 </html>
-""" % (NAV, total, marks, SECTION_SWITCH, total, cases_html)
+""" % (NAV, total, len(cases), sittings, SECTION_SWITCH, total, cases_html)
 
     with io.open(OUT, "w", encoding="utf-8") as f:
         f.write(html)

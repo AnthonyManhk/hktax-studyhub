@@ -354,8 +354,275 @@ def case3():
     return dict(id="case3", label="Harbour Partners", scenario=scenario, questions=items)
 
 
+# ===========================================================================
+# CASE 4 - Lau's Trading: sole proprietorship, s.17(2) and s.16AA
+# ===========================================================================
+def case4():
+    scenario = (
+        "Kenneth Lau runs Lau's Trading as a <strong>sole proprietorship</strong>. "
+        "Its accounts for the year show a net profit of $1,800,000, after charging "
+        "the following as expenses: a monthly “salary” of $50,000 drawn by "
+        "Kenneth himself ($600,000 for the year), a salary of $240,000 paid to his "
+        "wife, who works full time managing the shop, and depreciation of "
+        "$80,000.<br><br>"
+        "Depreciation allowances for the year have been computed at $120,000. "
+        "Kenneth also made the mandatory MPF contribution of $18,000 in respect of "
+        "himself as a self-employed person; this was <strong>not</strong> charged in "
+        "the accounts above."
+    )
+    items = []
+
+    o, a = opts(M(840000), M(600000), M(240000), M(0))
+    items.append(q(
+        "s.17(2) payments to the proprietor",
+        "How much must be added back in respect of the salaries paid to Kenneth "
+        "and to his wife?",
+        o, a,
+        "Both are added back: %s (Kenneth) + %s (his wife) = %s. A sole proprietor "
+        "cannot be their own employee, and s.17(2) extends the same treatment to a "
+        "payment to the proprietor's <strong>spouse</strong> — however genuinely "
+        "she works in the business, husband and wife are not treated as at arm's "
+        "length for this purpose. Adding back only one of the two is the error this "
+        "question tests." % (M(600000), M(240000), M(840000)),
+        "s.17(2)"))
+
+    o, a = opts(M(18000), M(36000), M(0), M(60000))
+    items.append(q(
+        "s.16AA MPF deduction",
+        "What deduction may the business claim for Kenneth's own mandatory MPF "
+        "contribution as a self-employed person?",
+        o, a,
+        "Section 16AA allows the proprietor's own mandatory contribution as a "
+        "deduction in the profits tax computation, capped at the statutory maximum "
+        "of %s. It was not charged in the accounts, so it is deducted in the "
+        "computation. Answering nil — on the reasoning that a proprietor's own "
+        "payments are never deductible — confuses this with the s.17(2) salary "
+        "rule; MPF is the deliberate exception." % M(18000),
+        "s.16AA"))
+
+    o, a = opts(M(2582000), M(2600000), M(2342000), M(2720000))
+    items.append(q(
+        "Assessable profit",
+        "What is Lau's Trading's assessable profit for the year?",
+        o, a,
+        "%s net profit + %s salaries added back under s.17(2) + %s depreciation = "
+        "%s; less depreciation allowances %s and the s.16AA MPF deduction %s = %s. "
+        "Forgetting the MPF deduction, forgetting the wife's salary, or forgetting "
+        "the depreciation allowances each give one of the other three options."
+        % (M(1800000), M(840000), M(80000), M(2720000), M(120000), M(18000),
+           M(2582000)),
+        "ss.16, 16AA, 17(2)"))
+
+    o, a = opts(M(237300), M(261030), M(387300), M(193650))
+    items.append(q(
+        "Two-tier profits tax",
+        "What is the profits tax payable by Lau's Trading?",
+        o, a,
+        "A sole proprietorship is an <strong>unincorporated</strong> business, so "
+        "the two-tier rates are 7.5%% and 15%%, not the corporate 8.25%%/16.5%%: "
+        "(2,000,000 &times; 7.5%%) + (%s &times; 15%%) = %s. Using the corporate "
+        "rates gives %s and is the commonest slip here."
+        % (M(2582000 - 2000000), M(237300), M(261030)),
+        "s.14AA"))
+
+    o, a = opts(
+        "Elect personal assessment, which lets the current-year business loss be "
+        "set against his salary in the same year",
+        "Nothing — a sole proprietor's loss can only ever be carried forward "
+        "against future profits of the same business",
+        "Carry the loss back against the previous year's profits",
+        "Surrender the loss to his wife against her own income")
+    items.append(q(
+        "Loss relief",
+        "Suppose instead that Lau's Trading had made a loss for the year, and "
+        "Kenneth also had salary income from a part-time job. What could he do to "
+        "relieve the loss against that salary in the same year?",
+        o, a,
+        "Within profits tax alone the loss is simply carried forward (s.19C) and "
+        "cannot touch his salary. Electing <strong>personal assessment</strong> "
+        "aggregates all his chargeable income, letting the current-year business "
+        "loss shelter the salary. Hong Kong has no carry-back and no transfer of "
+        "losses between spouses.",
+        "ss.19C, 42(1)"))
+
+    return dict(id="case4", label="Lau's Trading", scenario=scenario, questions=items)
+
+
+# ===========================================================================
+# CASE 5 - Priya Sharma: share options, gratuity, concessionary deductions
+# ===========================================================================
+def case5():
+    scenario = (
+        "Priya Sharma has a Hong Kong employment with an annual salary of "
+        "$1,200,000 for the year of assessment 2026/27.<br><br>"
+        "During the year she exercised a share option granted to her by her "
+        "employer in an earlier year. The market value of the shares on the date "
+        "of exercise was $850,000 and she paid the exercise price of $500,000. On "
+        "completing her fixed-term contract she also received a gratuity of "
+        "$200,000, payable under the terms of that contract.<br><br>"
+        "She paid $135,000 of mortgage interest on the flat she lives in herself, "
+        "and made the mandatory MPF contribution of $18,000. She is married and her "
+        "husband has no income; the married person's allowance is $290,000."
+    )
+    items = []
+
+    o, a = opts(M(350000), M(850000), M(500000), "Nil — a gain on shares is capital")
+    items.append(q(
+        "Share options",
+        "What amount of the share option gain is assessable to salaries tax?",
+        o, a,
+        "The charge falls on exercise, on the <strong>gain</strong>: market value at "
+        "exercise %s less the exercise price paid %s = %s. Assessing the full market "
+        "value, or treating the gain as a capital gain outside the charge, are both "
+        "wrong — an employee share option gain is specifically brought into "
+        "charge by s.9(1)(d)." % (M(850000), M(500000), M(350000)),
+        "s.9(1)(d); DIPN 38"))
+
+    o, a = opts(
+        "Assessable in full — it is payable under the contract, so it rewards "
+        "services",
+        "Not assessable — it is compensation for loss of office",
+        "Assessable at 50% as a terminal payment",
+        "Not assessable because it was paid after the contract ended")
+    items.append(q(
+        "Termination payments",
+        "How is the $200,000 contract-completion gratuity treated?",
+        o, a,
+        "A gratuity payable <strong>under the contract</strong> on completing it is a "
+        "reward for services and is fully assessable. Contrast a genuine statutory "
+        "severance or long service payment under the Employment Ordinance, which is "
+        "compensation for loss of office and is not assessable — that is the "
+        "distinction being tested.",
+        "s.8(1)"))
+
+    o, a = opts(M(100000), M(135000), M(120000), M(0))
+    items.append(q(
+        "Home loan interest",
+        "What deduction may Priya claim for the $135,000 of home loan interest?",
+        o, a,
+        "Home loan interest on the taxpayer's own dwelling is deductible but capped "
+        "at %s a year (the %s figure applies only where there is a qualifying "
+        "child), so %s of the %s paid is allowed and the excess simply lapses."
+        % (M(100000), M(120000), M(100000), M(135000)),
+        "ss.26E, 26F"))
+
+    o, a = opts(M(1632000), M(1750000), M(1602000), M(1732000))
+    items.append(q(
+        "Net income",
+        "What is Priya's net income for the year, after deductions but before "
+        "allowances?",
+        o, a,
+        "Assessable income %s salary + %s option gain + %s gratuity = %s; less the "
+        "capped home loan interest %s and MPF %s = %s."
+        % (M(1200000), M(350000), M(200000), M(1750000), M(100000), M(18000),
+           M(1632000)),
+        "ss.12, 26E, 26G"))
+
+    o, a = opts(M(210140), M(244800), M(201300), M(263840))
+    items.append(q(
+        "Salaries tax payable",
+        "What is Priya's salaries tax payable for the year?",
+        o, a,
+        "Progressive rates on net chargeable income (%s &minus; %s allowance = %s) "
+        "give %s; the standard rate on net income <strong>before</strong> allowances "
+        "(%s &times; 15%%) gives %s. The lower of the two is %s."
+        % (M(1632000), M(290000), M(1342000), M(210140), M(1632000), M(244800),
+           M(210140)),
+        "s.13"))
+
+    return dict(id="case5", label="Ms Priya Sharma", scenario=scenario, questions=items)
+
+
+# ===========================================================================
+# CASE 6 - Mr Wong: property tax with irrecoverable rent and a lease premium
+# ===========================================================================
+def case6():
+    scenario = (
+        "Wong Kwok-keung owns two properties in Hong Kong, both let in his own "
+        "name.<br><br>"
+        "<strong>Flat A</strong> was let for the whole year at $30,000 a month. "
+        "Wong paid rates of $12,000 on it. The tenant defaulted and $60,000 of the "
+        "year's rent was proved to be irrecoverable during the year.<br><br>"
+        "<strong>Flat B</strong> was let under a new <strong>four-year</strong> "
+        "lease granted at the start of the year, for which Wong received a premium "
+        "of $360,000. No periodic rent is payable on Flat B, and the tenant pays "
+        "the rates on it direct to the Government."
+    )
+    items = []
+
+    o, a = opts(M(300000), M(360000), M(288000), M(240000))
+    items.append(q(
+        "Irrecoverable rent",
+        "What is the assessable value of Flat A for the year, before deducting "
+        "rates and the statutory allowance?",
+        o, a,
+        "Rent for the year %s (%s &times; 12) less the %s proved irrecoverable "
+        "during the year = %s. Section 7C(1) gives the deduction in the year the "
+        "rent is <strong>recognised as irrecoverable</strong>, not the year it "
+        "accrued." % (M(360000), M(30000), M(60000), M(300000)),
+        "ss.5B(2), 7C(1)"))
+
+    o, a = opts(M(34560), M(43200), M(38880), M(45000))
+    items.append(q(
+        "Flat A property tax",
+        "What is the property tax payable on Flat A?",
+        o, a,
+        "Assessable value %s; less rates paid by the owner %s = %s; less the 20%% "
+        "statutory allowance %s = net assessable value %s; &times; 15%% = %s."
+        % (M(300000), M(12000), M(288000), M(57600), M(230400), M(34560)),
+        "ss.5, 5(1A)"))
+
+    o, a = opts(M(120000), M(90000), M(360000), M(30000))
+    items.append(q(
+        "Lease premium",
+        "How much of Flat B's premium falls into the assessable value for this "
+        "year?",
+        o, a,
+        "A premium is spread over the lease term <strong>or 36 months, whichever "
+        "is shorter</strong>. The lease runs four years (48 months), so the 36-month "
+        "cap bites: %s &divide; 36 &times; 12 = %s for the year. Spreading over the "
+        "full 48 months gives %s and is the error the cap exists to catch."
+        % (M(360000), M(120000), M(90000)),
+        "s.5B(4)"))
+
+    o, a = opts(M(48960), M(34560), M(14400), M(45360))
+    items.append(q(
+        "Total property tax",
+        "What is Wong's total property tax liability for the year on both "
+        "properties?",
+        o, a,
+        "Property tax is computed <strong>property by property</strong>, each with "
+        "its own rates deduction and its own 20%% allowance: Flat A %s + Flat B %s "
+        "(net assessable value %s &times; 15%%) = %s. Flat B has no owner's rates to "
+        "deduct because the tenant pays them direct."
+        % (M(34560), M(14400), M(96000), M(48960)),
+        "s.5"))
+
+    o, a = opts(
+        "Apply for exemption under s.5(2)(a), the rental income being included in "
+        "its profits tax computation instead",
+        "Nothing — a company pays both property tax and profits tax on the same "
+        "rent with no relief",
+        "Claim depreciation allowances on the building against the property tax",
+        "Pay property tax at the corporate rate of 16.5% instead of 15%")
+    items.append(q(
+        "Corporate owners",
+        "Suppose Flat B were instead owned by a Hong Kong company carrying on "
+        "business here. What relief from property tax would be available?",
+        o, a,
+        "A corporation carrying on a trade or business in Hong Kong may apply under "
+        "s.5(2)(a) for exemption from property tax where the income is brought into "
+        "its profits tax computation. Without that application property tax is "
+        "charged and then <strong>set off</strong> against the profits tax payable "
+        "under s.25 — so the rent is not taxed twice either way, but the "
+        "exemption is the cleaner route.",
+        "ss.5(2)(a), 25"))
+
+    return dict(id="case6", label="Mr Wong Kwok-keung", scenario=scenario, questions=items)
+
+
 if __name__ == "__main__":
-    CASES = [case1(), case2(), case3()]
+    CASES = [case1(), case2(), case3(), case4(), case5(), case6()]
     total_q = sum(len(c["questions"]) for c in CASES)
 
     # Duplicate guard, same convention as Section A.
