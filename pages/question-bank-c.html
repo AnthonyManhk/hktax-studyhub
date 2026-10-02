@@ -68,6 +68,8 @@
     <a href="#q4">Question 4 — Summit &amp; Vale Partners (25 marks)</a>
     <a href="#q5">Question 5 — Mr Daniel Lau (15 marks)</a>
     <a href="#q6">Question 6 — JadeTech Manufacturing Ltd (25 marks)</a>
+    <a href="#q7">Question 7 — Harbor Link Sourcing Ltd (15 marks)</a>
+    <a href="#q8">Question 8 — East Point Design Ltd (25 marks)</a>
     <a href="#copyright">Originality</a>
   </aside>
 
@@ -76,7 +78,7 @@
       <div>
         <span class="badge badge-common">ACCA TX-HKG</span>
         <h1>Question Bank — Section C</h1>
-        <p class="subtitle">ACCA TX-HKG — Section C, Constructed Response Questions · 6 original long-form questions (three 15-mark and three 25-mark), matching the exam's own format — full scenario, a graded model answer laid out as a real computation, and marks allocated line by line. A real Section C is one 15-mark and one 25-mark question, so this is 3 full sittings' worth, covering salaries tax, profits tax, property tax, partnerships, badges of trade and depreciation allowances.</p>
+        <p class="subtitle">ACCA TX-HKG — Section C, Constructed Response Questions · 8 original long-form questions (four 15-mark and four 25-mark), matching the exam's own format — full scenario, a graded model answer laid out as a real computation, and marks allocated line by line. A real Section C is one 15-mark and one 25-mark question, so this is 4 full sittings' worth, covering salaries tax, profits tax, property tax, partnerships, badges of trade, depreciation allowances, offshore claims and IRD administration.</p>
       </div>
     </div>
 
@@ -91,7 +93,7 @@
       <p class="lede">Section C mirrors the exam's constructed-response questions: no multiple choice here — each question gives a scenario and asks you to prepare an actual computation or a written explanation, the same way you would in the exam itself. Attempt each part on paper first, then open the model answer to mark your own work.</p>
       <div class="callout tip">
         <span class="lbl">Same computation engine as Sections A and B</span>
-        Every figure in all six model answers was generated from and checked against <code>scripts/qbank_tax.py</code>, the same module behind Section A's and Section B's answers — nothing here was worked out by hand and left unchecked.
+        Every figure in all eight model answers was generated from and checked against <code>scripts/qbank_tax.py</code>, the same module behind Section A's and Section B's answers — nothing here was worked out by hand and left unchecked.
       </div>
     </section>
 
@@ -403,9 +405,72 @@
       </details>
     </section>
 
+    <section class="block" id="q7">
+      <h2>Question 7 — Harbor Link Sourcing Ltd (15 marks)</h2>
+      <div class="qbox">
+        <h3>Scenario<span class="marks">15 marks</span></h3>
+        <p>Harbor Link Sourcing Ltd is incorporated and managed in Hong Kong. During the year ended 31 March 2027 it earned net sourcing commission profit of $3,200,000 from overseas customers who bought electronic components from factories in Mainland China.</p>
+        <p>Harbor Link's Hong Kong staff found suppliers, negotiated prices and specifications, arranged purchase orders and dealt with quality complaints from its office in Hong Kong. Factory visits and shipment inspections in Mainland China were carried out by independent contractors engaged job by job. Customers signed their master supply agreements outside Hong Kong and paid Harbor Link into an overseas bank account.</p>
+        <p class="part">(a) Advise whether Harbor Link's offshore claim is likely to succeed. (10 marks)</p>
+        <p class="part">(b) If the whole profit is taxable in Hong Kong, compute the profits tax payable. (5 marks)</p>
+      </div>
+
+      <details class="model-answer">
+        <summary>Show model answer</summary>
+        <p><strong>(a) (10 marks):</strong> The charge under <strong>s.14</strong> is on profits arising in or derived from Hong Kong from a trade, profession or business carried on here (1 mark). The company carries on business in Hong Kong: it is incorporated and managed here and its staff conduct the sourcing business from the Hong Kong office (1 mark). Source is decided by identifying the profit-producing operations and where those operations take place, not by asking where the customer is resident or where money is banked (1 mark). For a sourcing commission business, the relevant operations are finding suppliers, negotiating price and specifications, arranging purchase orders and handling performance problems (2 marks). Those core operations were performed by Harbor Link's own staff in Hong Kong (1 mark). The Mainland factory visits and inspections were ancillary execution work, and they were performed by independent contractors rather than by Harbor Link's own profit-producing team (1 mark). Signing master agreements outside Hong Kong is not decisive if the commercial work that earned the commission was done in Hong Kong (1 mark). The overseas bank account is administrative evidence, not a source rule (1 mark). Harbor Link bears the burden of proving the facts supporting an offshore claim under <strong>s.68(4)</strong>; on these facts the claim is unlikely to succeed (1 mark).</p>
+
+        <div class="proforma">
+          <table class="right">
+            <caption>(b) Harbor Link Sourcing Ltd — Profits Tax if the Offshore Claim Fails, YA 2026/27</caption>
+            <tbody>
+              <tr><th>Assessable profits</th><td class="num">3,200,000</td></tr>
+              <tr><td class="sub">First $2,000,000 at 8.25% <span class="note-no">(2 marks)</span></td><td class="num">165,000</td></tr>
+              <tr><td class="sub">Balance $1,200,000 at 16.5% <span class="note-no">(2 marks)</span></td><td class="num">198,000</td></tr>
+              <tr class="dbl"><th>Profits tax payable <span class="note-no">(1 mark)</span></th><td class="num">363,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Total for part (b): 5 marks. This question is designed to catch the error of treating overseas customers, overseas signing or an overseas bank account as decisive, instead of applying the operations test to the profit-producing activities.</p>
+      </details>
+    </section>
+
+    <section class="block" id="q8">
+      <h2>Question 8 — East Point Design Ltd (25 marks)</h2>
+      <div class="qbox">
+        <h3>Scenario<span class="marks">25 marks</span></h3>
+        <p>East Point Design Ltd filed its profits tax return late after omitting a major service invoice. The Inland Revenue Department later issued an additional assessment on 15 August 2027, showing tax undercharged of $420,000, and requiring payment on 15 September 2027. East Point accepts that the invoice was taxable but says the omission was caused by a bookkeeper's spreadsheet error.</p>
+        <p>The directors are considering an objection because they also believe a separate deduction has been refused wrongly. They cannot pay the full assessment by the due date and expect cash will not be available until eight months after the due date.</p>
+        <p class="part">(a) Explain the objection procedure and what East Point must do if it wants collection held over. (10 marks)</p>
+        <p class="part">(b) Compute the maximum penalty under s.80 and the late-payment amount if the tax remains unpaid for eight months. (8 marks)</p>
+        <p class="part">(c) Advise on the penalty exposure and the practical steps East Point should take now. (7 marks)</p>
+      </div>
+
+      <details class="model-answer">
+        <summary>Show model answer</summary>
+        <p><strong>(a) (10 marks):</strong> A valid objection must be made in writing to the Commissioner within one month after the notice of assessment, stating precisely the grounds of objection (2 marks). Filing an objection does not by itself suspend collection: the tax remains payable unless the Commissioner orders holdover (2 marks). East Point should therefore request holdover at the same time, explaining the disputed deduction and providing supporting documents (2 marks). Holdover may be conditional, including requiring the taxpayer to purchase a tax reserve certificate or provide security (1 mark). If the objection is determined against East Point, the company may appeal to the Board of Review within one month after the determination (1 mark). The accepted omitted invoice should not be included in the objection grounds: East Point should separate the conceded undercharge from the genuinely disputed deduction (1 mark). Missing the payment date without holdover exposes the company to late-payment surcharges even while correspondence continues (1 mark).</p>
+
+        <div class="proforma">
+          <table class="right">
+            <caption>(b) East Point Design Ltd — Penalty and Late-Payment Exposure</caption>
+            <tbody>
+              <tr><th>Tax undercharged / additional tax assessed</th><td class="num">420,000</td></tr>
+              <tr><td class="sub">Maximum s.80 penalty: $10,000 plus treble the tax undercharged <span class="note-no">(3 marks)</span></td><td class="num">1,270,000</td></tr>
+              <tr><td class="sub">First surcharge for late payment: 5% of $420,000 <span class="note-no">(1 mark)</span></td><td class="num">21,000</td></tr>
+              <tr><td class="sub">Further surcharge after six months: 10% of $441,000 <span class="note-no">(2 marks)</span></td><td class="num">44,100</td></tr>
+              <tr class="rule"><th>Total surcharges after eight months</th><td class="num">65,100</td></tr>
+              <tr class="dbl"><th>Amount payable after eight months <span class="note-no">(2 marks)</span></th><td class="num">485,100</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Total for part (b): 8 marks. The late-payment computation applies the second 10% surcharge to the tax plus the first surcharge, not to the original tax alone.</p>
+
+        <p style="margin-top:14px"><strong>(c) (7 marks):</strong> The omission of taxable income creates penalty exposure even if the bookkeeper made the spreadsheet error: the company remains responsible for the correctness of its return (1 mark). A maximum s.80 penalty is not automatically imposed; IRD will consider culpability, cooperation, voluntary disclosure, previous compliance and whether prosecution or additional tax procedures are used (2 marks). East Point should make a full written disclosure of the omitted invoice, correct the computation, explain the control failure and provide evidence that the error was not deliberate (1 mark). It should pay the undisputed part as soon as possible, or at least seek instalment arrangements, because cash difficulty does not remove statutory surcharges (1 mark). It should support the disputed deduction with invoices, contracts, board approvals and accounting records, and keep the objection focused on that point (1 mark). Finally, it should improve controls over sales cut-off and return review before the next filing, since repeated errors aggravate penalties (1 mark).</p>
+      </details>
+    </section>
+
     <section class="block" id="copyright">
       <h2>Originality</h2>
-      <p>All six questions and all six model answers on this page are original, written for this Hub in the exam's own constructed-response format. See the <a href="acca-tx-hkg.html#copyright">ACCA TX-HKG page</a> for the fuller statement of what is and is not reproduced anywhere on this Hub.</p>
+      <p>All eight questions and all eight model answers on this page are original, written for this Hub in the exam's own constructed-response format. See the <a href="acca-tx-hkg.html#copyright">ACCA TX-HKG page</a> for the fuller statement of what is and is not reproduced anywhere on this Hub.</p>
     </section>
 
     <div class="section-nav">
