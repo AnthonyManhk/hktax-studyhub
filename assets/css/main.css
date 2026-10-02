@@ -222,6 +222,18 @@ footer.site-footer{max-width:1280px;margin:0 auto;padding:20px;color:var(--text-
    Making the table itself the scroll container keeps the page fixed and lets
    the table pan horizontally instead. */
 @media (max-width: 760px) {
+  .site-header .bar {
+    height: auto;
+    min-height: 56px;
+    padding: 8px 0;
+    flex-wrap: wrap;
+  }
+  .site-nav {
+    order: 3;
+    flex-basis: 100%;
+    max-height: 96px;
+    overflow: auto;
+  }
   .content table {
     display: block;
     max-width: 100%;

@@ -561,6 +561,29 @@ FRAME_CSS = """
 #MAIN .hero{max-width:1280px;margin:0 auto;padding:30px 20px 4px}
 #MAIN .hero h1{font-size:29px;margin:0 0 6px}
 #MAIN .hero p{color:var(--text-muted);max-width:820px;font-size:14.5px}
+#MAIN .hero-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+#MAIN .hero-actions button{border:1px solid var(--brand);border-radius:6px;padding:8px 13px;
+  font:inherit;font-size:13px;cursor:pointer}
+#MAIN .intro-open{background:var(--brand);color:#fff}
+#MAIN .intro-open:hover{background:var(--brand-dark)}
+.intro-dialog{width:min(680px,calc(100% - 28px));max-width:680px;max-height:86vh;
+  padding:0;border:1px solid var(--border);border-radius:12px;background:var(--surface);
+  color:var(--text);box-shadow:0 12px 44px rgba(0,0,0,.32)}
+.intro-dialog::backdrop{background:rgba(10,14,20,.62)}
+.intro-body{padding:22px 24px 18px;display:flex;flex-direction:column;
+  max-height:86vh;overflow:hidden}
+.intro-dialog h2{margin:0;color:var(--brand);font-size:21px}
+.intro-subtitle{margin:4px 0 16px;color:var(--text-muted);font-size:13px}
+.intro-list{flex:1 1 auto;min-height:0;overflow-y:auto;margin:0;padding:0 8px 0 22px;font-size:13.5px}
+.intro-list li{margin:0 0 11px;line-height:1.55}
+.intro-list strong{color:var(--brand)}
+.intro-zh{display:block;color:var(--text-muted);margin-top:2px}
+.intro-note{margin:14px 0;padding:10px 12px;border-left:3px solid var(--warn-border);
+  background:var(--warn-bg);color:var(--warn-text);font-size:12.5px}
+.intro-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.intro-footer label{display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer}
+.intro-close{background:var(--brand);color:#fff}
+.intro-close:hover{background:var(--brand-dark)}
 #MAIN .index-wrap{max-width:1280px;margin:0 auto;padding:0 20px 50px}
 .family-heading{margin:30px 0 2px;font-size:17px;color:var(--brand);border-bottom:2px solid var(--border);padding-bottom:6px}
 .group-blurb{color:var(--text-muted);font-size:13px;margin:6px 0 0}
@@ -624,6 +647,28 @@ footer.appfoot{text-align:center;color:var(--text-muted);font-size:12.5px;paddin
 FRAME_JS = r"""
 (function(){
   var root = document.documentElement;
+
+  /* ---------- first-visit guide ---------- */
+  var guide = document.getElementById('welcomeGuide');
+  var guideOpen = document.getElementById('guideOpen');
+  var guideClose = document.getElementById('guideClose');
+  var guideSkip = document.getElementById('guideDontShow');
+  var guideKey = 'hktax_intro_dismissed';
+  function showGuide(){
+    if(guide && !guide.open) guide.showModal();
+  }
+  if(guide && guideOpen && guideClose && guideSkip){
+    guideOpen.addEventListener('click', showGuide);
+    guideClose.addEventListener('click', function(){ guide.close(); });
+    guide.addEventListener('close', function(){
+      if(guideSkip.checked){
+        try{ localStorage.setItem(guideKey, 'true'); }catch(e){}
+      }
+    });
+    var guideDismissed = false;
+    try{ guideDismissed = localStorage.getItem(guideKey) === 'true'; }catch(e){}
+    if(!guideDismissed) showGuide();
+  }
 
   /* ---------- tabs ---------- */
   function activate(id){
@@ -866,6 +911,26 @@ def main():
   <button class="toolbtn" id="themeBtn">&#9789; Dark Mode</button>
 </div>
 
+<dialog class="intro-dialog" id="welcomeGuide" aria-labelledby="welcomeTitle">
+  <div class="intro-body">
+    <h2 id="welcomeTitle">Welcome to the HK Tax Study Hub · 歡迎使用香港稅務學習平台</h2>
+    <p class="intro-subtitle">A quick guide to what the Hub does and how to use it · 平台功能及使用方法簡介</p>
+    <ul class="intro-list">
+      <li><strong>Find a tool or topic · 尋找工具或稅務主題</strong> — Choose a card on the home page, use the top navigation, or type into “Jump to a page”. The search narrows the cards; press Enter to open the first match.<span class="intro-zh">可在主頁選擇功能卡、使用上方導覽，或輸入「Jump to a page」搜尋；按 Enter 開啟首個符合項目。</span></li>
+      <li><strong>Check a transaction · 查核交易稅務處理</strong> — Open Transaction Checker, search by an account name or transaction keyword, and use the tax/status filters. Follow “View section” to read the rule and its context.<span class="intro-zh">開啟「交易檢查器」，搜尋會計科目或交易關鍵字，再按稅種／處理方式篩選；點選「View section」閱讀相關規則及說明。</span></li>
+      <li><strong>Learn a tax topic · 學習稅務主題</strong> — Start with a tax page for the rules, rates and computation format; use its links to open worked illustrations, return guidance, or related topics.<span class="intro-zh">先閱讀各稅項頁面的規則、稅率及計算格式，再透過頁面連結查看例題、報稅表指引或相關主題。</span></li>
+      <li><strong>Practise ACCA TX-HKG · 練習 ACCA TX-HKG</strong> — Section A offers searchable/filterable MCQs and Random 15; Section B gives linked case questions; Section C has constructed-response questions and model answers. Select an answer and choose “Show answer” to check it and update your score where scoring is provided.<span class="intro-zh">A 部分提供可搜尋／篩選的選擇題及隨機 15 題；B 部分是相連個案題；C 部分提供長題目及模範答案。選擇答案後按「Show answer」核對；設有計分的部分會同步更新分數。</span></li>
+      <li><strong>Check updates and sources · 查閱更新及資料來源</strong> — IRD What’s New records announced changes and whether they are enacted, bills or proposals. The DIPN Index searches practice notes. Use the cited ordinance and current IRD guidance to verify a point.<span class="intro-zh">「稅務局最新消息」記錄政策變動及其已生效、草案或建議狀態；DIPN 索引可搜尋實務指引。重要事項請核對所引法例及稅務局最新指引。</span></li>
+      <li><strong>Personalise your view · 自訂閱讀方式</strong> — Use “Dark Mode” to switch themes. “AI Prompts” copies a cautious Hong Kong tax prompt for you to paste into an AI chat; it does not connect to or verify an AI’s answer.<span class="intro-zh">使用「Dark Mode」切換顯示主題。「AI Prompts」只會複製審慎的香港稅務提示詞，供你貼到 AI 對話中；平台不會連接 AI 或核實其答案。</span></li>
+    </ul>
+    <p class="intro-note"><strong>Study material only · 僅供學習參考。</strong> This Hub is not professional tax advice. Check the current law and IRD guidance before relying on a figure or section reference. · 本平台並非專業稅務意見；依賴任何數字或條文前，請核對現行法例及稅務局指引。</p>
+    <div class="intro-footer">
+      <label><input type="checkbox" id="guideDontShow"> Don’t show this again · 下次不再顯示</label>
+      <button type="button" class="intro-close" id="guideClose">Get started · 開始使用</button>
+    </div>
+  </div>
+</dialog>
+
 <section class="tab-panel active" id="MAIN">
   <div class="hero">
     <h1>Hong Kong Tax Study Hub</h1>
@@ -875,6 +940,9 @@ def main():
       <span class="lbl">Study material — not professional advice · 學習材料，非專業意見</span>
       Nothing here is tax advice, and reading it creates no adviser–client relationship. This is written to one finance team's internal working standard and published openly because the underlying material is public — not because it has been reviewed for anyone else's use. It contains mistakes and goes out of date as the law changes. <strong>Verify against the Inland Revenue Ordinance (Cap. 112), the Stamp Duty Ordinance (Cap. 117) and current IRD guidance before relying on any figure for a filing position.</strong>
       <div style="margin-top:6px">本平台所載內容並非稅務意見，閱讀不構成顧問關係。內容按某財務團隊的內部工作標準撰寫，因所依據的資料屬公開而公開發布，並未經審核供他人使用；內容或有錯誤，亦會隨法例變動而過時。<strong>在依賴任何數字作報稅立場前，請核對《稅務條例》（第112章）、《印花稅條例》（第117章）及稅務局現行指引。</strong></div>
+    </div>
+    <div class="hero-actions">
+      <button type="button" class="intro-open" id="guideOpen">How to use this Hub · 使用指南</button>
     </div>
   </div>
   <div class="hub-freshness">

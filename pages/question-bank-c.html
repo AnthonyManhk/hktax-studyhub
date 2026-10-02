@@ -14,6 +14,7 @@
   .qbox h3{margin:0 0 4px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand)}
   .qbox .marks{float:right;font-weight:600;color:var(--text-muted);font-size:12.5px;text-transform:none;letter-spacing:0}
   .qbox .part{font-weight:700;margin:12px 0 4px}
+  .proforma{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
   .proforma table{font-size:13.5px}
   .proforma td:first-child{width:56%}
   .sub{padding-left:26px}
@@ -65,6 +66,8 @@
     <a href="#q2">Question 2 — XYZ Trading Ltd (25 marks)</a>
     <a href="#q3">Question 3 — Mr Anthony Cheung (15 marks)</a>
     <a href="#q4">Question 4 — Summit &amp; Vale Partners (25 marks)</a>
+    <a href="#q5">Question 5 — Mr Daniel Lau (15 marks)</a>
+    <a href="#q6">Question 6 — JadeTech Manufacturing Ltd (25 marks)</a>
     <a href="#copyright">Originality</a>
   </aside>
 
@@ -73,7 +76,7 @@
       <div>
         <span class="badge badge-common">ACCA TX-HKG</span>
         <h1>Question Bank — Section C</h1>
-        <p class="subtitle">ACCA TX-HKG — Section C, Constructed Response Questions · 4 original long-form questions (two 15-mark and two 25-mark), matching the exam's own format — full scenario, a graded model answer laid out as a real computation, and marks allocated line by line. A real Section C is one 15-mark and one 25-mark question, so this is 2 full sittings' worth, covering salaries tax, profits tax, property tax and partnerships.</p>
+        <p class="subtitle">ACCA TX-HKG — Section C, Constructed Response Questions · 6 original long-form questions (three 15-mark and three 25-mark), matching the exam's own format — full scenario, a graded model answer laid out as a real computation, and marks allocated line by line. A real Section C is one 15-mark and one 25-mark question, so this is 3 full sittings' worth, covering salaries tax, profits tax, property tax, partnerships, badges of trade and depreciation allowances.</p>
       </div>
     </div>
 
@@ -88,7 +91,7 @@
       <p class="lede">Section C mirrors the exam's constructed-response questions: no multiple choice here — each question gives a scenario and asks you to prepare an actual computation or a written explanation, the same way you would in the exam itself. Attempt each part on paper first, then open the model answer to mark your own work.</p>
       <div class="callout tip">
         <span class="lbl">Same computation engine as Sections A and B</span>
-        Every figure in both model answers was generated from and checked against <code>scripts/qbank_tax.py</code>, the same module behind Section A's and Section B's answers — nothing here was worked out by hand and left unchecked.
+        Every figure in all six model answers was generated from and checked against <code>scripts/qbank_tax.py</code>, the same module behind Section A's and Section B's answers — nothing here was worked out by hand and left unchecked.
       </div>
     </section>
 
@@ -326,9 +329,83 @@
       </details>
     </section>
 
+    <section class="block" id="q5">
+      <h2>Question 5 — Mr Daniel Lau (15 marks)</h2>
+      <div class="qbox">
+        <h3>Scenario<span class="marks">15 marks</span></h3>
+        <p>Daniel Lau is an individual resident in Hong Kong. In May 2026 he bought three adjacent mini-storage units in Kwun Tong for $3,200,000. He paid stamp duty and legal costs of $120,000 and spent $280,000 partitioning, repainting and installing access controls. He borrowed to fund the purchase and paid $180,000 interest during the holding period.</p>
+        <p>The units were never used by Daniel or let to tenants. He placed online advertisements for a resale before the renovation works were completed and sold all three units in February 2027 for $4,350,000, paying selling agency and legal costs of $90,000. Daniel says the gain is capital because he originally described the units as a "long-term store of value".</p>
+        <p class="part">(a) Explain whether the gain is more likely to be taxable as profits from trade or non-taxable as capital. (10 marks)</p>
+        <p class="part">(b) Assuming the gain is taxable as trading profits, compute Daniel's assessable profit and profits tax payable for YA 2026/27. (5 marks)</p>
+      </div>
+
+      <details class="model-answer">
+        <summary>Show model answer</summary>
+        <p><strong>(a) (10 marks):</strong> The issue is whether Daniel was carrying on an adventure in the nature of trade, so that the profit arises from a trade, profession or business carried on in Hong Kong and is chargeable under <strong>s.14</strong> (1 mark). Intention is relevant but is judged objectively from the facts, not merely from Daniel's label (1 mark). The subject matter points towards trade: three adjacent units are more consistent with a resale package than a personal long-term investment (1 mark). The short period of ownership, from May 2026 to February 2027, is a strong badge of trade (1 mark). The renovation and access-control works improved the units for onward sale rather than for own use or rental yield (1 mark). The early online advertisements, before completion of the works, show a pre-existing resale plan (1 mark). Borrowing and interest exposure support a need for quick realisation rather than passive holding (1 mark). There was no rental income or own use during the holding period, so there is little evidence of investment exploitation (1 mark). The buying, improving and selling activity was carried out in Hong Kong, so the source of any trading profit is Hong Kong (1 mark). On balance, the gain is more likely a taxable trading profit, and Daniel bears the practical burden of supporting any capital-gain claim if challenged (1 mark).</p>
+
+        <div class="proforma">
+          <table class="right">
+            <caption>(b) Daniel Lau — Trading Profit and Profits Tax, YA 2026/27</caption>
+            <tbody>
+              <tr><th>Sale proceeds <span class="note-no">(1 mark)</span></th><td class="num">4,350,000</td></tr>
+              <tr><td class="sub">Less: purchase cost <span class="note-no">(1 mark)</span></td><td class="num">(3,200,000)</td></tr>
+              <tr><td class="sub">Less: stamp duty and legal costs <span class="note-no">(1 mark)</span></td><td class="num">(120,000)</td></tr>
+              <tr><td class="sub">Less: renovation and access controls</td><td class="num">(280,000)</td></tr>
+              <tr><td class="sub">Less: interest and selling costs</td><td class="num">(270,000)</td></tr>
+              <tr class="dbl"><th>Assessable profits <span class="note-no">(1 mark)</span></th><td class="num">480,000</td></tr>
+              <tr><td class="sub">Profits tax at the individual first-tier rate, $480,000 &times; 7.5% <span class="note-no">(1 mark)</span></td><td class="num">36,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Total for part (b): 5 marks. This question is designed to catch the error of treating a self-serving "capital intention" statement as decisive, instead of weighing the badges of trade objectively.</p>
+      </details>
+    </section>
+
+    <section class="block" id="q6">
+      <h2>Question 6 — JadeTech Manufacturing Ltd (25 marks)</h2>
+      <div class="qbox">
+        <h3>Scenario<span class="marks">25 marks</span></h3>
+        <p>JadeTech Manufacturing Ltd is a Hong Kong manufacturing company with no connected entities. Its net profit per accounts for the year ended 31 March 2027 is $7,850,000, after charging depreciation of $740,000 and approved charitable donations of $260,000, and after crediting an accounting gain of $450,000 on the sale of its old factory.</p>
+        <p>The old factory had qualifying construction cost of $2,400,000. Before the sale, total industrial building allowances granted were $1,152,000 and the residue of expenditure was $1,248,000. The sale proceeds attributable to the building, excluding land, were $1,560,000.</p>
+        <p>The 30% plant and machinery pool had written-down value brought forward of $520,000. During the year JadeTech bought qualifying plant for cash of $900,000 and sold pooled plant for $180,000. It also acquired a machine on hire purchase: deposit paid $240,000, eight instalments paid in the year, and the capital element of each instalment was $55,000.</p>
+        <p>During the year JadeTech completed and first used a new factory. The purchase price included land of $2,100,000 and qualifying construction cost of $4,200,000.</p>
+        <p class="part">(a) Compute JadeTech's assessable profits and profits tax payable for YA 2026/27. (22 marks)</p>
+        <p class="part">(b) State three depreciation-allowance errors this question is designed to catch. (3 marks)</p>
+      </div>
+
+      <details class="model-answer">
+        <summary>Show model answer</summary>
+        <div class="proforma">
+          <table class="right">
+            <caption>(a) JadeTech Manufacturing Ltd — Profits Tax Computation, YA 2026/27</caption>
+            <tbody>
+              <tr><th>Net profit per accounts <span class="note-no">(1 mark)</span></th><td class="num">7,850,000</td></tr>
+              <tr><td><strong>Add back / deduct accounting and tax adjustments</strong></td><td class="num"></td></tr>
+              <tr><td class="sub2">Depreciation, non-deductible under s.17(1)(c) <span class="note-no">(1 mark)</span></td><td class="num">740,000</td></tr>
+              <tr><td class="sub2">Approved charitable donations added back first <span class="note-no">(1 mark)</span></td><td class="num">260,000</td></tr>
+              <tr><td class="sub2">Less: accounting gain on factory sale, capital receipt</td><td class="num">(450,000)</td></tr>
+              <tr><td class="sub2">Add: industrial building balancing charge <span class="note-no">(3 marks)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">Proceeds $1,560,000 less residue $1,248,000 = $312,000, capped by prior allowances of $1,152,000</span></td><td class="num">312,000</td></tr>
+              <tr class="rule"><th>Adjusted profit before depreciation allowances</th><td class="num">8,712,000</td></tr>
+              <tr><td><strong>Less: depreciation allowances</strong></td><td class="num"></td></tr>
+              <tr><td class="sub2">30% plant pool <span class="note-no">(4 marks)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">IA: $900,000 &times; 60% = $540,000. Pool: $520,000 + $900,000 &minus; $540,000 &minus; $180,000 = $700,000. AA: $700,000 &times; 30% = $210,000</span></td><td class="num">(750,000)</td></tr>
+              <tr><td class="sub2">Hire-purchase machine <span class="note-no">(3 marks)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">Qualifying capital paid: $240,000 + (8 &times; $55,000) = $680,000. IA $408,000 and AA $81,600</span></td><td class="num">(489,600)</td></tr>
+              <tr><td class="sub2">New factory industrial building allowance <span class="note-no">(3 marks)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">Land $2,100,000 excluded. Construction cost $4,200,000: IA 20% = $840,000; AA 4% = $168,000</span></td><td class="num">(1,008,000)</td></tr>
+              <tr class="rule"><th>Profit before donations <span class="note-no">(1 mark)</span></th><td class="num">6,464,400</td></tr>
+              <tr><td class="sub">Less: approved charitable donations <span class="note-no">(2 marks)</span><br><span style="font-size:12px;color:var(--text-muted);padding-left:26px">Actual $260,000 is below the 35% cap of $2,262,540</span></td><td class="num">(260,000)</td></tr>
+              <tr class="dbl"><th>Assessable profits <span class="note-no">(1 mark)</span></th><td class="num">6,204,400</td></tr>
+              <tr><td class="sub">Profits tax: first $2,000,000 at 8.25%, balance $4,204,400 at 16.5% <span class="note-no">(1 mark)</span></td><td class="num">858,726</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted)">Total for part (a): 22 marks. The tax payable is $165,000 + $693,726 = <strong>$858,726</strong>.</p>
+
+        <p style="margin-top:14px"><strong>(b) (3 marks):</strong> The first error is giving building allowances on land: only qualifying construction cost is used (1 mark). The second is computing initial allowance on the full hire-purchase cash price instead of the capital sums actually paid in the year (1 mark). The third is omitting the balancing charge on the old factory sale and taxing the accounting gain instead (1 mark).</p>
+      </details>
+    </section>
+
     <section class="block" id="copyright">
       <h2>Originality</h2>
-      <p>Both questions and both model answers on this page are original, written for this Hub in the exam's own constructed-response format. See the <a href="acca-tx-hkg.html#copyright">ACCA TX-HKG page</a> for the fuller statement of what is and is not reproduced anywhere on this Hub.</p>
+      <p>All six questions and all six model answers on this page are original, written for this Hub in the exam's own constructed-response format. See the <a href="acca-tx-hkg.html#copyright">ACCA TX-HKG page</a> for the fuller statement of what is and is not reproduced anywhere on this Hub.</p>
     </section>
 
     <div class="section-nav">

@@ -58,7 +58,7 @@ Open `index.html` (or the live site). From the card index you can reach:
 | Page | Purpose |
 |---|---|
 | **IRD What's New** | Every item on IRD's What's New page, read against this Hub and marked **enacted** / **bill** / **proposed**, with the exact page each item changed. Open this first after any IRD refresh. |
-| **ACCA TX-HKG Question Bank (A / B / C)** | Three pages matching the exam's own three sections — A: 282 filterable standalone MCQs with select-and-check scoring; B: 6 OT case scenarios (30 linked MCQs); C: 4 constructed-response questions with full model answers. B and C are each 2 full sittings' worth. All computation-checked against `scripts/qbank_tax.py`. |
+| **ACCA TX-HKG Question Bank (A / B / C)** | Three pages matching the exam's own three sections — A: 282 filterable standalone MCQs with select-and-check scoring; B: 6 OT case scenarios (30 linked MCQs); C: 6 constructed-response questions with full model answers. B is 2 full sittings' worth; C is 3 full sittings' worth. All computation-checked against `scripts/qbank_tax.py`. |
 | **Transaction Checker** | Search any transaction by keyword → Taxable/Non-taxable/Deductible/Non-deductible/Dutiable, with the exact section and a link to the full explanation. |
 | **DIPN Index** | Searchable catalogue of all 73 currently-in-force DIPN/SOIPN/EDOIPN documents, with topic, summary, and whether it backs a full study page or is reference-only. |
 | **Profits Tax / Property Tax / Salaries Tax / Stamp Duty / Depreciation & Allowances** | The five core topic pages — charging basis, rates, taxable/deductible tables, computation templates, all tied to exact IRO (Cap. 112) / Stamp Duty Ordinance (Cap. 117) sections. |
@@ -300,9 +300,10 @@ Three pages, one for each real exam section, cross-linked by a Section A ⇄ B
   from the same figures. No filters here; the three cases are fixed and
   always shown in full, with a **Reset all three cases** button for a clean
   second attempt.
-- **`pages/question-bank-c.html` (Section C)** — 4 original constructed-
-  response questions (two 15-mark, two 25-mark = 2 full sittings' worth),
-  spanning salaries tax, profits tax, property tax and partnerships, in the
+- **`pages/question-bank-c.html` (Section C)** — 6 original constructed-
+  response questions (three 15-mark, three 25-mark = 3 full sittings' worth),
+  spanning salaries tax, profits tax, property tax, partnerships, badges of
+  trade and depreciation allowances, in the
   exam's own long-form
   format: no multiple choice, just a full scenario and a `<details>`-
   revealed model answer laid out as a real computation with marks
@@ -323,7 +324,7 @@ and filtering/**Show all** never touch it; on Section B, the dedicated
 scoring — it's marked by comparing your own working to the model answer.
 
 Every computational question's correct answer **and** (on Sections A and B)
-its wrong-option distractors, and every figure in Section C's two model
+its wrong-option distractors, and every figure in Section C's six model
 answers, are generated from `scripts/qbank_tax.py` — the same small tax-
 computation module the Hub's worked illustrations use — so the arithmetic
 cannot drift from the explanation. Distractors are not arbitrary wrong
@@ -355,7 +356,7 @@ python scripts\build-combined.py
 
 Section C (`pages/question-bank-c.html`) is hand-written prose and proforma
 tables, like the Tax Reconciliation page, rather than JSON-driven — with only
-2 questions there is more value in writing them directly than building a
+6 questions there is more value in writing them directly than building a
 generator for two items. Its figures are still verified by running the same
 `qbank_tax.py` functions in a scratch calculation first (see the build log
 for the exact commands), before being transcribed into the page.

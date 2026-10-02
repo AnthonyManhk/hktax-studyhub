@@ -153,6 +153,25 @@ def da_pool(wdv_bf, additions=0, disposals=0, rate=0.30, initial=True):
             "total": round(ia + aa, 2)}
 
 
+def industrial_building_allowance(cost, annual_years=1, initial=True):
+    """Industrial building IA and AA on qualifying construction cost."""
+    ia = cost * IBA_INITIAL if initial else 0.0
+    aa = cost * IBA_ANNUAL * annual_years
+    total = ia + aa
+    return {"ia": round(ia, 2), "aa": round(aa, 2),
+            "total": round(total, 2),
+            "residue": round(cost - total, 2)}
+
+
+def building_balancing_adjustment(residue, proceeds, allowances_granted):
+    """Balancing adjustment on sale: positive charge, negative allowance."""
+    diff = proceeds - residue
+    if diff >= 0:
+        return {"charge": round(min(diff, allowances_granted), 2),
+                "allowance": 0.0}
+    return {"charge": 0.0, "allowance": round(-diff, 2)}
+
+
 def hire_purchase_ia(deposit, instalments_paid, capital_per_instalment):
     """IA runs on capital sums actually paid in the year, not the cash price."""
     qualifying = deposit + instalments_paid * capital_per_instalment
